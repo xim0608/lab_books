@@ -12,24 +12,22 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= f.label :name_ja %>日本語で名前<br />
+      <%= f.text_field :name_ja, autocomplete: "off" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <%= f.label :nickname %>ゼミ内でのニックネームを入力してください<br />
+      <%= f.text_field :nickname, autocomplete: "off" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <%= f.label :student_id %>学籍番号を入力してください<br />
+      <%= f.text_field :student_id, autocomplete: "off" %>
+    </div>
+
+
 
   <div class="actions">
     <%= f.submit "Update" %>

@@ -20,7 +20,7 @@ gem 'annotate', '~> 2.6.5'
 gem 'dotenv-rails', '~> 2.2.1'
 gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-slack', '~> 2.3.0'
-gem 'devise', github: "plataformatec/devise"
+gem 'devise', '~> 4.3.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.0.6'
