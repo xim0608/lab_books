@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if current_user.student_id.blank?
       edit_user_registration_path
     else
-      root
+      books_path
     end
   end
 

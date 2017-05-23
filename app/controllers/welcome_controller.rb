@@ -3,7 +3,10 @@ class WelcomeController < ApplicationController
     if current_user
       redirect_to books_path
     else
-      redirect_to user_slack_omniauth_authorize_path
+      render 'welcome/index'
     end
+  end
+
+  def error
   end
 end
