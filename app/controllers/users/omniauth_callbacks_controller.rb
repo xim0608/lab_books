@@ -10,4 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to error_path
     end
   end
+
+  def passthru
+    super
+  end
 end

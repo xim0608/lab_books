@@ -1,9 +1,7 @@
 class WelcomeController < ApplicationController
   def index
-    if current_user
+    if user_signed_in?
       redirect_to books_path
-    else
-      render 'welcome/index'
     end
   end
 
