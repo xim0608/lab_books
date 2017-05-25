@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '5.1.1'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -20,7 +20,7 @@ gem 'annotate', '~> 2.6.5'
 gem 'dotenv-rails', '~> 2.2.1'
 gem 'omniauth', '~> 1.6.1'
 gem 'omniauth-slack', '~> 2.3.0'
-gem 'devise', github: "plataformatec/devise"
+gem 'devise', '~> 4.3.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.0.6'
@@ -46,4 +46,3 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver', '~> 3.4.0'
 end
-
