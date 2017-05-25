@@ -1,0 +1,4 @@
+<%= form_tag({controller: "books", action: "import", method: "post"}, {multipart: true}) do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag 'Booklogのデータを一括インポート' %>
+<% end %>

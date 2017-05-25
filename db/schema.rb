@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523154102) do
+ActiveRecord::Schema.define(version: 20170525072943) do
+
+  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "isbn_13"
+    t.string "isbn_10"
+    t.string "name"
+    t.string "publisher"
+    t.string "author"
+    t.text "image_url"
+    t.integer "publish_year"
+    t.integer "pages"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["isbn_10"], name: "index_books_on_isbn_10", unique: true
+    t.index ["isbn_13"], name: "index_books_on_isbn_13", unique: true
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -29,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170523154102) do
     t.string "student_id"
     t.datetime "deleted_at"
     t.datetime "remember_created_at"
+    t.boolean "is_admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
