@@ -46,4 +46,3 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver', '~> 3.4.0'
 end
-
