@@ -34,6 +34,7 @@
 .env
 
 /.idea
+/.idea/vcs.xml
 tags
 
 
