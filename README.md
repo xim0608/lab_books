@@ -1,24 +1,3 @@
-# README
+# 研究室蔵書管理システム
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+研究室の蔵書の貸し出し管理ができるアプリケーションを現在作成中です。現在ブクログで管理している蔵書のデータをインポートし、管理部分はElasticsearchを導入して、検索機能を付加したいと思っています。
