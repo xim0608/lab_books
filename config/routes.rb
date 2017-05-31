@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'api/search'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
 
@@ -25,6 +27,12 @@ Rails.application.routes.draw do
       post :import
       post :rent
       post :return
+    end
+  end
+
+  resources :api, none: [:all] do
+    collection do
+      post :search
     end
   end
 end

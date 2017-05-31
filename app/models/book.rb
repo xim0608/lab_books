@@ -17,4 +17,12 @@ class Book < ApplicationRecord
     end
     counter
   end
+
+  def self.search(query)
+    if query
+      where(['name LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%"])
+    else
+      all
+    end
+  end
 end
