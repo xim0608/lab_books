@@ -2,7 +2,7 @@
 <%= current_user.name %>
 <p>Find me in app/views/books/index.html.erb</p>
 <% @books.each do |book| %>
-    <p><%= book.name %></p>
+    <p><%= book.name %>、<%= book.publish_year %></p>
 <% end %>
 
 <%= will_paginate @books %>

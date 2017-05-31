@@ -2,6 +2,8 @@ class Book < ApplicationRecord
   # いま本がどこにあるのかわかるようにする
   belongs_to :where, class_name: 'User', foreign_key: 'user_id'
 
+
+
   def self.import(file)
     counter = 0
     default_user = User.where(name: ENV['ADMINISTRATOR_NAME'])
