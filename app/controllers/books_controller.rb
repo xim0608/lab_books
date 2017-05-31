@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @books = Book.search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
+    @books = Book.search_and_tagging(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
   end
 
   def import_from_csv

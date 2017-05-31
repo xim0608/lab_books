@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  acts_as_taggable_on :labels
+  acts_as_taggable
   # いま本がどこにあるのかわかるようにする
   belongs_to :where, class_name: 'User', foreign_key: 'user_id'
 
@@ -24,5 +26,19 @@ class Book < ApplicationRecord
     else
       all
     end
+  end
+
+  def self.search_and_tagging(query)
+    search_results = self.search(query)
+    result_length = search_results.size
+    puts result_length
+    if result_length >= 5 && result_length < 500
+      search_results.each do |add_book|
+        puts add_book.name
+        add_book.tag_list.add(query)
+        add_book.save
+      end
+    end
+    search_results
   end
 end
