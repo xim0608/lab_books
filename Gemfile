@@ -24,6 +24,8 @@ gem 'devise', '~> 4.3.0'
 gem 'will_paginate', '~> 3.1.5'
 gem 'google-api-client', '~> 0.11.3'
 gem 'acts-as-taggable-on', '~> 5.0'
+gem 'okura', '~> 0.0.1'
+gem 'search_cop', '~> 1.0.8'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

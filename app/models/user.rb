@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :rememberable, :trackable,
          :omniauthable, omniauth_providers: [:slack]
 
+  has_many :books
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid).first
 
