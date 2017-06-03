@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @books = Book.ja_search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
   end
 
+
   def import_from_csv
   end
 
@@ -36,3 +37,4 @@ class BooksController < ApplicationController
   end
 
 end
+
