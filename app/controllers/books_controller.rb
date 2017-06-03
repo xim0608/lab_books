@@ -10,8 +10,13 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
-    @url = res.get_element('CustomerReviews').get('IFrameURL')
+    begin
+      res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews,Images')
+      @image = res.get_element('LargeImage').get('URL')
+      @url = res.get_element('CustomerReviews').get('IFrameURL')
+    rescue
+      puts '503 error'
+    end
   end
 
   def import
