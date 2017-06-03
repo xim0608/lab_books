@@ -10,6 +10,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
+    @url = res.get_element('CustomerReviews').get('IFrameURL')
   end
 
   def import

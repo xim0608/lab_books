@@ -42,6 +42,9 @@ GEM
       activerecord (>= 4.2.8)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    amazon-ecs (2.5.0)
+      nokogiri (~> 1.4)
+      ruby-hmac (~> 0.3)
     annotate (2.6.7)
       activerecord (>= 2.3.0)
       rake (~> 10.4.2, >= 10.4.2)
@@ -229,6 +232,7 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-hmac (0.4.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.4.24)
@@ -291,6 +295,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 5.0)
+  amazon-ecs (~> 2.5.0)
   annotate (~> 2.6.5)
   bcrypt (~> 3.1.7)
   better_errors (~> 2.1.1)

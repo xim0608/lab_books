@@ -26,6 +26,7 @@ gem 'google-api-client', '~> 0.11.3'
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'okura', '~> 0.0.1'
 gem 'search_cop', '~> 1.0.8'
+gem 'amazon-ecs', '~> 2.5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
