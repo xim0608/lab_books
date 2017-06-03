@@ -1,0 +1,7 @@
+<%= @book.name %>
+<% if @url.present? %>
+  <iframe src="<%= @url.html_safe %>" frameborder="0" height="500" width="800"></iframe>
+<% end %>
+<% if @image.present? %>
+  <img src="<%= @image %>" alt="">
+<% end %>

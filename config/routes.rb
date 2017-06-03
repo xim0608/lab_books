@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  resources :books, only: [:index]
+  get 'api/search'
 
-  # devise_for :users,
-  #            :controllers => {omniauth_callbacks: "users/omniauth_callbacks",
-  #                             registrations: "users/registrations",
-  #                             sessions: "users/sessions"
-  #            }
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "welcome#index"
+
   devise_for :users,
              skip: [:session, :registration],
              controllers: {omniauth_callbacks: "users/omniauth_callbacks",
@@ -23,7 +21,18 @@ Rails.application.routes.draw do
   end
 
 
-  root to: "welcome#index"
+  resources :books, except: [:edit, :update, :delete] do
+    collection do
+      get :import_from_csv
+      post :import
+      post :rent
+      post :return
+    end
+  end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :api, none: [:all] do
+    collection do
+      post :search
+    end
+  end
 end
