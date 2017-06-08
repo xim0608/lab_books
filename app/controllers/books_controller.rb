@@ -2,9 +2,14 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @books = Book.ja_search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
+    @tags = Tag.take(15)
+    @new_books = Book.order('id DESC').take(10)
+    # @favorites = Favorites.all
   end
 
+  def show_all
+    @books = Book.ja_search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
+  end
 
   def import_from_csv
   end

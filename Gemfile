@@ -11,7 +11,8 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-
+gem 'jquery-rails', '~> 4.3.1'
+gem 'turbolinks', '~> 5.0.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
@@ -27,6 +28,9 @@ gem 'acts-as-taggable-on', '~> 5.0'
 gem 'okura', '~> 0.0.1'
 gem 'search_cop', '~> 1.0.8'
 gem 'amazon-ecs', '~> 2.5.0'
+gem 'materialize-sass', '~> 0.98.2'
+gem 'material_icons', '~> 2.2.1'
+gem 'will_paginate-materialize', '~> 0.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

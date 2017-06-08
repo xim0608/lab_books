@@ -1,0 +1,28 @@
+<div class="row">
+  <% @books.each do |book| %>
+      <div class="col s12 m6">
+        <div class="card small horizontal z-depth-5">
+          <div class="card-image">
+            <%= smaller_book_image book.image_url %>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p><%= book.name %></p>
+              <small><%= book.author %></small>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<%= will_paginate @books, class: 'pagination' %>
+<script type="text/javascript" src="jquery.matchHeight.js"></script>
+<script>
+  $(function(){
+    $('.js-matchHeight').matchHeight();
+  });
+</script>

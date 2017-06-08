@@ -1,0 +1,10 @@
+<div class="card-panel blue lighten-5">
+  <%= form_tag :books, method: :get, class: 'input-field' do %>
+      <p>
+        <i class="material-icons prefix">search</i>
+        <%= text_field_tag "q",params[:q], class: 'validate' %>
+        <label for="input-field">Search</label>
+        <%= submit_tag "検索", class: 'waves-effect waves-light btn' %>
+      </p>
+  <% end %>
+</div>

@@ -15,4 +15,23 @@ module ApplicationHelper
   def user_session
     current_user && warden.session(:user)
   end
+
+  def smaller_book_image(image_url='',size='small')
+    if image_url.present?
+      if size == 'small'
+        image_url.gsub!('/.jpg/', '._SL110_.jpg')
+      elsif size == 'medium'
+        image_url.gsub!('/.jpg/', '._SL160_.jpg')
+      elsif size == 'tiny'
+        image_url.gsub!('/.jpg/', '._SL175_.jpg')
+      end
+    else
+      if size == 'small'
+        size = 'medium'
+      end
+
+      image_url = "/images/no_image_#{size}.jpg"
+    end
+      image_tag image_url, size: '200x120'
+  end
 end

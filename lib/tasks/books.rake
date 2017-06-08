@@ -2,7 +2,7 @@ namespace :books do
 
   desc 'descriptionがない本のdescriptionを取得してdbに登録'
   task :get_description => :environment do
-    no_description_books = Book.where(description: nil).take(500)
+    no_description_books = Book.where(description: nil)
     no_description_books.each do |book|
       isbn = book.isbn_13.to_s || book.isbn_10.to_s
       book.description = GoogleBooks::Api.new(isbn).get_description
@@ -13,7 +13,7 @@ namespace :books do
 
   desc '写真URLがない本の写真URLを取得してDBに登録'
   task :get_image => :environment do
-    no_images_books = Book.where(image_url: nil).take(50)
+    no_images_books = Book.where(image_url: nil)
     no_images_books.each do |book|
       begin
         res = Amazon::Ecs.item_lookup(book.isbn_10, ResponseGroup: 'Images')
