@@ -1,16 +1,3 @@
-<h1>Books#index</h1>
-<%= current_user.name %>
-<p>Find me in app/views/books/index.html.erb</p>
-
-<%= form_tag :books, method: :get do %>
-    <p>
-      <%= text_field_tag "q",params[:q] %>
-      <%= submit_tag "検索" %>
-    </p>
-<% end %>
-
-<% @books.each do |book| %>
-    <p><%= book.name %>、<%= book.publish_year %></p>
-<% end %>
-
-<%= will_paginate @books %>
+<%# 新着本 %>
+<%# 人気キーワード %>
+<%# お気に入り %>

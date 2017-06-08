@@ -30,6 +30,7 @@ gem 'search_cop', '~> 1.0.8'
 gem 'amazon-ecs', '~> 2.5.0'
 gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
+gem 'will_paginate-materialize', '~> 0.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
