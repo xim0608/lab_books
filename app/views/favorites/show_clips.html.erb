@@ -1,0 +1,6 @@
+<h2><%= @book.name %>をお気に入りしたユーザー</h2>
+<% @favorites.each do |favorite| %>
+  <% @user_id = favorite.user_id %>
+  <% user = User.find(@user_id) %>
+<p><%= user.name %></p>
+<% end %>

@@ -9,7 +9,8 @@ class Book < ApplicationRecord
 
   # いま本がどこにあるのかわかるようにする
   belongs_to :where, class_name: 'User', foreign_key: 'user_id'
-
+  has_many :favorites
+  has_many :users, through: :favorites
 
 
   def self.import(file)

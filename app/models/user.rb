@@ -6,6 +6,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:slack]
 
   has_many :books
+  has_many :clips, dependent: :destroy
+  has_many :books, through: :favorites
+
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid).first
 

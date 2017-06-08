@@ -1,0 +1,5 @@
+<h2>お気に入りの本</h2>
+<% @favorites.each do |favorite| %>
+    <% book = Book.find(favorite.book_id) %>
+    <p><%= book.name %></p>
+<% end %>
