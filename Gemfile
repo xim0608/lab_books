@@ -27,6 +27,7 @@ gem 'acts-as-taggable-on', '~> 5.0'
 gem 'okura', '~> 0.0.1'
 gem 'search_cop', '~> 1.0.8'
 gem 'amazon-ecs', '~> 2.5.0'
+gem 'materialize-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
