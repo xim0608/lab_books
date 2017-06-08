@@ -2,7 +2,9 @@ class BooksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @books = Book.all
+    @tags = Tag.take(15)
+    @new_books = Book.order('id DESC').take(10)
+    # @favorites = Favorites.all
   end
 
   def show_all

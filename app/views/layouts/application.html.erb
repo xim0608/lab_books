@@ -11,11 +11,11 @@
   <body>
   <%= render 'shared/header' %>
   <div class="container">
-    <%= render 'shared/search' %>
     <% if current_user %>
+      <%= render 'shared/search' %>
       <p>ようこそ<%= current_user.name %>さん</p>
       <%= link_to 'logout', destroy_user_session_path, :method => :delete %>
-      <% end %>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
