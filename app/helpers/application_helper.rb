@@ -25,13 +25,14 @@ module ApplicationHelper
       elsif size == 'tiny'
         image_url.gsub!('/.jpg/', '._SL175_.jpg')
       end
+      image_tag image_url
     else
       if size == 'small'
         size = 'medium'
       end
 
       image_url = "/images/no_image_#{size}.jpg"
+      image_tag image_url, size: '300x300'
     end
-      image_tag image_url, size: '200x120'
   end
 end

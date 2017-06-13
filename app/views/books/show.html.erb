@@ -1,7 +1,18 @@
-<%= @book.name %>
+<div style="overflow: hidden;">
+<h3><%= @book.name %> <h5>著者：<%= @book.author %></h5></h3>
+
+<div class="row">
+  <div class="col s12 m12 l6 image" height="300" width="300">
+    <%= smaller_book_image @book.image_url %>
+  </div>
+  <div class="col s12 m12 l6">
+    <p><%= @book.description %></p>
+  </div>
+</div>
+
 <% if @url.present? %>
-  <iframe src="<%= @url.html_safe %>" frameborder="0" height="500" width="800"></iframe>
+      <div class="iframe-content">
+        <iframe src="<%= @url.html_safe %>" frameborder="0" height="500" width="800" ></iframe>
+      </div>
 <% end %>
-<% if @image.present? %>
-  <img src="<%= @image %>" alt="">
-<% end %>
+</div>

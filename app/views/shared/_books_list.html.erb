@@ -20,12 +20,7 @@
 </div>
 
 <%= will_paginate @books, class: 'pagination' %>
-<script type="text/javascript" src="jquery.matchHeight.js"></script>
-<script>
-  $(function(){
-    $('.js-matchHeight').matchHeight();
-  });
-
+<script type="text/javascript">
   jQuery('.card').click(function() {
     location.href = jQuery(this).attr('data-url');
   });
