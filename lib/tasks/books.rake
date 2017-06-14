@@ -27,14 +27,4 @@ namespace :books do
       end
     end
   end
-
-
-  # desc "descriptionがない本のdescriptionを取得してdbに記録"
-  # task :get_description => :environment do
-  #   require 'google/apis/books_v1'
-  #   require 'google/api_client/'
-  #   no_description_books = Book.where(description: nil).take(5)
-  #   service = Google::Apis::BooksV1::BooksService.new
-  #   service.key = ENV["GOOGLE_BOOKS_API_KEY"]
-  # end
 end
