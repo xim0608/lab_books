@@ -27,6 +27,19 @@ class Book < ApplicationRecord
     counter
   end
 
+  def self.import_from_api
+    books = BookLog::Api.new(100).get_data
+    default_user = User.where(name: ENV['ADMINISTRATOR_NAME'])
+    books.each do |book|
+      image_url = book[:image].sub('._SL75_', '')
+      unless self.exists?(book[:asin])
+        create(author: book[:author], isbn_10: book[:asin], name: book[:title],
+                               image_url: image_url, user_id: default_user.ids[0])
+        puts 'success'
+      end
+    end
+  end
+
   def self.ja_search(query)
     results = self.search(query)
     if query.present?
@@ -40,7 +53,8 @@ class Book < ApplicationRecord
         # queryが一般名詞のみで構成されているか
         if okura.is_noun?(query)
           if size > 3 && size < self.all.size
-            results.each do |book|
+            un_tagged_books = results - Book.tagged_with(query)
+            un_tagged_books.each do |book|
               book.tag_list.add(query)
               book.save
             end
@@ -50,26 +64,4 @@ class Book < ApplicationRecord
     end
     results
   end
-
-  # def self.search(query)
-  #   if query
-  #     where(['name LIKE ? OR description LIKE ?', "%#{query}%", "%#{query}%"])
-  #   else
-  #     all
-  #   end
-  # end
-  #
-  # def self.search_and_tagging(query)
-  #   search_results = self.search(query)
-  #   result_length = search_results.size
-  #   puts result_length
-  #   if result_length >= 5 && result_length < 200
-  #     search_results.each do |book|
-  #       puts book.name
-  #       book.tag_list.add(query)
-  #       book.save
-  #     end
-  #   end
-  #   search_results
-  # end
 end

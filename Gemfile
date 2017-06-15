@@ -32,6 +32,7 @@ gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', '~> 0.1.0'
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.0.6'
@@ -48,6 +49,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.0.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'bullet', '~> 5.5.1'
+
 end
 
 group :test do

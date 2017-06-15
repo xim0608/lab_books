@@ -14,9 +14,7 @@ class BooksController < ApplicationController
 
   def show_all
     @books = Book.ja_search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
-    if params[:q].present?
-      @value = params[:q]
-    end
+    @tags = ActsAsTaggableOn::Tag.most_used(20)
   end
 
   def import_from_csv

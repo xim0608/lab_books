@@ -13,6 +13,11 @@
                 <span class="grey-text"><%= cut_description(book.description) if book.description.present? %></span>
               </small>
             </div>
+            <div class="card-action">
+              <div>
+                <%= link_to "お気に入り", add_book_path(book), method: :post %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
