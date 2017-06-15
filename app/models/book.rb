@@ -32,9 +32,9 @@ class Book < ApplicationRecord
     default_user = User.where(name: ENV['ADMINISTRATOR_NAME'])
     books.each do |book|
       image_url = book[:image].sub('._SL75_', '')
-      unless self.exists?(book[:asin])
+      if self.exists?(book[:asin])
         create(author: book[:author], isbn_10: book[:asin], name: book[:title],
-                               image_url: image_url, user_id: default_user.ids[0])
+                               image_url: image_url, user_id: default_user.ids)
         puts 'success'
       end
     end

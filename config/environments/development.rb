@@ -53,9 +53,9 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # bullet を有効にする
-  Bullet.enable  = true
+  # Bullet.enable  = true
   # Bullet.alert   = true
-  Bullet.bullet_logger = true
-  Bullet.console = true
-  Bullet.add_footer   = true
+  # Bullet.bullet_logger = true
+  # Bullet.console = true
+  # Bullet.add_footer   = true
 end
