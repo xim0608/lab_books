@@ -33,11 +33,16 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :api, none: [:all] do
+  # resources :api, except: [:all] do
   #   collection do
   #     post :search
   #   end
   # end
+
+  post 'api/search', to: 'api#search'
+  post 'api/rent', to: 'api#rent'
+  post 'api/return', to: 'api#return'
+
 
   resources :favorites, only: [:destroy, :index]
 end

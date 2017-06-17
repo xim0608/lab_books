@@ -40,10 +40,10 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: notice_msg
   end
 
+  # API
   def rent
   end
 
   def return
   end
-
 end
