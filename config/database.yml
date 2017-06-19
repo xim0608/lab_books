@@ -52,3 +52,9 @@ production:
   database: lab_books_production
   username: lab_books
   password: <%= ENV['LAB_BOOKS_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: lab_books_staging
+  username: lab_books
+  password: <%= ENV['HEROKU_PASSWORD']
