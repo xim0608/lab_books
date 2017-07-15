@@ -31,6 +31,7 @@ gem 'amazon-ecs', '~> 2.5.0'
 gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', '~> 0.1.0'
+gem 'knock', '~> 2.1.1'
 
 
 group :development, :test do

@@ -1,8 +1,8 @@
 <div class="row">
   <% @books.each do |book| %>
       <div class="col s12 m6">
-        <div class="card small horizontal z-depth-5" data-url="<%= book_path(book.id) %>"
-             onmouseover="this.className='card small horizontal z-depth-1'" onmouseout="this.className='card small horizontal z-depth-5'">
+        <div class="card small horizontal z-depth-2" data-url="<%= book_path(book.id) %>"
+             onmouseover="this.className='card small horizontal z-depth-5'" onmouseout="this.className='card small horizontal z-depth-1'">
           <div class="card-image">
             <%= smaller_book_image book.image_url %>
           </div>
@@ -26,9 +26,9 @@
 </div>
 
 <%= will_paginate @books, class: 'pagination' %>
+
 <script type="text/javascript">
-  jQuery('.card').card.click(function() {
+  jQuery('.card').click(function() {
     location.href = jQuery(this).attr('data-url');
   });
-
 </script>
