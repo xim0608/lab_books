@@ -55,6 +55,8 @@ production:
 
 staging:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: labooks_staging
   username: labooks
   password: <%= ENV['HEROKU_PASSWORD']

@@ -7,7 +7,8 @@ end
 
 
 gem 'rails', '5.1.1'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+
+
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -41,6 +42,11 @@ group :development, :test do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
+  gem 'mysql2', '>= 0.3.18', '< 0.5'
+end
+
+group :staging do
+  gen 'pg'
 end
 
 group :development do
