@@ -46,7 +46,7 @@ group :development, :test do
 end
 
 group :staging do
-  gen 'pg'
+  gem 'pg'
 end
 
 group :development do
