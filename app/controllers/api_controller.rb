@@ -39,9 +39,11 @@ class ApiController < ApplicationController
       len = book_isbn.to_s.length
       book = Book.find_by_isbn_10(book_isbn) if len == 10
       book = Book.find_by_isbn_13(book_isbn) if len == 13
-      if book.rental.user == user
-        # 本が今借りているものなら返却
-        book.rental.soft_destroy
+      if book.rental.present?
+        if book.rental.user == user
+          # 本が今借りているものなら返却
+          book.rental.soft_destroy
+        end
       else
         user.rentals.create book: book
       end
