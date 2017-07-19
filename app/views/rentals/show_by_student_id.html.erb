@@ -1,0 +1,5 @@
+<h2><%= @user.nickname %>さんの借りている本</h2>
+
+<% @rental_books.each do |rental_book| %>
+    <p><%= rental_book.book.name %></p>
+<% end %>

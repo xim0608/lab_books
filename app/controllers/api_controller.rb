@@ -50,15 +50,6 @@ class ApiController < ApplicationController
           user.rentals.create book: book
         end
       end
-
-      # if book.rental.present?
-      #   if book.rental.user == user
-      #     # 本が今借りているものなら返却
-      #     book.rental.soft_destroy
-      #   end
-      # elsif book.rental.blank? || book.rental.soft_destroyed?
-      #   user.rentals.create book: book
-      # end
     end
   end
 end

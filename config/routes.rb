@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   # post 'api/rent', to: 'api#rent'
   # post 'api/return', to: 'api#return'
   post 'api/process', to: 'api#data_catcher'
-
+  get 'api/rentals/:student_id', to: 'rentals#show_by_student_id'
 
   resources :favorites, only: [:destroy, :index]
 end
