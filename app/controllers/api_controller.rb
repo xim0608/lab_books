@@ -39,14 +39,26 @@ class ApiController < ApplicationController
       len = book_isbn.to_s.length
       book = Book.find_by_isbn_10(book_isbn) if len == 10
       book = Book.find_by_isbn_13(book_isbn) if len == 13
-      if book.rental.present?
-        if book.rental.user == user
-          # 本が今借りているものなら返却
-          book.rental.soft_destroy
+      ActiveRecord::Base.transaction do
+        # 例外が発生するかもしれない処理
+        if book.rental.present?
+          if book.rental.user == user
+            RentalHistory.create(book_id: book.id, user_id: user.id)
+            book.rental.destroy
+          end
+        else
+          user.rentals.create book: book
         end
-      else
-        user.rentals.create book: book
       end
+
+      # if book.rental.present?
+      #   if book.rental.user == user
+      #     # 本が今借りているものなら返却
+      #     book.rental.soft_destroy
+      #   end
+      # elsif book.rental.blank? || book.rental.soft_destroyed?
+      #   user.rentals.create book: book
+      # end
     end
   end
 end
