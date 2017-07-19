@@ -40,9 +40,10 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  post 'api/search', to: 'api#search'
-  post 'api/rent', to: 'api#rent'
-  post 'api/return', to: 'api#return'
+  # post 'api/search', to: 'api#search'
+  # post 'api/rent', to: 'api#rent'
+  # post 'api/return', to: 'api#return'
+  post 'api/process', to: 'api#data_catcher'
 
 
   resources :favorites, only: [:destroy, :index]

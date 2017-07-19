@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :books, through: :favorites
+  has_many :rentals
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid).first
