@@ -42,7 +42,7 @@ class ApiController < ApplicationController
       ActiveRecord::Base.transaction do
         # 例外が発生するかもしれない処理
         if book.rental.present?
-          if book.rental.user == user
+          if book.rental.user.id == user.id
             RentalHistory.create(book_id: book.id, user_id: user.id)
             book.rental.destroy
           end
