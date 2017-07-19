@@ -36,7 +36,7 @@ class ApiController < ApplicationController
     books_isbn = json_request['books']
     user = User.find_by_student_id(student_id)
     books_isbn.each do |book_isbn|
-      len = str(book_isbn).length
+      len = book_isbn.to_s.length
       book = Book.find_by_isbn_10(book_isbn) if len == 10
       book = Book.find_by_isbn_13(book_isbn) if len == 13
       if book.rental.user == user
