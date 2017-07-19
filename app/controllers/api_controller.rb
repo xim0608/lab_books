@@ -33,7 +33,7 @@ class ApiController < ApplicationController
   def data_catcher
     json_request = JSON.parse(request.body.read)
     student_id = json_request['student_id']
-    books = json_request['books']
+    books_isbn = json_request['books']
     user = User.find_by_student_id(student_id)
     books_isbn.each do |book_isbn|
       len = str(book_isbn).length
