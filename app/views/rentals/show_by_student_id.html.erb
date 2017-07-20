@@ -14,6 +14,36 @@
 <div class="container">
   <h2><%# @user.name_ja %>さんの貸出情報</h2>
 
+  <% if @rental_books.unread.present? %>
+      <table class="striped highlight">
+        <thead>
+        <tr>
+          <th>借りた本</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @rental_books.unread.each do |rental_book_now| %>
+            <tr><td><%= rental_book_now.book.name %></td></tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+
+  <% if @rental_histories.present? %>
+      <table class="striped highlight">
+        <thead>
+        <tr>
+          <th>返却した本</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @rental_histories.each do |rental_history| %>
+            <tr><td><%= rental_history.book.name %></td></tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+
   <% if @rental_books.present? %>
     <table class="striped highlight">
       <thead>
@@ -30,20 +60,7 @@
   <% end %>
 
 
-  <% if @rental_histories.present? %>
-    <table class="striped highlight">
-      <thead>
-        <tr>
-          <th>返却した本</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @rental_histories.each do |rental_history| %>
-              <tr><td><%= rental_history.book.name %></td></tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+
 
 </div>
 <script type="text/javascript" charset="utf-8">
