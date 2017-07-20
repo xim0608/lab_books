@@ -11,7 +11,7 @@
 
 <body>
 
-<div class="container">
+<!--<div class="container">-->
   <h5><i class="medium material-icons">book</i><%= @user.nickname %>さんの貸出情報</h5>
 
   <% if @rental_books.unread.present? %>
@@ -62,7 +62,7 @@
 
 
 
-</div>
+<!--</div>-->
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
      $.get("<%= rental_change_unread_flag_url(params[:student_id]) %>");
