@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719152447) do
+ActiveRecord::Schema.define(version: 20170719235855) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "isbn_13"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170719152447) do
     t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "unread", default: true, null: false
     t.index ["book_id"], name: "index_rental_histories_on_book_id"
     t.index ["user_id"], name: "index_rental_histories_on_user_id"
   end
@@ -50,11 +51,9 @@ ActiveRecord::Schema.define(version: 20170719152447) do
   create_table "rentals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "book_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "soft_destroyed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_rentals_on_book_id"
-    t.index ["soft_destroyed_at"], name: "index_rentals_on_soft_destroyed_at"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end
 

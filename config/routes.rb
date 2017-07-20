@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   # post 'api/return', to: 'api#return'
   post 'api/process', to: 'api#data_catcher'
   get 'api/rentals/:student_id', to: 'rentals#show_by_student_id'
+  get 'api/rentals/change_flag/:student_id', to: 'rentals#change_unread_flag', as: 'rental_change_unread_flag'
 
   resources :favorites, only: [:destroy, :index]
 end

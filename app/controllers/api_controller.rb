@@ -51,5 +51,7 @@ class ApiController < ApplicationController
         end
       end
     end
+    return
+
   end
 end
