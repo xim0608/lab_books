@@ -11,6 +11,7 @@
     </div></li>
     <li><a href="<%= edit_user_registration_path %>"><i class="material-icons">perm_identity</i>Edit your account</a></li>
     <li><a href="<%= favorites_path %>"><i class="material-icons">grade</i>Your Favorites</a></li>
+    <li><a href="<%= user_rental_path(current_user.id) %>"><i class="material-icons">book</i>Your Rentals</a></li>
     <li><div class="divider"></div></li>
     <!--<li><a class="subheader">Subheader</a></li>-->
     <li><%= link_to 'logout', destroy_user_session_path, :method => :delete, class: "wave-effect" %></li>

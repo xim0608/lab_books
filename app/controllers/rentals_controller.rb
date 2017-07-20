@@ -14,4 +14,9 @@ class RentalsController < ApplicationController
     rental_histories.update_all(unread: false)
     rentals_now.update_all(unread: false)
   end
+
+  def show
+    @user = User.find(params[:user_id])
+    @rental_books = @user.rentals
+  end
 end
