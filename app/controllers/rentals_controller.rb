@@ -20,3 +20,4 @@ class RentalsController < ApplicationController
     @rental_books = @user.rentals
   end
 end
+

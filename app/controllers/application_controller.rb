@@ -15,3 +15,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name_ja, :nickname, :student_id])
   end
 end
+

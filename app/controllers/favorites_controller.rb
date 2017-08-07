@@ -23,3 +23,4 @@ class FavoritesController < ApplicationController
     @users = User.includes(:favorites).where(favorites: {book_id: @book.id})
   end
 end
+

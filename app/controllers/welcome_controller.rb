@@ -8,3 +8,4 @@ class WelcomeController < ApplicationController
   def error
   end
 end
+

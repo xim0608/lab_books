@@ -15,3 +15,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     super
   end
 end
+
