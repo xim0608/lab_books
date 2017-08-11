@@ -61,6 +61,8 @@ GEM
     bullet (5.5.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
+    bulma-rails (0.4.3)
+      sass (~> 3.2)
     byebug (9.0.6)
     capybara (2.14.0)
       addressable
@@ -322,6 +324,7 @@ DEPENDENCIES
   better_errors (~> 2.1.1)
   binding_of_caller (~> 0.7.2)
   bullet (~> 5.5.1)
+  bulma-rails (~> 0.4.2)
   byebug (~> 9.0.6)
   capybara (~> 2.14.0)
   coffee-rails (~> 4.2)
