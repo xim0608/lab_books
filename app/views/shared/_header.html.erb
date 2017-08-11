@@ -1,40 +1,159 @@
-<!--side bar-->
-<% if current_user %>
-  <ul id="slide-out" class="side-nav">
-    <li><div class="userView">
-      <div class="background">
-        <img src="https://unsplash.it/500/500?image=831">
-      </div>
-      <a href="<%= edit_user_registration_path %>"><img class="circle" src="https://secure.gravatar.com/avatar/36960f5fc467f60690e12f658a07ee71.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0007-192.png"></a>
-      <a href="#"><span class="white-text name"><%= current_user.name %></span></a>
-      <a href="#!email"><span class="white-text email"><%= current_user.email %></span></a>
-    </div></li>
-    <li><a href="<%= edit_user_registration_path %>"><i class="material-icons">perm_identity</i>Edit your account</a></li>
-    <li><a href="<%= favorites_path %>"><i class="material-icons">grade</i>Your Favorites</a></li>
-    <li><a href="<%= user_rental_path(current_user.id) %>"><i class="material-icons">book</i>Your Rentals</a></li>
-    <li><div class="divider"></div></li>
-    <!--<li><a class="subheader">Subheader</a></li>-->
-    <li><%= link_to 'logout', destroy_user_session_path, :method => :delete, class: "wave-effect" %></li>
-  </ul>
-<% end %>
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://bulma.io">
+      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
 
-<!--navigation bar-->
-<nav>
-  <div class="container">
-    <div class="nav-wrapper">
-      <a href="<%= books_path %>" class="brand-logo left"><i class="material-icons hide-on-small-only"> book</i> LaBooks</a>
-      <ul class="right">
-        <li><a href=""><i class="material-icons">search</i></a></li>
-        <li><a href="<%= show_all_books_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show All Books"><i class="material-icons">view_module</i></a></li>
-        <li><a href="" onclick="location.reload()"><i class="material-icons">refresh</i></a></li>
-        <% if current_user %>
-          <li><a href="#" data-activates="slide-out" class="side-button"><i class="material-icons">menu</i></a></li>
-        <% end %>
-      </ul>
+    <div class="navbar-burger burger" data-target="navMenuExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenuExample" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active" href="/books">
+          Book
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="/books">
+            New Books
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+            Modifiers
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/grid/columns/">
+            Grid
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+            Layout
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
+            Form
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
+            Elements
+          </a>
+          
+            <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link " href="http://bulma.io/blog/">
+          人気タグ
+        </a>
+        <div class="navbar-dropdown " data-style="width: 18rem;">
+          <% @tags.each do |tag| %>
+            <%= link_to tag.name,{controller: 'books', action: 'show_all', q: tag.name}, {class: "navbar-item"} %>
+          <% end %>
+          <a class="navbar-item" href="http://bulma.io/blog/">
+            More posts
+          </a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-link">
+          More
+        </div>
+        <div id="moreDropdown" class="navbar-dropdown ">
+          <a class="navbar-item " href="http://bulma.io/extensions/">
+            <div class="level is-mobile">
+              <div class="level-left">
+                <div class="level-item">
+                  <p>
+                    <strong>Extensions</strong>
+                    <br>
+                    <small>Side projects to enhance Bulma</small>
+                  </p>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <span class="icon has-text-info">
+                    <i class="fa fa-plug"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <a class="navbar-item " href="http://bulma.io/expo/">
+        <span class="emoji">🎨</span>
+        Expo
+      </a>
+      <a class="navbar-item " href="http://bulma.io/love/">
+        <span class="emoji">❤️</span>
+        Love
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+        Github
+      </a>
+      <a class="navbar-item is-hidden-desktop-only" href="https://twitter.com/jgthms" target="_blank">
+        Twitter
+      </a>
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="tw-button button"
+  data-social-network="Twitter"
+  data-social-action="tweet"
+  data-social-target="http://bulma.io"
+  target="_blank"
+  href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&hashtags=bulmaio&url=http://bulma.io&via=jgthms">
+  <span class="icon">
+    <i class="fa fa-twitter"></i>
+  </span>
+  <span>
+    Tweet
+  </span>
+</a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
 
-<script text="javascript/text">
-  $(".side-button").sideNav();
-</script>
+<% content_for :javascript do %>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+  });
+<% end %>

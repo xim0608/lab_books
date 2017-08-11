@@ -1,0 +1,3 @@
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, controller: 'books', action: 'show_all', q: tag.name, class: 'navbar-item' %>
+<% end %>
