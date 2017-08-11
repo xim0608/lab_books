@@ -33,7 +33,7 @@ gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', '~> 0.1.0'
 gem 'knock', '~> 2.1.1'
-gem "bulma-rails", "~> 0.4.2"
+gem "bulma-rails"
 gem "font-awesome-rails", '~> 4.7.0.2'
 
 group :development, :test do

@@ -1,10 +1,11 @@
-<div class="card-panel grey lighten-3">
-  <%= form_tag show_all_books_path, method: :get, class: 'input-field' do %>
+<div class="column is-half is-offset-one-quarter">
+  <%= form_tag show_all_books_path, method: :get, class: 'field' do %>
       <p>
         <i class="material-icons prefix">search</i>
-        <%= text_field_tag "q", params[:q], class: 'validate' %>
-        <label for="q" class="active">Search</label>
-        <%= submit_tag "検索", class: 'waves-effect waves-light btn' %>
+        <label for="q" class="label">Search</label>
+        <%= text_field_tag "q", params[:q], size: "10",class: 'input is-left' %>
+        <%= submit_tag "検索", class: 'button is-success' %>
       </p>
   <% end %>
 </div>
+
