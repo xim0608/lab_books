@@ -14,9 +14,27 @@
     <% if current_user %>
       <%= render 'shared/search' %>
     <% end %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+    <% if notice.present? %>
+      <article class="message is-success">
+        <div class="message-body">
+          <%= notice %>
+        </div>
+      </article>
+    <% end %>
+
+    <% if alert.present? %>
+      <article class="message is-danger">
+        <div class="message-body">
+          <%= alert %>
+        </div>
+      </article>
+    <% end %>
+    <div class="section">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
   </div>
   <%= render 'shared/footer' %>
   <script>

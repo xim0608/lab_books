@@ -1,11 +1,20 @@
 <div class="column is-half is-offset-one-quarter">
-  <%= form_tag show_all_books_path, method: :get, class: 'field' do %>
-      <p>
-        <i class="material-icons prefix">search</i>
-        <label for="q" class="label">Search</label>
-        <%= text_field_tag "q", params[:q], size: "10",class: 'input is-left' %>
-        <%= submit_tag "検索", class: 'button is-success' %>
+  <div class="box">
+    <%= form_tag show_all_books_path, method: :get do %>
+
+      <div class="columns is-multiline">
+        <div class="column is-12">
+      <p class="control has-icons-left">
+      <!-- <label for="q" class="label">Search</label> -->
+        <%= text_field_tag "q", params[:q], size: "10", class: 'input', placeholder: 'Search' %>
+        <span class="icon is-small is-left">
+          <i class="fa fa-search"></i>
+        </span>
       </p>
-  <% end %>
+      </div>
+      <%= submit_tag "検索", class: 'button is-success column is-4 is-offset-one-third' %>
+      </div>
+    <% end %>
+</div>
 </div>
 

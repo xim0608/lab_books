@@ -27,3 +27,30 @@
   width: 100%;
   height: 100%;
 }
+
+.book-img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 100%; 
+}
+
+.photo {
+    width:150px;
+    height:150px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid #333;
+}
+.photo img {
+    position: absolute;
+    left: -100%;
+    right: -100%;
+    margin: auto;
+    width: auto;
+    height: 100%;
+}

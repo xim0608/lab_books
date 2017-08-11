@@ -4,8 +4,8 @@
       <div class="col s12 m6">
         <div class="card small horizontal z-depth-2" data-url="<%= book_path(book.id) %>"
              onmouseover="this.className='card small horizontal z-depth-5'" onmouseout="this.className='card small horizontal z-depth-1'">
-          <div class="card-image">
-            <%= smaller_book_image book.image_url %>
+          <div class="card-image photo">
+            <%= smaller_book_image(url=book.image_url, size="tiny") %>
           </div>
           <div class="card-stacked">
             <div class="card-content">
