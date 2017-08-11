@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def slack
     @user = User.find_for_oauth(request.env['omniauth.auth'])
     if @user.persisted?
-      flash[:notice] = 'devise.omniauth_callbacks.success'
+      flash[:notice] = 'ログインに成功しました'
       @user.deleted_at = nil
       @user.save
       sign_in_and_redirect @user, event: :authentication
