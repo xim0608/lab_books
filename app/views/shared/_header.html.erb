@@ -24,7 +24,7 @@
     <div class="nav-wrapper">
       <a href="<%= books_path %>" class="brand-logo left"><i class="material-icons hide-on-small-only"> book</i> LaBooks</a>
       <ul class="right">
-        <li><a href=""><i class="material-icons">search</i></a></li>
+        <li><a id="search-toggle"><i class="material-icons">search</i></a></li>
         <li><a href="<%= show_all_books_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show All Books"><i class="material-icons">view_module</i></a></li>
         <li><a href="" onclick="location.reload()"><i class="material-icons">refresh</i></a></li>
         <% if current_user %>
@@ -35,6 +35,33 @@
   </div>
 </nav>
 
+<% if user_signed_in? %>
+    <div class="container">
+      <% if params[:q].present? %>
+        <div id="search" class="card-panel grey lighten-3" style="display:block;">
+      <% else %>
+        <div id="search" class="card-panel grey lighten-3" style="display:none;">
+      <% end %>
+        <%= form_tag show_all_books_path, method: :get, class: 'input-field' do %>
+            <p class="row">
+              <i class="material-icons prefix">search</i>
+              <%= text_field_tag "q", params[:q], class: 'validate' %>
+              <label for="q" class="active">Search</label>
+              <%= submit_tag "検索", class: 'waves-effect waves-light btn col s4 offset-s4' %>
+            </p>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+
+
 <script text="javascript/text">
   $(".side-button").sideNav();
+  $("#search-toggle").click(function(){
+      $("#search").toggle('slow');
+      if ($("#search").css('display') == 'block') {
+        $('input:visible').eq(0).focus();
+    }
+  });
 </script>

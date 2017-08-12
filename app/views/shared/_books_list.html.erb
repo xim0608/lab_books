@@ -1,3 +1,7 @@
+<% if params[:q].present? %>
+    <p>該当件数：<%= @books.length %>件</p>
+<% end %>
+
 <div class="row">
   <% @books.each do |book| %>
       <div class="col s12 m6">

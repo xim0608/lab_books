@@ -11,9 +11,6 @@
   <body>
   <%= render 'shared/header' %>
   <div class="container">
-    <% if current_user %>
-      <%= render 'shared/search' %>
-    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
