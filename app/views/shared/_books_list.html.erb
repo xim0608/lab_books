@@ -17,7 +17,6 @@
             <div class="card-action">
               <div class="favorite" book_id="<%= book.id %>">
                 <i class="material-icons">star_border</i>
-                <%# link_to "お気に入り", add_book_path(book), method: :post %>
               </div>
             </div>
           </div>
@@ -26,7 +25,9 @@
   <% end %>
 </div>
 
-<%= will_paginate @books, class: 'pagination' %>
+<% if controller.action_name == "show_all" %>
+  <%= will_paginate @books, class: 'pagination' %>
+<% end %>
 
 <script type="text/javascript">
   $('.card-image').click(function() {
@@ -66,38 +67,6 @@
           $(this).html("<i class='material-icons'>star</i>");
           $books_id.push(parseInt($(this).attr('book_id')));
       }
-  })
-
-  function favorite_on_load() {
-      $('.favorite').each(function () {
-          if ($books_id.includes(parseInt($(this).attr('book_id')))) {
-              $(this).html("<i class='material-icons'>star</i>");
-          }
-      });
-  }
-
-  $(document).on('ready page:load', function(){
-      $.ajax({
-          url: "<%= list_favorite_books_path %>",
-          dataType: 'json',
-          success: function (json) {
-              $books_id = json
-          }
-      });
-      $('.favorite').each(function(){
-          if($books_id.includes($(this).attr('book_id'))){
-              $(this).html("<i class='material-icons'>star</i>");
-          }
-      });
-
-     if ($('.favorite').attr('book_id')){
-
-     }
   });
 
-//  $('.favorite').click(function(){
-//      if ($books_id.includes($(this).attr('book_id'))){
-//          $(this).html("<i class='material-icon'>star</i>")
-//      }
-//  });
 </script>
