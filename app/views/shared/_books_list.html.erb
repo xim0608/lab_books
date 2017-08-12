@@ -1,13 +1,13 @@
 <div class="row">
   <% @books.each do |book| %>
       <div class="col s12 m6">
-        <div class="card small horizontal z-depth-2" data-url="<%= book_path(book.id) %>"
+        <div class="card small horizontal z-depth-2"
              onmouseover="this.className='card small horizontal z-depth-5'" onmouseout="this.className='card small horizontal z-depth-1'">
-          <div class="card-image">
+          <div class="card-image" data-url="<%= book_path(book.id) %>">
             <%= smaller_book_image book.image_url %>
           </div>
           <div class="card-stacked">
-            <div class="card-content">
+            <div class="card-content" data-url="<%= book_path(book.id) %>">
               <p><%= book.name %></p>
               <small>
                 著者：<%= book.author %><br>
@@ -15,8 +15,9 @@
               </small>
             </div>
             <div class="card-action">
-              <div>
-                <%= link_to "お気に入り", add_book_path(book), method: :post %>
+              <div class="favorite" book_id="<%= book.id %>">
+                <i class="material-icons">star_border</i>
+                <%# link_to "お気に入り", add_book_path(book), method: :post %>
               </div>
             </div>
           </div>
@@ -28,8 +29,75 @@
 <%= will_paginate @books, class: 'pagination' %>
 
 <script type="text/javascript">
-  $('.card').click(function() {
+  $('.card-image').click(function() {
     location.href = jQuery(this).attr('data-url');
   });
-  
+  $('.card-content').click(function() {
+      location.href = jQuery(this).attr('data-url');
+  });
+  $books_id = [];
+  $.ajax({
+      url: "<%= list_favorite_books_path %>",
+      dataType: 'json',
+      success: function (json) {
+          $books_id = json;
+          $('.favorite').each(function () {
+              if ($books_id.includes(parseInt($(this).attr('book_id')))) {
+                  $(this).html("<i class='material-icons'>star</i>");
+              }
+          });
+      }
+  });
+
+  $('.favorite').click(function(){
+      $.post({
+          url: `/books/${$(this).attr("book_id")}/add`
+      });
+      if ($books_id.includes(parseInt($(this).attr('book_id')))) {
+          // 白抜きにする
+          $(this).html("<i class='material-icons'>star_border</i>");
+          for(i=0; i<$books_id.length; i++){
+              if($books_id[i] == parseInt($(this).attr("book_id"))){
+                  $books_id.splice(i--, 1);
+              }
+          }
+      } else {
+          // 色付きにする
+          $(this).html("<i class='material-icons'>star</i>");
+          $books_id.push(parseInt($(this).attr('book_id')));
+      }
+  })
+
+  function favorite_on_load() {
+      $('.favorite').each(function () {
+          if ($books_id.includes(parseInt($(this).attr('book_id')))) {
+              $(this).html("<i class='material-icons'>star</i>");
+          }
+      });
+  }
+
+  $(document).on('ready page:load', function(){
+      $.ajax({
+          url: "<%= list_favorite_books_path %>",
+          dataType: 'json',
+          success: function (json) {
+              $books_id = json
+          }
+      });
+      $('.favorite').each(function(){
+          if($books_id.includes($(this).attr('book_id'))){
+              $(this).html("<i class='material-icons'>star</i>");
+          }
+      });
+
+     if ($('.favorite').attr('book_id')){
+
+     }
+  });
+
+//  $('.favorite').click(function(){
+//      if ($books_id.includes($(this).attr('book_id'))){
+//          $(this).html("<i class='material-icon'>star</i>")
+//      }
+//  });
 </script>
