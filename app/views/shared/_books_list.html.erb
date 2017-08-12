@@ -14,16 +14,20 @@
                 <span class="grey-text"><%= cut_description(book.description) if book.description.present? %></span>
               </small>
             </div>
-            <div class="card-action">
-              <div class="favorite" book_id="<%= book.id %>">
-                <a href="#add_modal"><i class="material-icons">star_border</i></a>
+            <% if user_signed_in? %>
+              <div class="card-action">
+                <div class="favorite" book_id="<%= book.id %>">
+                  <a href="#add_modal"><i class="material-icons">star_border</i></a>
+                </div>
               </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
   <% end %>
 </div>
+
+<%# お気に入り追加時のモーダル %>
 <div id="add_modal" class="modal">
   <div class="modal-content">
     <p>お気に入りに追加しました！</p>
@@ -47,6 +51,7 @@
   $('.card-content').click(function() {
       location.href = jQuery(this).attr('data-url');
   });
+  <% if user_signed_in? %>
   $('.modal').modal();
   $books_id = [];
   $.ajax({
@@ -80,5 +85,5 @@
           $books_id.push(parseInt($(this).attr('book_id')));
       }
   });
-
+  <% end %>
 </script>
