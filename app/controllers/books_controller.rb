@@ -13,7 +13,16 @@ class BooksController < ApplicationController
   end
 
   def show_all
-    @books = Book.ja_search(params[:q]).order('publish_year').paginate(:page => params[:page], :per_page => 20)
+    books = Book.ja_search(params[:q])
+    if params[:q].present?
+      if ActsAsTaggableOn::Tag.pluck(:name).include?(params[:q])
+        tag = ActsAsTaggableOn::Tag.where(name: params[:q]).first
+        @books_size = tag[:taggings_count]
+      else
+        @books_size = books.count
+      end
+    end
+    @books = books.order('publish_year').paginate(:page => params[:page], :per_page => 20)
     @tags = ActsAsTaggableOn::Tag.most_used(20)
   end
 

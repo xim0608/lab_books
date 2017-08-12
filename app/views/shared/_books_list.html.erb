@@ -1,5 +1,5 @@
 <% if params[:q].present? %>
-    <p>該当件数：<%= @books.length %>件</p>
+    <p>該当件数：<%= @books_size %>件</p>
 <% end %>
 
 <div class="row">
@@ -7,6 +7,7 @@
       <div class="col s12 m6">
         <div class="card small horizontal z-depth-2"
              onmouseover="this.className='card small horizontal z-depth-5'" onmouseout="this.className='card small horizontal z-depth-1'">
+
           <div class="card-image" data-url="<%= book_path(book.id) %>">
             <%= smaller_book_image book.image_url %>
           </div>
