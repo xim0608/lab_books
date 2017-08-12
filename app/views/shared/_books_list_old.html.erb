@@ -4,21 +4,19 @@
 
 <div class="row">
   <% @books.each do |book| %>
-      <div class="col s6">
-        <div class="card horizontal z-depth-2"
-             onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+      <div class="col s12 m6">
+        <div class="card small horizontal z-depth-2"
+             onmouseover="this.className='card small horizontal z-depth-5'" onmouseout="this.className='card small horizontal z-depth-1'">
 
           <div class="card-image" data-url="<%= book_path(book.id) %>">
-            <div class="photo">
-              <%= smaller_book_image book.image_url %>
-            </div>
+            <%= smaller_book_image book.image_url %>
           </div>
           <div class="card-stacked">
             <div class="card-content" data-url="<%= book_path(book.id) %>">
               <p><%= book.name %></p>
               <small>
-                著者：<%= book.author %>
-                <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+                著者：<%= book.author %><br>
+                <span class="grey-text"><%= cut_description(book.description) if book.description.present? %></span>
               </small>
             </div>
             <% if user_signed_in? %>
