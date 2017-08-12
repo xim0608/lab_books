@@ -25,7 +25,7 @@ module ApplicationHelper
       elsif size == 'tiny'
         image_url.gsub!('/.jpg/', '._SL175_.jpg')
       end
-      image_tag image_url
+      image_tag image_url, class: "responsive-img"
     else
       if size == 'small'
         size = 'medium'
