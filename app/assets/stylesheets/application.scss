@@ -45,17 +45,20 @@ $primary-color: color("blue", "lighten-2") !default;
     width: auto;
     height: 100%;
 }
-.card-image{
+.card-image.w-photo{
   width: auto;
 
 }
-.card-content {
-  height: 130px;
+.card-content.w-photo {
+  height: 123px;
   width: auto;
   overflow: hidden;
   text-overflow: ellipsis;
   //white-space: nowrap;
 }
-.card-action {
-  height: 45px;
+.card-action.w-photo{
+  height: 52px;
 }
+
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
