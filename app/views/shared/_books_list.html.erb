@@ -16,13 +16,24 @@
             </div>
             <div class="card-action">
               <div class="favorite" book_id="<%= book.id %>">
-                <i class="material-icons">star_border</i>
+                <a href="#add_modal"><i class="material-icons">star_border</i></a>
               </div>
             </div>
           </div>
         </div>
       </div>
   <% end %>
+</div>
+<div id="add_modal" class="modal">
+  <div class="modal-content">
+    <p>お気に入りに追加しました！</p>
+  </div>
+</div>
+
+<div id="delete_modal" class="modal">
+  <div class="modal-content">
+    <p>お気に入りから削除しました。</p>
+  </div>
 </div>
 
 <% if controller.action_name == "show_all" %>
@@ -36,6 +47,7 @@
   $('.card-content').click(function() {
       location.href = jQuery(this).attr('data-url');
   });
+  $('.modal').modal();
   $books_id = [];
   $.ajax({
       url: "<%= list_favorite_books_path %>",
@@ -44,7 +56,7 @@
           $books_id = json;
           $('.favorite').each(function () {
               if ($books_id.includes(parseInt($(this).attr('book_id')))) {
-                  $(this).html("<i class='material-icons'>star</i>");
+                  $(this).html("<a href='#delete_modal'><i class='material-icons'>star</i></a>");
               }
           });
       }
@@ -56,7 +68,7 @@
       });
       if ($books_id.includes(parseInt($(this).attr('book_id')))) {
           // 白抜きにする
-          $(this).html("<i class='material-icons'>star_border</i>");
+          $(this).html("<a href='#add_modal'><i class='material-icons'>star_border</i></a>");
           for(i=0; i<$books_id.length; i++){
               if($books_id[i] == parseInt($(this).attr("book_id"))){
                   $books_id.splice(i--, 1);
@@ -64,7 +76,7 @@
           }
       } else {
           // 色付きにする
-          $(this).html("<i class='material-icons'>star</i>");
+          $(this).html("<a href='#delete_modal'><i class='material-icons'>star</i></a>");
           $books_id.push(parseInt($(this).attr('book_id')));
       }
   });
