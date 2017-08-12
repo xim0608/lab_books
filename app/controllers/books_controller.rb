@@ -22,11 +22,33 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+   # begin
+     # res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
+     # @url = res.get_element('CustomerReviews').get('IFrameURL')
+   # rescue
+   #   puts '503 error'
+   # end
+  end
+
+  def show_review
+    require 'timeout'
+    @book = Book.find(params[:book_id])
+    counter = 0
     begin
-      res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
-      @url = res.get_element('CustomerReviews').get('IFrameURL')
+      Timeout.timeout(2) do
+        res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
+        url = res.get_element('CustomerReviews').get('IFrameURL')
+        render json: {url: url}
+      end
+    rescue Timeout::Error
+      render json: {error: 'timeout'}
     rescue
       puts '503 error'
+      counter += 1
+      if counter <= 3
+        retry
+      end
+      render json: {error: '503 error'}
     end
   end
 

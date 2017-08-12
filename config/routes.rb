@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :import
       post :rent
       post :return
+      get :show_review
     end
     member do
       post :add, to: 'favorites#create'

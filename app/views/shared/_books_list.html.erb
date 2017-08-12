@@ -28,7 +28,8 @@
 <%= will_paginate @books, class: 'pagination' %>
 
 <script type="text/javascript">
-  jQuery('.card').click(function() {
+  $('.card').click(function() {
     location.href = jQuery(this).attr('data-url');
   });
+  
 </script>
