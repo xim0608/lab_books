@@ -46,8 +46,11 @@
 </div>
 
 <% if controller.action_name == "show_all" %>
-  <%= will_paginate @books, class: 'pagination' %>
+    <div class="center-align">
+      <%= will_paginate @books, renderer: MaterializePagination::Rails %>
+    </div>
 <% end %>
+
 
 <script type="text/javascript">
   $('.card-image').click(function() {

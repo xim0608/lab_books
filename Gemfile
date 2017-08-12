@@ -31,7 +31,7 @@ gem 'search_cop', '~> 1.0.8'
 gem 'amazon-ecs', '~> 2.5.0'
 gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
-gem 'will_paginate-materialize', '~> 0.1.0'
+gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
 gem 'knock', '~> 2.1.1'
 
 
