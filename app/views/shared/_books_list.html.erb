@@ -1,44 +1,62 @@
-<% if params[:q].present? %>
-    <p>該当件数：<%= @books_size %>件</p>
-<% end %>
+<div class="row">
+  <div class="col s8">
+  <% if params[:q].present? %>
+      <p>該当件数：<%= @books_size %>件</p>
+  <% end %>
+  </div>
+  <div class="col s4">
+
+    <select name="preview_type" id="preview_type" class="browser-default">
+      <option value="true" disabled selected>表示方法</option>
+      <option value="true">サムネイルあり</option>
+      <option value="false">サムネイルなし</option>
+    </select>
+  </div>
+
+</div>
 
 
 <div class="row">
   <% @books.each do |book| %>
-      <% if true %>
+      <% if session[:show_type] == 'with_image' %>
           <!--写真つき一覧-->
           <div class="col s6">
-          <div class="card horizontal z-depth-2"
-               onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+            <div class="card horizontal z-depth-2"
+                 onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
 
-            <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>">
-              <div class="photo">
-                <%= smaller_book_image book.image_url %>
-              </div>
-            </div>
-            <div class="card-stacked">
-              <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>">
-                <p><%= book.name %></p>
-                <small>
-                  著者：<%= book.author %>
-                  <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-                </small>
-              </div>
-              <% if user_signed_in? %>
-                <div class="card-action w-photo">
-                  <div class="favorite" book_id="<%= book.id %>">
-                    <a href="#add_modal">
-                      <i class="material-icons md-dark md-inactive"
-                                            onmouseover="this.className='material-icons'"
-                                            onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
-                    </a>
-                  </div>
+              <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>">
+                <div class="photo">
+                  <%= smaller_book_image book.image_url %>
                 </div>
-              <% end %>
+              </div>
+              <div class="card-stacked">
+                <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>">
+                  <p><%= book.name %></p>
+                  <small>
+                    著者：<%= book.author %>
+                    <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+                  </small>
+                </div>
+                <% if user_signed_in? %>
+                    <div class="card-action w-photo">
+                      <div class="favorite" book_id="<%= book.id %>">
+                        <a href="#add_modal">
+                          <i class="material-icons md-dark md-inactive"
+                             onmouseover="this.className='material-icons'"
+                             onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+                        </a>
+                      </div>
+                    </div>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      <% else %>
+
+
+
+
+<% else %>
+
           <!--写真なし一覧-->
           <div class="col s12">
             <div class="card horizontal z-depth-2"
@@ -105,8 +123,9 @@
   $('.card-link').click(function() {
       location.href = jQuery(this).attr('data-url');
   });
-  <% if user_signed_in? %>
+
   $('.modal').modal();
+
   $books_id = [];
   $.ajax({
       url: "<%= list_favorite_books_path %>",
@@ -139,5 +158,22 @@
           $books_id.push(parseInt($(this).attr('book_id')));
       }
   });
-  <% end %>
+
+  $('#preview_type').change(function() {
+      let val = $(this).val();
+      $.ajax({
+          type: 'post',
+          url: '<%= change_show_type_books_path %>',
+          data: {show_type: val},
+          dataType: 'json',
+      })
+          .then(
+              function(){
+                  location.reload();
+              },
+              function(){
+                  alert("access failed");
+              }
+          );
+  });
 </script>

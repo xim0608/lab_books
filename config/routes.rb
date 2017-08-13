@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post :rent
       post :return
       get :show_review
+      post :change_show_type
       get :list_favorite, to: 'favorites#list'
     end
     member do

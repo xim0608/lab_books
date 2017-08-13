@@ -2,13 +2,14 @@ require 'will_paginate/array'
 
 class BooksController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :set_show_type
+  protect_from_forgery except: [:change_show_type]
 
   def index
     # 人気タグ
     @tags = ActsAsTaggableOn::Tag.most_used(20)
     # 新着本
-    @books = Book.order('id DESC').take(21)
+    @books = Book.order('id DESC').take(20)
     # @favorites = Favorites.all
   end
 
@@ -71,11 +72,25 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: notice_msg
   end
 
+  def change_show_type
+    if params[:show_type] == 'true'
+      session[:show_type] = 'with_image'
+    else
+      session[:show_type] = 'without_image'
+    end
+  end
+
+
   # API
   def rent
   end
 
   def return
+  end
+
+  private
+  def set_show_type
+    session[:show_type] ||= 'with_image'
   end
 end
 
