@@ -62,6 +62,9 @@ $primary-color: color("blue", "lighten-2") !default;
 .card.wo-photo{
   height: 100px;
   width: auto;
+
+}
+.card-content.wo-photo{
   overflow: hidden;
   text-overflow: ellipsis;
 }

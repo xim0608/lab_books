@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       post :return
       get :show_review
       post :change_show_type
+      post :change_show_num
       get :list_favorite, to: 'favorites#list'
     end
     member do

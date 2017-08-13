@@ -4,8 +4,8 @@
         <p>該当件数：<%= @books_size %>件</p>
     <% end %>
   </div>
-  <div class="col s4">
 
+  <div class="col s2 push-s2">
     <select name="preview_type" id="preview_type" class="browser-default">
       <option value="true" disabled selected>表示方法</option>
       <option value="true">サムネイルあり</option>
@@ -13,6 +13,16 @@
     </select>
   </div>
 
+  <% if params[:page].to_i == 1 %>
+      <div class="col s2 pull-s2">
+        <select name="preview_num" id="preview_num" class="browser-default">
+          <option value="true" disabled selected>表示件数</option>
+          <option value="20">20件</option>
+          <option value="50">50件</option>
+          <option value="100">100件</option>
+        </select>
+      </div>
+  <% end %>
 </div>
 
 
@@ -32,8 +42,7 @@
               <div class="card-stacked">
                 <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>">
                   <small>
-                  <p><%= book.name %></p>
-
+                    <p><%= book.name %></p>
                     著者：<%= book.author %>
                     <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
                   </small>
@@ -61,10 +70,10 @@
                  onmouseover="this.className='card horizontal z-depth-5 wo-photo'"
                  onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
               <div class="card-stacked row">
-                <div class="card-content col">
+                <div class="card-content col wo-photo">
                   <div class="col s10 card-link" data-url="<%= book_path(book.id) %>">
-                    <p style="font-size: small;"><%= book.name %></p>
                     <small>
+                      <p><%= book.name %></p>
                       著者：<%= book.author %>
                       <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
                     </small>
@@ -160,6 +169,24 @@
             type: 'post',
             url: '<%= change_show_type_books_path %>',
             data: {show_type: val},
+            dataType: 'json',
+        })
+            .then(
+                function () {
+                    location.reload();
+                },
+                function () {
+                    alert("access failed");
+                }
+            );
+    });
+
+    $('#preview_num').change(function () {
+        let val = $(this).val();
+        $.ajax({
+            type: 'post',
+            url: '<%= change_show_num_books_path %>',
+            data: {show_num: val},
             dataType: 'json',
         })
             .then(
