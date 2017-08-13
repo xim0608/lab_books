@@ -6,17 +6,19 @@
   </div>
 
   <div class="col s2 push-s2">
-    <select name="preview_type" id="preview_type" class="browser-default">
-      <option value="true" disabled selected>表示方法</option>
-      <option value="true">サムネイルあり</option>
-      <option value="false">サムネイルなし</option>
+    <label>表示形式</label>
+    <select name="preview_type" id="preview_type" class="browser-default" selected="<%= session[:show_type] %>">
+      <!--<option value="with_image" disabled selected>表示方法</option>-->
+      <option value="with_image">サムネイルあり</option>
+      <option value="without_image">サムネイルなし</option>
     </select>
   </div>
 
   <% if params[:page].to_i == 1 %>
       <div class="col s2 pull-s2">
-        <select name="preview_num" id="preview_num" class="browser-default">
-          <option value="true" disabled selected>表示件数</option>
+        <label>表示件数</label>
+        <select name="preview_num" id="preview_num" class="browser-default" selected="<%= session[:show_num] %>">
+          <!--<option value="20" disabled selected>表示件数</option>-->
           <option value="20">20件</option>
           <option value="50">50件</option>
           <option value="100">100件</option>

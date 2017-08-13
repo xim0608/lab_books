@@ -73,7 +73,7 @@ class BooksController < ApplicationController
   end
 
   def change_show_type
-    if params[:show_type] == 'true'
+    if params[:show_type] == 'with_image'
       session[:show_type] = 'with_image'
     else
       session[:show_type] = 'without_image'
