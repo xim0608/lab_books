@@ -59,6 +59,12 @@ $primary-color: color("blue", "lighten-2") !default;
 .card-action.w-photo{
   height: 52px;
 }
+.card.wo-photo{
+  height: 100px;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
