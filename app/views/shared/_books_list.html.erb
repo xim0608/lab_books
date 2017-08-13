@@ -36,13 +36,14 @@
             <div class="card horizontal z-depth-2"
                  onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
 
-              <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>">
+              <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
                 <div class="photo">
                   <%= smaller_book_image book.image_url %>
                 </div>
               </div>
               <div class="card-stacked">
-                <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>">
+                <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
+                ">
                   <small>
                     <p><%= book.name %></p>
                     著者：<%= book.author %>
@@ -73,7 +74,7 @@
                  onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
               <div class="card-stacked row">
                 <div class="card-content col wo-photo">
-                  <div class="col s10 card-link" data-url="<%= book_path(book.id) %>">
+                  <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand;">
                     <small>
                       <p><%= book.name %></p>
                       著者：<%= book.author %>
@@ -85,7 +86,9 @@
                         <a href="#add_modal">
                           <i class="material-icons md-dark md-inactive"
                              onmouseover="this.className='material-icons'"
-                             onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+                             onmouseout="this.className='material-icons md-dark md-inactive'"
+                             style="cursor:hand; cursor: pointer;">
+                            star_border</i>
                         </a>
                       </div>
                   <% end %>
