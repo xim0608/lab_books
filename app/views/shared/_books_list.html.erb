@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col s8">
+  <div class="col s8 l6">
     <% if params[:q].present? %>
         <p>該当件数：<%= @books_size %>件</p>
     <% end %>
   </div>
 
-  <div class="col s2 push-s2">
+  <div class="col s6 l3 push-l3">
     <label>表示形式</label>
     <select name="preview_type" id="preview_type" class="browser-default">
       <!--<option value="with_image" disabled selected>表示方法</option>-->
@@ -15,7 +15,7 @@
   </div>
 
   <% if params[:page].to_i == 1 || params[:page].blank? %>
-      <div class="col s2 pull-s2">
+      <div class="col s6 l3 pull-l3">
         <label>表示件数</label>
         <select name="preview_num" id="preview_num" class="browser-default">
           <!--<option value="20" disabled selected>表示件数</option>-->
