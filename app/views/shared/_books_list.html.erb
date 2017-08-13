@@ -7,21 +7,21 @@
 
   <div class="col s2 push-s2">
     <label>表示形式</label>
-    <select name="preview_type" id="preview_type" class="browser-default" selected="<%= session[:show_type] %>">
+    <select name="preview_type" id="preview_type" class="browser-default">
       <!--<option value="with_image" disabled selected>表示方法</option>-->
-      <option value="with_image">サムネイルあり</option>
-      <option value="without_image">サムネイルなし</option>
+      <option value="with_image" <%= 'selected' if session[:show_type] == 'with_image' %>>サムネイルあり</option>
+      <option value="without_image" <%= 'selected' if session[:show_type] == 'without_image' %>>サムネイルなし</option>
     </select>
   </div>
 
-  <% if params[:page].to_i == 1 %>
+  <% if params[:page].to_i == 1 || params[:page].blank? %>
       <div class="col s2 pull-s2">
         <label>表示件数</label>
-        <select name="preview_num" id="preview_num" class="browser-default" selected="<%= session[:show_num] %>">
+        <select name="preview_num" id="preview_num" class="browser-default">
           <!--<option value="20" disabled selected>表示件数</option>-->
-          <option value="20">20件</option>
-          <option value="50">50件</option>
-          <option value="100">100件</option>
+          <option value="20" <%= 'selected' if session[:show_num] == 20 %>>20件</option>
+          <option value="50" <%= 'selected' if session[:show_num] == 50 %>>50件</option>
+          <option value="100" <%= 'selected' if session[:show_num] == 100 %>>100件</option>
         </select>
       </div>
   <% end %>
