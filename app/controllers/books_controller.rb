@@ -2,13 +2,14 @@ require 'will_paginate/array'
 
 class BooksController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :set_show_type, :set_show_num
+  protect_from_forgery except: [:change_show_type, :change_show_num]
 
   def index
     # 人気タグ
     @tags = ActsAsTaggableOn::Tag.most_used(20)
     # 新着本
-    @books = Book.order('id DESC').take(21)
+    @books = Book.order('id DESC').take(session[:show_num])
     # @favorites = Favorites.all
   end
 
@@ -22,7 +23,7 @@ class BooksController < ApplicationController
         @books_size = books.count
       end
     end
-    @books = books.order('publish_year').paginate(:page => params[:page], :per_page => 20)
+    @books = books.order('publish_year').paginate(:page => params[:page], :per_page => session[:show_num])
     @tags = ActsAsTaggableOn::Tag.most_used(20)
   end
 
@@ -71,11 +72,33 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: notice_msg
   end
 
+  def change_show_type
+    if params[:show_type] == 'with_image'
+      session[:show_type] = 'with_image'
+    else
+      session[:show_type] = 'without_image'
+    end
+  end
+
+  def change_show_num
+    session[:show_num] = params[:show_num].to_i
+  end
+
+
   # API
   def rent
   end
 
   def return
+  end
+
+  private
+  def set_show_type
+    session[:show_type] ||= 'with_image'
+  end
+
+  def set_show_num
+    session[:show_num] ||= 20
   end
 end
 
