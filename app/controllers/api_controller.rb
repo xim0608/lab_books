@@ -1,7 +1,39 @@
 class ApiController < ApplicationController
-  # protect_from_forgery except: [:search, :rent, :return]
-  protect_from_forgery except: [:data_catcher]
+  # protect_from_forgery with: :null_session
+  protect_from_forgery except: [:make_session]
+
   require 'json'
+  require 'jwt'
+  require 'net/http'
+
+  def make_session
+    # slack.com/oauth/authorize?client_id=169915681349.170498868550&scope=identity.basic へアクセスした時のcallback
+    # slack.comからのcallbackを受ける
+    code = params[:code]
+    payload = URI.encode_www_form({client_id: ENV['SLACK_APP_ID'], client_secret: ENV['SLACK_APP_SECRET'], code: code})
+    oauth_access_uri = URI.parse("https://slack.com/api/oauth.access?#{payload}")
+
+    req = Net::HTTP::Get.new(oauth_access_uri.request_uri)
+    req['Accept'] = 'application/json'
+
+    res = Net::HTTP.start(oauth_access_uri.host, oauth_access_uri.port, :use_ssl => oauth_access_uri.scheme == 'https') do |http|
+      http.request(req)
+    end
+
+    oauth_access = JSON.parse(res.body)
+    if oauth_access['ok'].present?
+      uid = oauth_access['user']['id']
+      # トークン生成
+      # token =
+    end
+
+    hmac_secret = ENV['HMAC_SECRET']
+    # token = JWT.encode payload, hmac_secret, 'HS256'
+    render json: res.body
+    # payload = {jwt: token, exp: ""}
+
+  end
+
   def search
     raise unless params[:q]
     results = Book.ja_search(params[:q])

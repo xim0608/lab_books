@@ -32,7 +32,7 @@ gem 'amazon-ecs', '~> 2.5.0'
 gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
-gem 'knock', '~> 2.1.1'
+gem 'jwt', '~> 1.5.6'
 
 
 group :development, :test do

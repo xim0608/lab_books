@@ -53,5 +53,6 @@ Rails.application.routes.draw do
   get 'api/rentals/change_flag/:student_id', to: 'rentals#change_unread_flag', as: 'rental_change_unread_flag'
   get 'rentals/:user_id', to: 'rentals#show', as: 'user_rental'
 
+  get 'api/users/auth/slack/callback', to: 'api#make_session'
   resources :favorites, only: [:destroy, :index]
 end
