@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     delete '/users/sign_out' => 'devise/sessions#destroy', as: :destroy_user_session
     post '/users' => 'users/registrations#create', as: :user_registration
     get '/users/edit' => 'users/registrations#edit', as: :edit_user_registration
+    get '/users/edit' => 'users/registrations#new', as: :new_user_registration
     patch '/users' => 'users/registrations#update', as: nil
     put '/users' => 'users/registrations#update', as: :update_user_registration
     delete '/users' => 'users/registrations#destroy', as: :destroy_user_registration
