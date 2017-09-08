@@ -17,7 +17,9 @@
 
 
   <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
+      <div class='card-panel green lighten-5'>
+        <p class="green-text"><%= notice %></p>
+      </div>
   <% end %>
   <% if alert.present? %>
       <div class='card-panel red lighten-4'>
