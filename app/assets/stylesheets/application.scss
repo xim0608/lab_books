@@ -71,3 +71,7 @@ $primary-color: color("blue", "lighten-2") !default;
 
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.pad-top{
+  padding-top: 10px;
+}
