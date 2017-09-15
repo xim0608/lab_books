@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720033003) do
+ActiveRecord::Schema.define(version: 20170915093457) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "isbn_13"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170720033003) do
     t.datetime "deleted_at"
     t.datetime "remember_created_at"
     t.boolean "is_admin", default: false
+    t.string "year"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
