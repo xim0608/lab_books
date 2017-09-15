@@ -1,2 +1,22 @@
 <h1>Admin#index</h1>
-<p>Find me in app/views/admin/index.html.erb</p>
+
+<h3>B3</h3>
+<% @b3s.each do |b3_student| %>
+    <p><%= b3_student.name %></p>
+    <p><%= @books_sum[b3_student.id] %></p>
+<% end %>
+
+<h3>B4</h3>
+<% @b4s.each do |b4_student| %>
+    <p><%= b4_student.name %></p>
+<% end %>
+
+<h3>M1</h3>
+<% @m1s.each do |m1_student| %>
+    <p><%= m1_student.name %></p>
+<% end %>
+
+<h3>M2</h3>
+<% @m2s.each do |m2_student| %>
+    <p><%= m2_student.name %></p>
+<% end %>
