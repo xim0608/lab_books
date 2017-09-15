@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   #   end
   # end
 
-  # post 'api/search', to: 'api#search'
+  get 'api/inc_search', to: 'api#inc_search'
   # post 'api/rent', to: 'api#rent'
   # post 'api/return', to: 'api#return'
   post 'api/process', to: 'api#data_catcher'

@@ -40,6 +40,12 @@ class ApiController < ApplicationController
     render json: results.to_json({only: %w(name image_url)})
   end
 
+  def inc_search
+    raise unless params[:q]
+    results = Book.ja_title_search(params[:q]).take(10)
+    render json: results.to_json({only: %w(id name author image_url)})
+  end
+
   # def add
   #   book = Book.find_by_isbn_10(params[:isbn_10]).take(1)
   #   render json: {book: book}

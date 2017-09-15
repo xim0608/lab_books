@@ -7,6 +7,10 @@ class Book < ApplicationRecord
     attributes :name, :description
   end
 
+  search_scope :title_search do
+    attributes :name
+  end
+
   # いま本がどこにあるのかわかるようにする
   belongs_to :where, class_name: 'User', foreign_key: 'user_id'
   has_many :favorites
@@ -62,6 +66,16 @@ class Book < ApplicationRecord
           end
         end
       end
+    end
+    results
+  end
+
+  def self.ja_title_search(query)
+    results = self.title_search(query)
+    if query.present?
+      size = results.size
+      # 全角スペース置換
+      query.gsub!('　', ' ')
     end
     results
   end
