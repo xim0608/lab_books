@@ -37,4 +37,8 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  def admin?
+    self.is_admin
+  end
 end

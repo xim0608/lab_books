@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_admin!
+    redirect_to books_path, alert: '権限がありません'  unless current_user.admin?
+  end
   private
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name_ja, :nickname, :student_id])
