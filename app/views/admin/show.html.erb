@@ -1,0 +1,5 @@
+<h1><%= @user.name %>の貸し出し状況</h1>
+<% @rental_books.each do |book_id| %>
+    <% book = Book.find(book_id.id) %>
+    <p><%= book.name %></p>
+<% end %>

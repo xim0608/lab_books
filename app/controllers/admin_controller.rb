@@ -9,4 +9,9 @@ class AdminController < ApplicationController
     @books_sum = Rental.group(:user_id).sum(:user_id)
   end
 
-end
+  def show
+    @user = User.find(params[:user_id])
+    @rental_books = @user.rentals
+  end
+
+  end

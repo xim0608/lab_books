@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'admin/index'
 
   post 'user_token' => 'user_token#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -41,6 +40,10 @@ Rails.application.routes.draw do
       get :show_clips, to: 'favorites#show_clips'
     end
   end
+
+  get 'admin/index'
+  get 'admin/:user_id', to: 'admin#show', as: 'user_admin'
+
 
   # resources :api, except: [:all] do
   #   collection do
