@@ -32,37 +32,37 @@
   <% @books.each do |book| %>
       <% if session[:show_type] == 'with_image' %>
           <!--写真つき一覧-->
+          <%# aタグでリンクさせようとするとバグる %>
           <div class="col l4 m6 s12">
-            <div class="card horizontal z-depth-2"
-                 onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
-
-              <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
-                <div class="photo">
-                  <%= smaller_book_image book.image_url %>
+              <div class="card horizontal z-depth-2"
+                   onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+                <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
+                  <div class="photo">
+                    <%= smaller_book_image book.image_url %>
+                  </div>
                 </div>
-              </div>
-              <div class="card-stacked">
-                <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
-                ">
-                  <small>
-                    <p><%= book.name %></p>
-                    著者：<%= book.author %>
-                    <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-                  </small>
-                </div>
-                <% if user_signed_in? %>
-                    <div class="card-action w-photo">
-                      <div class="favorite" book_id="<%= book.id %>">
-                        <a href="#add_modal">
-                          <i class="material-icons md-dark md-inactive"
-                             onmouseover="this.className='material-icons'"
-                             onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
-                        </a>
+                <div class="card-stacked">
+                  <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
+                  ">
+                    <small>
+                      <p><%= book.name %></p>
+                      著者：<%= book.author %>
+                      <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+                    </small>
+                  </div>
+                  <% if user_signed_in? %>
+                      <div class="card-action w-photo">
+                        <div class="favorite favorite-btn" book_id="<%= book.id %>">
+                          <a href="#add_modal">
+                            <i class="material-icons md-dark md-inactive"
+                               onmouseover="this.className='material-icons'"
+                               onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
           </div>
 
 
@@ -74,7 +74,7 @@
                  onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
               <div class="card-stacked row">
                 <div class="card-content col wo-photo">
-                  <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand;">
+                  <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
                     <small>
                       <p><%= book.name %></p>
                       著者：<%= book.author %>
@@ -82,7 +82,7 @@
                     </small>
                   </div>
                   <% if user_signed_in? %>
-                      <div class="favorite col s2" book_id="<%= book.id %>">
+                      <div class="favorite col s2 favorite-btn" book_id="<%= book.id %>">
                         <a href="#add_modal">
                           <i class="material-icons md-dark md-inactive"
                              onmouseover="this.className='material-icons'"
@@ -97,7 +97,6 @@
             </div>
           </div>
       <% end %>
-
   <% end %>
 </div>
 
@@ -129,9 +128,9 @@
     //  $('.card-image').click(function() {
     //    location.href = jQuery(this).attr('data-url');
     //  });
-    $('.card-link').click(function () {
-        location.href = jQuery(this).attr('data-url');
-    });
+        $('.card-link').click(function () {
+            location.href = jQuery(this).attr('data-url');
+        });
 
     $('.modal').modal();
 
@@ -149,15 +148,16 @@
         }
     });
 
-    $('.favorite').click(function () {
+    $('.favorite-btn').click(function () {
         $.post({
             url: `/books/${$(this).attr("book_id")}/add`
         });
         if ($books_id.includes(parseInt($(this).attr('book_id')))) {
             // 白抜きにする
             $(this).html("<a href='#add_modal'><i class='material-icons md-dark md-inactive'>star_border</i></a>");
+            var i;
             for (i = 0; i < $books_id.length; i++) {
-                if ($books_id[i] == parseInt($(this).attr("book_id"))) {
+                if ($books_id[i] === parseInt($(this).attr("book_id"))) {
                     $books_id.splice(i--, 1);
                 }
             }
