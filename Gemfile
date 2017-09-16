@@ -33,6 +33,7 @@ gem 'materialize-sass', '~> 0.98.2'
 gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
 gem 'jwt', '~> 1.5.6'
+gem 'xmlrpc'
 
 
 group :development, :test do

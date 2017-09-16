@@ -41,16 +41,27 @@ namespace :books do
     Book.import_from_api
   end
 
-  desc 'calculate tf-idf'
-  task :cal_tf_idf => :environment do
-    okura = WordManipulation::OkuraConnector.new
-    books = Book.pluck(:name, :description).take(5)
-    books.map! {|book| book.join(' ')}
-    # p books
-    books_nouns = []
-    books.each do |book|
-      books_nouns.append(okura.select_nouns(book))
+  desc 'はてなキーワードAPIに本のデータを送信し、特徴語を取り出してタグ付け'
+  task :tagging_books => :environment do
+    require 'xmlrpc/client'
+
+    server = XMLRPC::Client.new2('http://d.hatena.ne.jp/xmlrpc')
+    Book.all.take(5).each do |book|
+      text = "#{book.name} #{book.description}"
+      begin
+        param = server.call("hatena.setKeywordLink", {"body": text, 'mode': 'lite'})
+        words = param["wordlist"]
+        words.each do |word|
+          if word['score'] > 25
+            book.tag_list.add(word['word'])
+            book.save
+          end
+        end
+      rescue XMLRPC::FaultException => e
+        puts "Error:"
+        puts e.faultCode
+        puts e.faultString
+      end
     end
-    p books_nouns
   end
 end
