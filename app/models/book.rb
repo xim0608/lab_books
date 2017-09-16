@@ -46,28 +46,9 @@ class Book < ApplicationRecord
   end
 
   def self.ja_search(query)
-    results = self.search(query)
-    if query.present?
-      size = results.size
-      # 全角スペース置換
-      query.gsub!('　', ' ')
-
-      # 一単語のみで検索しているか
-      unless query.include?(' ')
-        okura = WordManipulation::OkuraConnector.new
-        # queryが一般名詞のみで構成されているか
-        if okura.is_noun?(query)
-          if size > 3 && size < self.all.size
-            un_tagged_books = results - Book.tagged_with(query)
-            un_tagged_books.each do |book|
-              book.tag_list.add(query)
-              book.save
-            end
-          end
-        end
-      end
-    end
-    results
+    # 全角スペース置換tikann
+    query.gsub!('　', ' ') if query.present?
+    self.search(query)
   end
 
   def self.ja_title_search(query)
