@@ -40,4 +40,17 @@ namespace :books do
   task :get_new_book => :environment do
     Book.import_from_api
   end
+
+  desc 'calculate tf-idf'
+  task :cal_tf_idf => :environment do
+    okura = WordManipulation::OkuraConnector.new
+    books = Book.pluck(:name, :description).take(5)
+    books.map! {|book| book.join(' ')}
+    # p books
+    books_nouns = []
+    books.each do |book|
+      books_nouns.append(okura.select_nouns(book))
+    end
+    p books_nouns
+  end
 end

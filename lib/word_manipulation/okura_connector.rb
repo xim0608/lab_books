@@ -27,5 +27,23 @@ module WordManipulation
         true
       end
     end
+
+    def select_nouns(str)
+      nouns = []
+      nodes = @tagger.parse(str)
+      nodes.mincost_path.each do |node|
+        word = node.word
+        # p word.surface # 単語の表記
+        # p word.left.text # 品詞
+        if word.left.text.split(',')[0] == '名詞'
+          nouns.append(word.surface)
+        end
+        # 品詞はword.leftとword.rightがありますが､一般的に使われる辞書(IPA辞書やNAIST辞書)では
+        # 両方同じデータが入ってます
+
+      end
+      # p nouns
+      nouns.join(' ')
+    end
   end
 end
