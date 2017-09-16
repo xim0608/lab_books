@@ -1,9 +1,9 @@
 class RentalsController < ApplicationController
   def show_by_student_id
     @user = User.find_by_student_id(params[:student_id])
-    @rental_books = @user.rentals
+    @rental_books = @user.rentals.now
     # @rentals_now = @rental_books.unread
-    @rental_histories = @user.rental_histories.unread
+    @rental_histories = @user.rentals.history
     render :layout => false
   end
 

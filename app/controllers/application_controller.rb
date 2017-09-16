@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
           if book.rental.user.id == user.id
             # rentalを削除して、historyへ
             status.store(isbn, 'success')
+            book.rental.soft_destroy!
           end
         else
           status.store(isbn, 'no record')
