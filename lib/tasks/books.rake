@@ -46,7 +46,7 @@ namespace :books do
     require 'xmlrpc/client'
 
     server = XMLRPC::Client.new2('http://d.hatena.ne.jp/xmlrpc')
-    Book.all.take(5).each do |book|
+    Book.all.each do |book|
       text = "#{book.name} #{book.description}"
       begin
         param = server.call("hatena.setKeywordLink", {"body": text, 'mode': 'lite'})
@@ -61,6 +61,7 @@ namespace :books do
         puts "Error:"
         puts e.faultCode
         puts e.faultString
+        retry
       end
     end
   end
