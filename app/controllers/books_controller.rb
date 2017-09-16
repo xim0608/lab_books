@@ -32,12 +32,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-   # begin
-     # res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
-     # @url = res.get_element('CustomerReviews').get('IFrameURL')
-   # rescue
-   #   puts '503 error'
-   # end
+    @tags = @book.tags
   end
 
   def show_review

@@ -2,7 +2,7 @@
 <% @tags.each do |tag| %>
     <div class="chip">
       <%= link_to tag.name, controller: 'books', action: 'show_all', q: tag.name %>
-      <span><%= tag.taggings_count %></span>
+      <span><%= tag.taggings_count unless action_name == 'show' %></span>
     </div>
 <% end %>
 </div>
