@@ -71,12 +71,8 @@ class Book < ApplicationRecord
   end
 
   def self.ja_title_search(query)
-    results = self.title_search(query)
-    if query.present?
-      size = results.size
-      # 全角スペース置換
-      query.gsub!('　', ' ')
-    end
-    results
+    # 全角スペース置換
+    query.gsub!('　', ' ') if query.present?
+    self.title_search(query)
   end
 end
