@@ -14,6 +14,58 @@ class ApplicationController < ActionController::Base
     redirect_to books_path, alert: '権限がありません' unless current_user.admin?
   end
 
+  def rent(opts={})
+    # identify user
+    # student_id or user_id
+    user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
+    user = User.find(opts[:user_id]) if opts.key?(:user_id)
+    raise Exception unless defined?(user)
+
+    status = {}
+    opts[:books_isbn].each do |isbn|
+      book = Book.find(isbn_10: isbn) if isbn.size == 10
+      book = Book.find(isbn_13: isbn) if isbn.size == 13
+
+      ActiveRecord::Base.transaction do
+        # 例外が発生するかもしれない処理
+        if book.rental.present?
+          if book.rental.user.id == user.id
+            status.store(isbn, 'already rented')
+          end
+        else
+          user.rentals.create book: book
+          status.store(isbn, 'success')
+        end
+      end
+    end
+    status
+  end
+
+  def return(opts={})
+    user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
+    user = User.find(opts[:user_id]) if opts.key?(:user_id)
+    raise Exception unless defined?(user)
+
+    status = {}
+    opts[:books_isbn].each do |isbn|
+      book = Book.find(isbn_10: isbn) if isbn.size == 10
+      book = Book.find(isbn_13: isbn) if isbn.size == 13
+
+      ActiveRecord::Base.transaction do
+        # 例外が発生するかもしれない処理
+        if book.rental.present?
+          if book.rental.user.id == user.id
+            # rentalを削除して、historyへ
+            status.store(isbn, 'success')
+          end
+        else
+          status.store(isbn, 'no record')
+        end
+      end
+    end
+    status
+  end
+
   private
 
   def configure_permitted_parameters
