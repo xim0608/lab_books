@@ -34,6 +34,7 @@ gem 'material_icons', '~> 2.2.1'
 gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
 gem 'jwt', '~> 1.5.6'
 gem 'xmlrpc'
+gem 'kakurenbo-puti'
 
 
 group :development, :test do

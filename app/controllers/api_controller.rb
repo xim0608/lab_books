@@ -81,8 +81,7 @@ class ApiController < ApplicationController
         # 例外が発生するかもしれない処理
         if book.rental.present?
           if book.rental.user.id == user.id
-            RentalHistory.create(book_id: book.id, user_id: user.id)
-            book.rental.destroy
+            book.rental.soft_destroy
           end
         else
           user.rentals.create book: book

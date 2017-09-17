@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915093457) do
+ActiveRecord::Schema.define(version: 20170916173827) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "isbn_13"
@@ -38,22 +38,13 @@ ActiveRecord::Schema.define(version: 20170915093457) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "rental_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "unread", default: true, null: false
-    t.index ["book_id"], name: "index_rental_histories_on_book_id"
-    t.index ["user_id"], name: "index_rental_histories_on_user_id"
-  end
-
   create_table "rentals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "book_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "unread", default: true, null: false
+    t.datetime "return_at"
     t.index ["book_id"], name: "index_rentals_on_book_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end
@@ -109,6 +100,4 @@ ActiveRecord::Schema.define(version: 20170915093457) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
-  add_foreign_key "rental_histories", "books"
-  add_foreign_key "rental_histories", "users"
 end
