@@ -1,15 +1,39 @@
-<h2><%= @user.nickname %>さんの借りている本</h2>
+<h2><%= @user.name %>さんの借りている本</h2>
 
-<% if @rental_books.present? %>
+<% if @rentals.present? %>
+    <table class="striped highlight">
+      <thead>
+      <tr>
+        <th>借りている本</th>
+        <th>貸出日</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @rentals.each do |rental| %>
+          <tr>
+            <td><%= rental.book.name %></td>
+            <td><%= rental.created_at %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+<% if @rental_histories.present? %>
     <table class="striped highlight">
       <thead>
       <tr>
         <th>借りた本</th>
+        <th>貸出日</th>
+        <th>返却日</th>
       </tr>
       </thead>
       <tbody>
-      <% @rental_books.each do |rental_book| %>
-          <tr><td><%= rental_book.book.name %></td></tr>
+      <% @rental_histories.each do |rental_history| %>
+          <tr>
+            <td><%= rental_history.book.name %></td>
+            <td><%= rental_history.created_at %></td>
+            <td><%= rental_history.return_at %></td>
+          </tr>
       <% end %>
       </tbody>
     </table>

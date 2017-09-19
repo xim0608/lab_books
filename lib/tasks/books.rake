@@ -1,13 +1,25 @@
 namespace :books do
 
   desc 'descriptionがない本のdescriptionを取得してdbに登録'
-  task :get_description => :environment do
+  task :get_description_from_google => :environment do
     # google books free枠は1000 queries per day
     no_description_books = Book.where(description: nil).take(1000)
     no_description_books.each do |book|
       isbn = book.isbn_10.to_s
       book.description = GoogleBooks::Api.new(isbn).get_description
       book.save
+      puts "#{book.name}'s description is successfully saved"
+    end
+  end
+
+  desc 'descriptionがない本のdescriptionをOpenBDから取得してdbに登録'
+  task :get_description_from_openbd => :environment do
+    # google books free枠は1000 queries per day
+    no_description_books = Book.where(description: nil).take(5)
+    no_description_books.each do |book|
+      isbn = book.isbn_13.to_s
+      book.description = OpenBd::Api.new(isbn).get_description
+      # book.save
       puts "#{book.name}'s description is successfully saved"
     end
   end
@@ -63,6 +75,7 @@ namespace :books do
         puts e.faultString
         retry
       end
+      p "success tagging to #{book.name}"
     end
   end
 end

@@ -17,7 +17,8 @@ class RentalsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @rental_books = @user.rentals
+    @rentals = @user.rentals.now
+    @rental_histories = @user.rentals.history
   end
 end
 
