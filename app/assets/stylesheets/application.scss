@@ -1,4 +1,5 @@
 @import "materialize/components/color";
+
 $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
 @import 'material_icons';
@@ -22,6 +23,7 @@ $primary-color: color("blue", "lighten-2") !default;
   width: 100%;
   padding: 75% 0 0 0;
 }
+
 .iframe-content iframe {
   position: absolute;
   top: 0;
@@ -31,24 +33,27 @@ $primary-color: color("blue", "lighten-2") !default;
 }
 
 .photo {
-    width:auto;
-    height:175px;
-    overflow:hidden;
-    position:relative;
-    border:1px solid #333;
+  width: auto;
+  height: 175px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
 }
+
 .photo img {
-    position: absolute;
-    left: -100%;
-    right: -100%;
-    margin: auto;
-    width: auto;
-    height: 100%;
+  position: absolute;
+  left: -100%;
+  right: -100%;
+  margin: auto;
+  width: auto;
+  height: 100%;
 }
-.card-image.w-photo{
+
+.card-image.w-photo {
   width: auto;
 
 }
+
 .card-content.w-photo {
   height: 123px;
   width: auto;
@@ -56,22 +61,38 @@ $primary-color: color("blue", "lighten-2") !default;
   text-overflow: ellipsis;
   //white-space: nowrap;
 }
-.card-action.w-photo{
+
+.card-action.w-photo {
   height: 52px;
 }
-.card.wo-photo{
+
+.card.wo-photo {
   height: 100px;
   width: auto;
 
 }
-.card-content.wo-photo{
+
+.card-content.wo-photo {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
 
-.pad-top{
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.pad-top {
   padding-top: 10px;
+}
+
+#result {
+  /* こいつが重要 */
+  overflow: auto;
+  height: 250px;
+  line-height: 1.5;
+  padding: 10px 0;
 }

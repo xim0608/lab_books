@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   # protect_from_forgery with: :null_session
   protect_from_forgery except: [:make_session]
+  before_action :authenticate_admin!, only: [:add]
 
   require 'json'
   require 'jwt'
@@ -46,10 +47,14 @@ class ApiController < ApplicationController
     render json: results.to_json({only: %w(id name author image_url)})
   end
 
-  # def add
-  #   book = Book.find_by_isbn_10(params[:isbn_10]).take(1)
-  #   render json: {book: book}
-  # end
+  def inc_list
+
+  end
+
+  def add
+    book = Book.find_by_isbn_10(params[:isbn_10]).take(1)
+    render json: {book: book}
+  end
   #
   # def rent
   #   # id = student_id

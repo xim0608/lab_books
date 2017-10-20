@@ -40,11 +40,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:book_id])
     counter = 0
     begin
-      Timeout.timeout(2) do
-        res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
-        url = res.get_element('CustomerReviews').get('IFrameURL')
-        render json: {url: url}
-      end
+      res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
+      url = res.get_element('CustomerReviews').get('IFrameURL')
+      render json: {url: url}
     rescue Timeout::Error
       render json: {error: 'timeout'}
     rescue
