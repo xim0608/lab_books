@@ -35,6 +35,8 @@ gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize
 gem 'jwt', '~> 1.5.6'
 gem 'xmlrpc'
 gem 'kakurenbo-puti'
+gem 'unicorn'
+gem 'therubyracer'
 
 
 group :development, :test do

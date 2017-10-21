@@ -50,8 +50,10 @@ test:
 production:
   <<: *default
   database: labooks_production
-  username: labooks
-  password: <%= ENV['LAB_BOOKS_DATABASE_PASSWORD'] %>
+  host: localhost
+  username: root
+  socket: /var/lib/mysql/mysql.sock
+  password: password
 
 staging:
   <<: *default
