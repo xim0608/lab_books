@@ -24,13 +24,22 @@ class ApiController < ApplicationController
     oauth_access = JSON.parse(res.body)
     if oauth_access['ok'].present?
       uid = oauth_access['user']['id']
+      user = User.find_by(uid: uid)
+      if user.is_admin?
+        logger.info("logged_in admin_user from iphone: #{user}")
+      else
+        return false
+      end
+      render json: {'user': user.name}
       # トークン生成
       # token =
     end
 
-    hmac_secret = ENV['HMAC_SECRET']
+    # hmac_secret = ENV['HMAC_SECRET']
     # token = JWT.encode payload, hmac_secret, 'HS256'
-    render json: res.body
+
+
+    # render json: res.body
     # payload = {jwt: token, exp: ""}
 
   end
