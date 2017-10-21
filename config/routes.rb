@@ -41,8 +41,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'admin/index'
-  get 'admin/:user_id', to: 'admin#show', as: 'user_admin'
+  get 'admin/users'
+  get 'admin/users/:user_id', to: 'admin#show', as: 'user_admin'
 
 
   # resources :api, except: [:all] do
