@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post 'api/process', to: 'api#data_catcher'
   get 'api/rentals/:student_id', to: 'rentals#show_by_student_id'
   get 'api/rentals/change_flag/:student_id', to: 'rentals#change_unread_flag', as: 'rental_change_unread_flag'
+  get 'api/check_book/:book_isbn', to: 'api#check_book'
   get 'rentals/:user_id', to: 'rentals#show', as: 'user_rental'
 
   get 'api/users/auth/slack/callback', to: 'api#make_session'

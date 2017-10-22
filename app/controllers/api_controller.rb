@@ -44,6 +44,20 @@ class ApiController < ApplicationController
 
   end
 
+  def check_book
+    book_isbn = params[:book_isbn].to_s
+    if book_isbn.length == 10
+      book = Book.find_by(isbn_10: book_isbn)
+    else
+      book = Book.find_by(isbn_13: book_isbn)
+    end
+    title = book.name
+    author = book.author
+    render json: [{title: title, author: author}]
+    # render json: [{title: "title", author: "author"}]
+
+  end
+
   def search
     raise unless params[:q]
     results = Book.ja_search(params[:q])
@@ -86,6 +100,7 @@ class ApiController < ApplicationController
     json_request = JSON.parse(request.body.read)
     student_id = json_request['student_id']
     books_isbn = json_request['books']
+    logger.info(books_isbn)
     user = User.find_by_student_id(student_id)
     books_isbn.each do |book_isbn|
       len = book_isbn.to_s.length
@@ -102,8 +117,6 @@ class ApiController < ApplicationController
         end
       end
     end
-    return
-
   end
 end
 
