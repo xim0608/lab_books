@@ -56,4 +56,5 @@ class Book < ApplicationRecord
     query.gsub!('　', ' ') if query.present?
     self.title_search(query)
   end
+
 end

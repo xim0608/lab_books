@@ -1,26 +1,88 @@
 namespace :books do
 
-  desc 'descriptionがない本のdescriptionを取得してdbに登録'
-  task :get_description_from_google => :environment do
-    # google books free枠は1000 queries per day
-    no_description_books = Book.where(description: nil).take(1000)
+  # desc 'descriptionがない本のdescriptionを取得してdbに登録'
+  # task :get_description_from_google => :environment do
+  #   # google books free枠は1000 queries per day
+  #   no_description_books = Book.where(description: nil).take(1000)
+  #   no_description_books.each do |book|
+  #     isbn = book.isbn_10.to_s
+  #     book.description = GoogleBooks::Api.new(isbn).get_description
+  #     book.save
+  #     puts "#{book.name}'s description is successfully saved"
+  #   end
+  # end
+
+  desc 'descriptionがない本のdescriptionをOpenBDから取得してdbに登録'
+  task :get_description => :environment do
+    no_description_books = Book.all
     no_description_books.each do |book|
-      isbn = book.isbn_10.to_s
-      book.description = GoogleBooks::Api.new(isbn).get_description
+      isbn = book.isbn_13.to_s
+      descriptions = OpenBd::Api.new(isbn).get_description
+      if descriptions[:description].blank?
+        book.description = GoogleBooks::Api.new(isbn).get_description
+        sleep(1)
+      else
+        book.description = descriptions[:description]
+      end
+      book.outline = descriptions[:outline]
       book.save
       puts "#{book.name}'s description is successfully saved"
     end
   end
 
-  desc 'descriptionがない本のdescriptionをOpenBDから取得してdbに登録'
-  task :get_description_from_openbd => :environment do
-    # google books free枠は1000 queries per day
-    no_description_books = Book.where(description: nil).take(5)
-    no_description_books.each do |book|
-      isbn = book.isbn_13.to_s
-      book.description = OpenBd::Api.new(isbn).get_description
-      # book.save
-      puts "#{book.name}'s description is successfully saved"
+  desc 'isbn_13がない本のisbn13をopenbdから取得してdbに登録'
+  task :get_booklog_missing => :environment do
+    # booklogのapiから取得した本には、isbn_13, publisher, author, publish_year, pagesが欠けている
+    no_13_books = Book.where(isbn_13: nil)
+    no_13_books.each do |book|
+      isbn_10 = book.isbn_10.to_s
+      datas = OpenBd::Api.new(isbn_10).get_booklog_missing
+      book.isbn_13 = datas[:isbn_13]
+      book.publisher = datas[:publisher]
+      book.author = datas[:author]
+      book.publish_year = datas[:publish_year]
+      book.save
+    end
+  end
+
+  desc 'isbn_13がない本のisbn13をopenbdから取得してdbに登録'
+  task :get_isbn_13 => :environment do
+    # booklogのapiから取得した本には、isbn_13, publisher, author, publish_year, pagesが欠けている
+    no_13_books = Book.where(isbn_13: nil)
+    no_13_books.each do |book|
+      counter = 0
+      p book.name
+      begin
+        sleep(1)
+        res = Amazon::Ecs.item_lookup(book.isbn_10, ResponseGroup: 'ItemAttributes')
+        unless res.get_element('Format').nil?
+          if res.get_element('Format').get == 'Kindle本'
+            next
+          end
+        end
+        isbn_13 = res.get_element('EAN').get if res.get_element('EAN').present?
+        publisher = res.get_element('Label').get if res.get_element('Label').present?
+        author = res.get_element('Author').get if res.get_element('Author').present?
+        publish_year = res.get_element('PublicationDate').get.slice(0, 4).to_i if res.get_element('PublicationDate').present?
+        pages = res.get_element('NumberOfPages').get.to_i if res.get_element('NumberOfPages').present?
+        book.isbn_13 = isbn_13
+        book.publisher = publisher || nil
+        book.author = author || nil
+        book.publish_year = publish_year || nil
+        book.pages = pages || nil
+        book.save
+      rescue => e
+        p e.message
+        puts '503 error'
+        counter += 1
+        if counter <= 3
+          retry
+          sleep(1)
+        else
+          next
+        end
+      end
+
     end
   end
 

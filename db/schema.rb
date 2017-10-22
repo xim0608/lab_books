@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916173827) do
+ActiveRecord::Schema.define(version: 20171022070617) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "isbn_13"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170916173827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.text "outline"
     t.index ["isbn_10"], name: "index_books_on_isbn_10", unique: true
     t.index ["isbn_13"], name: "index_books_on_isbn_13", unique: true
   end
