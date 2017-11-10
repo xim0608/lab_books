@@ -98,9 +98,10 @@ class ApiController < ApplicationController
 
   def data_catcher
     json_request = JSON.parse(request.body.read)
-    student_id = json_request['student_id']
-    books_isbn = json_request['books']
+    student_id = json_request['studentNum']
+    books_isbn = json_request['books_isbn']
     logger.info(books_isbn)
+    return_data = []
     user = User.find_by_student_id(student_id)
     books_isbn.each do |book_isbn|
       len = book_isbn.to_s.length
@@ -109,14 +110,18 @@ class ApiController < ApplicationController
       ActiveRecord::Base.transaction do
         # 例外が発生するかもしれない処理
         if book.rental.present?
-          if book.rental.user.id == user.id
+          if book.rental.return_at.present? and book.rental.user.id == user.id
             book.rental.soft_destroy
+            return_data.append({title: '返却：' + book.name, author: book.author})
           end
         else
           user.rentals.create book: book
+          return_data.append({title: '貸出：' + book.name, author: book.author})
         end
       end
     end
+    logger.info(return_data)
+    render json: return_data
   end
 end
 
