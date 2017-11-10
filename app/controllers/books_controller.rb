@@ -77,7 +77,6 @@ class BooksController < ApplicationController
     session[:show_num] = params[:show_num].to_i
   end
 
-
   # API
   def rent
   end

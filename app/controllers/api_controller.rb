@@ -113,6 +113,11 @@ class ApiController < ApplicationController
           if book.rental.return_at.present? and book.rental.user.id == user.id
             book.rental.soft_destroy
             return_data.append({title: '返却：' + book.name, author: book.author})
+          else
+            return_data.append({title: 'エラー：' + book.name, author: book.author})
+            if book.rental.user.name.present?
+              logger.error(book.rental.user.name + 'が借りている本を貸し出そうとしました')
+            end
           end
         else
           user.rentals.create book: book

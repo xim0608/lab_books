@@ -24,6 +24,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+
 test:
   <<: *default
   database: labooks_test
@@ -47,13 +48,14 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
   <<: *default
   database: labooks_production
   host: localhost
-  username: root
+  username: <%= ENV['PRODUCTION_DATABASE_USER'] %>
   socket: /var/lib/mysql/mysql.sock
-  password: password
+  password: '@Miyaji3'
 
 staging:
   <<: *default
@@ -61,4 +63,4 @@ staging:
   encoding: unicode
   database: labooks_staging
   username: labooks
-  password: <%= ENV['HEROKU_PASSWORD']
+  password: <%= ENV['HEROKU_PASSWORD'] %>
