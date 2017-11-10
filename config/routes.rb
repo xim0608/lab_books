@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   get 'admin/users'
   get 'admin/users/:user_id', to: 'admin#show', as: 'user_admin'
+  get 'admin/users/:user_id/:book_id', to: 'admin#change_flag', as: 'admin_change_rental_flag'
 
 
   # resources :api, except: [:all] do

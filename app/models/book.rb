@@ -15,7 +15,7 @@ class Book < ApplicationRecord
   belongs_to :where, class_name: 'User', foreign_key: 'user_id'
   has_many :favorites
   has_many :users, through: :favorites
-  has_one :rental
+  has_one :rental, -> { where(return_at: nil) }
 
 
   def self.import(file)

@@ -1,7 +1,6 @@
 <h1><%= @user.name %>の貸し出し状況</h1>
-<% @rental_books.each do |book_id| %>
-    <% book = Book.find(book_id.id) %>
-    <p><%= book.name %></p>
+<% @rentals.each do |rental| %>
+    <p><%= rental.book.name %></p>
 <% end %>
 
 <h3>貸出修正/追加</h3>
@@ -27,7 +26,8 @@
             .done(function (data) {
                 $('#result').find('li').remove();
                 $(data).each(function (i, book) {
-                    $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a href="<%= @user.id %>">貸出中にする</a></div></li>')
+                    var href = "<%= @user.id %>/" + book.id;
+                    $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a href="' + href + '">貸出中にする</a></div></li>')
                 });
             })
     });
