@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     redirect_to books_path, alert: '権限がありません' unless current_user.admin?
   end
 
-  def rent(opts={})
+  def rent_books(opts={})
     # identify user
     # student_id or user_id
     user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     status
   end
 
-  def return(opts={})
+  def return_books(opts={})
     user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
     user = User.find(opts[:user_id]) if opts.key?(:user_id)
     raise Exception unless defined?(user)
