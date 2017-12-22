@@ -45,16 +45,28 @@ class Book < ApplicationRecord
     end
   end
 
+  def self.availables
+    borrowed_books = Book.joins(:rental)
+    books = Book.all
+    books - borrowed_books
+  end
+
   def self.ja_search(query)
     # 全角スペース置換tikann
     query.gsub!('　', ' ') if query.present?
     self.search(query)
   end
 
-  def self.ja_title_search(query)
+  def self.admin_user_search(query, user)
     # 全角スペース置換
     query.gsub!('　', ' ') if query.present?
-    self.title_search(query)
+    borrowed_books = Book.joins(:rental).pluck(:id)
+    borrowing_books = user.rentals.now.pluck(:book_id)
+    books_json = Book.title_search(query).where.not(id: borrowed_books - borrowing_books).take(10).as_json
+    books_json.each do |book|
+      book["is_borrowing"] = true if borrowing_books.include?(book["id"])
+    end
+    books_json
   end
 
 end

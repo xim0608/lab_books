@@ -1,6 +1,6 @@
 <h1><%= @user.name %>の貸し出し状況</h1>
 <% @rentals.each do |rental| %>
-    <p><%= rental.book.name %></p>
+  <p><%= rental.book.name %></p>
 <% end %>
 
 <h3>貸出修正/追加</h3>
@@ -11,24 +11,44 @@
 </ul>
 
 <script>
+    $('#result').delegate('a', 'click', function () {
+        $.ajax({
+            url: `/admin/users/<%= @user.id %>/${$(this).attr("data-book_id")}`,
+            type: 'GET',
+            processData: false,
+            contentType: false,
+            dataType: 'json'
+        })
+            .done(function (data) {
+                alert(data['title']);
+                location.reload();
+            });
+    });
+
+
     $(document).on('keyup', '#form', function (e) {
         e.preventDefault();
         var input = $.trim($(this).val());
         $.ajax({
             url: '/api/inc_search',
             type: 'GET',
-            data: ('q=' + input),
+            data: ('q=' + input + '&uid=' + <%= @user.id %>),
             processData: false,
             contentType: false,
             dataType: 'json'
         })
-        //ここから追記
             .done(function (data) {
                 $('#result').find('li').remove();
                 $(data).each(function (i, book) {
-                    var href = "<%= @user.id %>/" + book.id;
-                    $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a href="' + href + '">貸出中にする</a></div></li>')
+                    if (book.is_borrowing === true) {
+                        let href = "<%= @user.id %>/" + book.id;
+                        $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a class="change_flag" data-book_id="' + book.id + '">返却する</a></div></li>')
+                    } else {
+                        let href = "<%= @user.id %>/" + book.id;
+                        $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a class="change_flag" data-book_id="' + book.id + '">貸出中にする</a></div></li>')
+                    }
                 });
             })
     });
+    
 </script>

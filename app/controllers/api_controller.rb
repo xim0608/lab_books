@@ -65,9 +65,10 @@ class ApiController < ApplicationController
   end
 
   def inc_search
-    raise unless params[:q]
-    results = Book.ja_title_search(params[:q]).take(10)
-    render json: results.to_json({only: %w(id name author image_url)})
+    raise unless params[:q] || params[:uid]
+    user = User.find(params[:uid])
+    results = Book.admin_user_search(params[:q], user)
+    render json: results.to_json({only: %w(id name author image_url is_borrowing)})
   end
 
   def inc_list

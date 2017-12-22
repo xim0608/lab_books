@@ -6,7 +6,7 @@ class AdminController < ApplicationController
     @b4s = User.where(year: 'B4')
     @m1s = User.where(year: 'M1')
     @m2s = User.where(year: 'M2')
-    @books_sum = Rental.group(:user_id).sum(:user_id)
+    @books_sum = Rental.now.group(:user_id).sum(:user_id)
   end
 
   def show
