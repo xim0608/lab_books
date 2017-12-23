@@ -67,6 +67,13 @@ class ApplicationController < ActionController::Base
     status
   end
 
+  protected
+    def authenticate_inviter!
+      authenticate_admin!
+    end
+
+
+
   private
 
   def configure_permitted_parameters
