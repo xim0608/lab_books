@@ -1,21 +1,6 @@
 <h1>Admin#index</h1>
 
-<h3>B3</h3>
-<% @b3s.each do |b3_student| %>
-    <a href="<%= user_admins_path(b3_student.id) %>"><%= b3_student.nickname %> - <small><%= b3_student.name_ja %></small></a>
-    <p><%= @books_sum[b3_student.id] %></p>
-<% end %>
-<h3>B4</h3>
-<% @b4s.each do |b4_student| %>
-    <p><%= b4_student.name %></p>
-<% end %>
-
-<h3>M1</h3>
-<% @m1s.each do |m1_student| %>
-    <p><%= m1_student.name %></p>
-<% end %>
-
-<h3>M2</h3>
-<% @m2s.each do |m2_student| %>
-    <p><%= m2_student.name %></p>
-<% end %>
+<%= render 'users_rentals_condition', year: 'B3', students_by_year: @b3s %>
+<%= render 'users_rentals_condition', year: 'B4', students_by_year: @b4s %>
+<%= render 'users_rentals_condition', year: 'M1', students_by_year: @m1s %>
+<%= render 'users_rentals_condition', year: 'M2', students_by_year: @m2s %>
