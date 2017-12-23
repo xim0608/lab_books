@@ -16,5 +16,15 @@ module Labooks
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :ja
+
+    # config.middleware.insert_before 0, "Rack::Cors" do
+    #   allow do
+    #     origins '*'
+    #     resource '*',
+    #              :headers => :any,
+    #              :expose => ['access-token', 'expiry', 'token-type', 'email', 'client'],
+    #              :methods => [:get, :post, :options, :delete, :put]
+    #   end
+    # end
   end
 end
