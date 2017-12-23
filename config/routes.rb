@@ -41,9 +41,15 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'admin/users'
-  get 'admin/users/:user_id', to: 'admin#show', as: 'user_admin'
-  get 'admin/users/:user_id/:book_id', to: 'admin#change_flag', as: 'admin_change_rental_flag'
+  # resource :admins, except: [:show, :destroy, :create, :edit, :update, :delete, :new] do
+  resources :admins, only: [:index] do
+    collection do
+      get :users
+      get 'users/:user_id', to: 'admins#show', as: 'user'
+      get 'users/:user_id/:book_id', to: 'admins#change_flag', as: 'admin_change_rental_flag'
+    end
+  end
+  # get 'admins/users'
 
 
   # resources :api, except: [:all] do

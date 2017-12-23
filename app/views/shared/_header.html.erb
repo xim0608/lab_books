@@ -16,7 +16,7 @@
       <li><a href="<%= favorites_path %>"><i class="material-icons">grade</i>Your Favorites</a></li>
       <li><a href="<%= user_rental_path(current_user.id) %>"><i class="material-icons">book</i>Your Rentals</a></li>
       <% if current_user.admin? %>
-          <li><a href="<%= admin_users_path %>"><i class="material-icons">build</i>Admin</a></li>
+          <li><a href="<%= admins_path %>"><i class="material-icons">build</i>Admin</a></li>
       <% end %>
       <li>
         <div class="divider"></div>
