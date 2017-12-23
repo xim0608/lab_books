@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :rememberable, :trackable, :recoverable
+  include DeviseTokenAuth::Concerns::User
 
   has_many :books
   has_many :favorites, dependent: :destroy

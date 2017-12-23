@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-
-  post 'user_token' => 'user_token#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
+
+  namespace :api do
+    mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations, :passwords, :invitations]
+  end
+  post 'user_token' => 'user_token#create'
 
   devise_scope :user do
     get '/sign_in' => 'devise/sessions#new'
