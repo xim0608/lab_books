@@ -48,6 +48,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'mysql2', '>= 0.3.18', '< 0.5'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :staging do

@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   root to: "welcome#index"
 
   devise_for :users,
-             skip: [:session, :registration],
-             controllers: {omniauth_callbacks: "users/omniauth_callbacks",
-                            registrations: "users/registrations",
-                            sessions: "users/sessions"
-  }
+             skip: [:session, :registration] # ,
+             # controllers: {omniauth_callbacks: "users/omniauth_callbacks",
+             #               registrations: "users/registrations",
+             #               sessions: "users/sessions"  }
+
   devise_scope :user do
     get '/users/sign_in' => 'devise/sessions#new', as: :new_user_session
     post '/users/sign_in' => 'devise/sessions#create', as: :user_session
@@ -63,4 +63,8 @@ Rails.application.routes.draw do
 
   get 'api/users/auth/slack/callback', to: 'api#make_session'
   resources :favorites, only: [:destroy, :index]
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
