@@ -1,5 +1,8 @@
-class AdminController < ApplicationController
+class AdminsController < ApplicationController
   before_action :authenticate_admin!
+
+  def index
+  end
 
   def users
     @b3s = User.where(year: 'B3')

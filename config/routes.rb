@@ -4,24 +4,16 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
 
-  devise_for :users,
-             skip: [:session, :registration],
-             controllers: {omniauth_callbacks: "users/omniauth_callbacks",
-                            registrations: "users/registrations",
-                            sessions: "users/sessions"
-  }
   devise_scope :user do
-    get '/users/sign_in' => 'devise/sessions#new', as: :new_user_session
-    post '/users/sign_in' => 'devise/sessions#create', as: :user_session
-    delete '/users/sign_out' => 'devise/sessions#destroy', as: :destroy_user_session
-    post '/users' => 'users/registrations#create', as: :user_registration
-    get '/users/edit' => 'users/registrations#edit', as: :edit_user_registration
-    get '/users/edit' => 'users/registrations#new', as: :new_user_registration
-    patch '/users' => 'users/registrations#update', as: nil
-    put '/users' => 'users/registrations#update', as: :update_user_registration
-    delete '/users' => 'users/registrations#destroy', as: :destroy_user_registration
+    get '/sign_in' => 'devise/sessions#new'
   end
 
+  # disable sign_up from top_page
+  devise_for :users, skip: [:registrations]
+    as :user do
+      get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
+      put 'users' => 'devise/registrations#update', :as => 'user_registration'
+    end
 
   resources :books, except: [:edit, :update, :delete] do
     collection do
@@ -41,26 +33,24 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'admin/users'
-  get 'admin/users/:user_id', to: 'admin#show', as: 'user_admin'
-  get 'admin/users/:user_id/:book_id', to: 'admin#change_flag', as: 'admin_change_rental_flag'
-
-
-  # resources :api, except: [:all] do
-  #   collection do
-  #     post :search
-  #   end
-  # end
+  resources :admins, only: [:index] do
+    collection do
+      get :users
+      get 'users/:user_id', to: 'admins#show', as: 'user'
+      get 'users/:user_id/:book_id', to: 'admins#change_flag', as: 'admin_change_rental_flag'
+    end
+  end
 
   get 'api/inc_search', to: 'api#inc_search'
-  # post 'api/rent', to: 'api#rent'
-  # post 'api/return', to: 'api#return'
   post 'api/process', to: 'api#data_catcher'
   get 'api/rentals/:student_id', to: 'rentals#show_by_student_id'
   get 'api/rentals/change_flag/:student_id', to: 'rentals#change_unread_flag', as: 'rental_change_unread_flag'
   get 'api/check_book/:book_isbn', to: 'api#check_book'
   get 'rentals/:user_id', to: 'rentals#show', as: 'user_rental'
 
-  get 'api/users/auth/slack/callback', to: 'api#make_session'
   resources :favorites, only: [:destroy, :index]
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

@@ -1,0 +1,17 @@
+<h3><%= year %></h3>
+<table>
+  <thead>
+  <tr>
+    <th>名前</th>
+    <th>貸出冊数</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% students_by_year.each do |student| %>
+    <tr>
+      <th><a href="<%= user_admins_path(student.id) %>"><%= name_with_nickname(student) %></a></th>
+      <th><%= @books_sum[student.id] || 0 %></th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

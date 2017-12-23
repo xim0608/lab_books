@@ -1,30 +1,12 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :rememberable, :trackable,
-         :omniauthable, omniauth_providers: [:slack]
+  devise :invitable, :database_authenticatable, :registerable,
+         :rememberable, :trackable, :recoverable
 
   has_many :books
   has_many :favorites, dependent: :destroy
   has_many :books, through: :favorites
   has_many :rentals
   has_many :rental_histories
-
-
-  def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid).first
-
-    unless user
-      user = User.create(
-        name: auth.info.name,
-        email: auth.info.email,
-        uid: auth.uid,
-        password: Devise.friendly_token[0,20]
-      )
-    end
-    return user
-  end
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)

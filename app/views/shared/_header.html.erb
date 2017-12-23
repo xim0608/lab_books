@@ -6,7 +6,7 @@
           <div class="background">
             <img src="https://unsplash.it/500/500?image=831">
           </div>
-          <a href="<%= edit_user_registration_path %>"><img class="circle" src="https://secure.gravatar.com/avatar/36960f5fc467f60690e12f658a07ee71.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F7fa9%2Fimg%2Favatars%2Fava_0007-192.png"></a>
+          <a href="<%= edit_user_registration_path %>"><!--<img class="circle" src="https://secure.gravatar.com/avatar/36960f5fc467f60690e12f658a07ee71.jpg">--></a>
           <a href="#"><span class="white-text name"><%= current_user.name %></span></a>
           <a href="#!email"><span class="white-text email"><%= current_user.email %></span></a>
         </div>
@@ -16,7 +16,7 @@
       <li><a href="<%= favorites_path %>"><i class="material-icons">grade</i>Your Favorites</a></li>
       <li><a href="<%= user_rental_path(current_user.id) %>"><i class="material-icons">book</i>Your Rentals</a></li>
       <% if current_user.admin? %>
-          <li><a href="<%= admin_users_path %>"><i class="material-icons">build</i>Admin</a></li>
+          <li><a href="<%= admins_path %>"><i class="material-icons">build</i>Admin</a></li>
       <% end %>
       <li>
         <div class="divider"></div>

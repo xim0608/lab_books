@@ -20,9 +20,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'annotate', '~> 2.6.5'
 #gem 'capistrano-rails', group: :development
 gem 'dotenv-rails', '~> 2.2.1'
-gem 'omniauth', '~> 1.6.1'
-gem 'omniauth-slack', '~> 2.3.0'
 gem 'devise', '~> 4.3.0'
+gem 'devise_invitable'
 gem 'will_paginate', '~> 3.1.5'
 gem 'google-api-client', '~> 0.11.3'
 gem 'acts-as-taggable-on', '~> 5.0'
@@ -47,6 +46,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'mysql2', '>= 0.3.18', '< 0.5'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :staging do
