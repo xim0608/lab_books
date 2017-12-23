@@ -10,6 +10,7 @@ Rails.application.routes.draw do
                                     sessions: 'api/auth/sessions'
                                 }
     resources :books, only: [:index]
+    resources :rentals, only: [:index, :create]
   end
   post 'user_token' => 'user_token#create'
 
