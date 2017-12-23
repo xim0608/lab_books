@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 20171223131735) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.text "tokens"
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
