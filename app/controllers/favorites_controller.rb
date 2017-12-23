@@ -35,7 +35,6 @@ class FavoritesController < ApplicationController
   def show_clips
     @book = Book.find(params[:id])
     @users = User.includes(:favorites).where(favorites: {book_id: @book.id})
-
   end
 end
 
