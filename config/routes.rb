@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   root to: "welcome#index"
 
   namespace :api do
-    mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations, :passwords, :invitations]
+    mount_devise_token_auth_for 'User',
+                                at: 'auth',
+                                skip: [:registrations, :passwords, :invitations],
+                                controllers: {
+                                    sessions: 'api/auth/sessions'
+                                }
+    resources :books, only: [:index]
   end
   post 'user_token' => 'user_token#create'
 
