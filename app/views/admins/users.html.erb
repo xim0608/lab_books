@@ -2,10 +2,9 @@
 
 <h3>B3</h3>
 <% @b3s.each do |b3_student| %>
-    <a href="<%= user_admin_path(b3_student.id) %>"><%= b3_student.name %></a>
+    <a href="<%= user_admins_path(b3_student.id) %>"><%= b3_student.nickname %> - <small><%= b3_student.name_ja %></small></a>
     <p><%= @books_sum[b3_student.id] %></p>
 <% end %>
-
 <h3>B4</h3>
 <% @b4s.each do |b4_student| %>
     <p><%= b4_student.name %></p>
