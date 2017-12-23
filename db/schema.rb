@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222111000) do
+ActiveRecord::Schema.define(version: 20171223084249) do
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "isbn_13"
@@ -85,9 +85,7 @@ ActiveRecord::Schema.define(version: 20171222111000) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "uid"
     t.string "name"
-    t.string "name_ja"
     t.string "nickname"
     t.string "student_id"
     t.datetime "deleted_at"
@@ -110,7 +108,6 @@ ActiveRecord::Schema.define(version: 20171222111000) do
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["student_id"], name: "index_users_on_student_id", unique: true
-    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
 end
