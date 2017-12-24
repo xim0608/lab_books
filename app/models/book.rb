@@ -11,12 +11,9 @@ class Book < ApplicationRecord
     attributes :name
   end
 
-  # いま本がどこにあるのかわかるようにする
-  belongs_to :where, class_name: 'User', foreign_key: 'user_id'
   has_many :favorites
   has_many :users, through: :favorites
   has_one :rental, -> { where(return_at: nil) }
-
 
   def self.import(file)
     counter = 0
@@ -25,7 +22,7 @@ class Book < ApplicationRecord
       unless self.exists?(isbn_13: row[2].to_i)
         create(isbn_13: row[2].to_i, isbn_10: row[1], name: row[11],
              publisher: row[13], author: row[12], publish_year: row[14].to_i,
-             pages: row[16].to_i, user_id: default_user.ids[0])
+             pages: row[16].to_i)
         counter += 1
       end
     end
@@ -39,7 +36,7 @@ class Book < ApplicationRecord
       image_url = book[:image].sub('._SL75_', '')
       if self.exists?(book[:asin])
         create(author: book[:author], isbn_10: book[:asin], name: book[:title],
-                               image_url: image_url, user_id: default_user.ids)
+                               image_url: image_url)
         puts 'success'
       end
     end
