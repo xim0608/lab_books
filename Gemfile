@@ -34,6 +34,7 @@ gem 'xmlrpc'
 gem 'kakurenbo-puti'
 gem 'unicorn'
 gem 'therubyracer'
+gem 'mysql2', '>= 0.3.18', '< 0.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,7 +43,6 @@ group :development, :test do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'rspec-rails', '~> 3.5.2'
   gem 'factory_girl_rails', '~> 4.8.0'
-  gem 'mysql2', '>= 0.3.18', '< 0.5'
   gem 'letter_opener'
   gem 'letter_opener_web'
   gem 'capistrano'
