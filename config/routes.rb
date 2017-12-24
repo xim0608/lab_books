@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  post 'user_token' => 'user_token#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
 
@@ -10,10 +8,22 @@ Rails.application.routes.draw do
 
   # disable sign_up from top_page
   devise_for :users, skip: [:registrations]
-    as :user do
-      get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-      put 'users' => 'devise/registrations#update', :as => 'user_registration'
-    end
+  as :user do
+    get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
+    put 'users' => 'users/registrations#update', :as => 'user_registration'
+  end
+
+  namespace :api do
+    mount_devise_token_auth_for 'User',
+                                at: 'auth',
+                                skip: [:registrations, :passwords, :invitations],
+                                controllers: {
+                                    sessions: 'api/auth/sessions'
+                                }
+    resources :books, only: [:index]
+    resources :rentals, only: [:index, :create]
+  end
+  post 'user_token' => 'user_token#create'
 
   resources :books, except: [:edit, :update, :delete] do
     collection do
