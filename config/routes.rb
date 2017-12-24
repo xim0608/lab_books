@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/sign_in' => 'devise/sessions#new'
   end
+
   # disable sign_up from top_page
   devise_for :users, skip: [:registrations]
   as :user do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
   end
-
 
   namespace :api do
     mount_devise_token_auth_for 'User',
@@ -24,8 +24,6 @@ Rails.application.routes.draw do
     resources :rentals, only: [:index, :create]
   end
   post 'user_token' => 'user_token#create'
-
-
 
   resources :books, except: [:edit, :update, :delete] do
     collection do
