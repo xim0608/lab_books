@@ -17,7 +17,6 @@ class Book < ApplicationRecord
 
   def self.import(file)
     counter = 0
-    default_user = User.where(name: ENV['ADMINISTRATOR_NAME'])
     CSV.foreach(file.path, encoding: Encoding::SHIFT_JIS) do |row|
       unless self.exists?(isbn_13: row[2].to_i)
         create(isbn_13: row[2].to_i, isbn_10: row[1], name: row[11],
@@ -31,7 +30,6 @@ class Book < ApplicationRecord
 
   def self.import_from_api
     books = BookLog::Api.new(100).get_data
-    default_user = User.where(name: ENV['ADMINISTRATOR_NAME'])
     books.each do |book|
       image_url = book[:image].sub('._SL75_', '')
       if self.exists?(book[:asin])
@@ -49,7 +47,7 @@ class Book < ApplicationRecord
   end
 
   def self.ja_search(query)
-    # 全角スペース置換tikann
+    # 全角スペース置換
     query.gsub!('　', ' ') if query.present?
     self.search(query)
   end

@@ -37,3 +37,6 @@
 /.idea/vcs.xml
 /.vscode
 tags
+
+# booklog initial data
+db/seeds/booklog*
