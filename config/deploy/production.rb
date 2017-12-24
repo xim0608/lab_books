@@ -1,4 +1,6 @@
-set :rails_env, 'production'
-set :unicorn_rack_env, 'production'
+set :stage, :production
+set :branch, 'master'
 
-server 'localhost', roles: %{app web db}
+role :app, %w{localhost}
+role :web, %w{localhost}
+role :db, %w{localhost}
