@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 worker_processes 4
 
-listen File.expand_path('tmp/unicorn.sock')
-pid File.expand_path('tmp/unicorn.pid')
+app_path = '/var/www/labooks'
+app_shared_path = "#{app_path}/shared"
+working_directory = "#{app_path}/current"
 
-stderr_path File.expand_path('log/unicorn.log')
-stdout_path File.expand_path('log/unicorn.log')
+listen File.expand_path("#{app_shared_path}/tmp/sockets/unicorn.sock")
+pid File.expand_path("#{app_shared_path}/tmp/pids/unicorn.pid")
+
+stderr_path File.expand_path("#{app_shared_path}/log/unicorn.log")
+stdout_path File.expand_path("#{app_shared_path}/log/unicorn.log")
 
 preload_app true
 
