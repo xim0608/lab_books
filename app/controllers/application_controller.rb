@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
     redirect_to books_path, alert: '権限がありません' unless current_user.admin?
   end
 
-  def rent_books(opts={})
+  def rent_books(opts = {})
     # identify user
     # student_id or user_id
-    user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
-    user = User.find(opts[:user_id]) if opts.key?(:user_id)
+    user = User.find(student_id: opts[:student_id]) if opts.has_key?(:student_id)
+    user = User.find(opts[:user_id]) if opts.has_key?(:user_id)
     raise Exception unless defined?(user)
 
     status = {}
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
             status.store(isbn, 'already rented')
           end
         else
-          user.rentals.create book: book
+          user.rentals.create! book: book
           status.store(isbn, 'success')
         end
       end
@@ -41,9 +41,9 @@ class ApplicationController < ActionController::Base
     status
   end
 
-  def return_books(opts={})
-    user = User.find(student_id: opts[:student_id]) if opts.key?(:student_id)
-    user = User.find(opts[:user_id]) if opts.key?(:user_id)
+  def return_books(opts = {})
+    user = User.find(student_id: opts[:student_id]) if opts.has_key?(:student_id)
+    user = User.find(opts[:user_id]) if opts.has_key?(:user_id)
     raise Exception unless defined?(user)
 
     status = {}
@@ -68,16 +68,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
     def authenticate_inviter!
       authenticate_admin!
     end
 
-
-
   private
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :student_id, :year])
-  end
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :student_id, :year])
+    end
 end
-

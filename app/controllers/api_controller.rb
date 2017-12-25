@@ -14,31 +14,29 @@ class ApiController < ApplicationController
     end
     title = book.name
     author = book.author
-    render json: [{title: title, author: author}]
+    render json: [{ title: title, author: author }]
     # render json: [{title: "title", author: "author"}]
-
   end
 
   def search
     raise unless params[:q]
     results = Book.ja_search(params[:q])
-    render json: results.to_json({only: %w(name image_url)})
+    render json: results.to_json({ only: %w[name image_url] })
   end
 
   def inc_search
     raise unless params[:q] || params[:uid]
     user = User.find(params[:uid])
     results = Book.admin_user_search(params[:q], user)
-    render json: results.to_json({only: %w(id name author image_url is_borrowing)})
+    render json: results.to_json({ only: %w[id name author image_url is_borrowing] })
   end
 
   def inc_list
-
   end
 
   def add
-    book = Book.find_by_isbn_10(params[:isbn_10]).take(1)
-    render json: {book: book}
+    book = Book.find_by(isbn_10: params[:isbn_10]).take(1)
+    render json: { book: book }
   end
 
   def data_catcher
@@ -47,24 +45,24 @@ class ApiController < ApplicationController
     books_isbn = json_request['books_isbn']
     logger.info(books_isbn)
     return_data = []
-    user = User.find_by_student_id(student_id)
+    user = User.find_by(student_id: student_id)
     books_isbn.each do |book_isbn|
       len = book_isbn.to_s.length
-      book = Book.find_by_isbn_10(book_isbn) if len == 10
-      book = Book.find_by_isbn_13(book_isbn) if len == 13
+      book = Book.find_by(isbn_10: book_isbn) if len == 10
+      book = Book.find_by(isbn_13: book_isbn) if len == 13
       ActiveRecord::Base.transaction do
         # 例外が発生するかもしれない処理
         if book.rental.present?
           if book.rental.user.id == user.id
             book.rental.soft_destroy
-            return_data.append({title: '返却：' + book.name, author: book.author})
+            return_data.append({ title: '返却：' + book.name, author: book.author })
           else
-            return_data.append({title: 'エラー：' + book.name, author: book.author})
+            return_data.append({ title: 'エラー：' + book.name, author: book.author })
             logger.error(book.rental.user.name + 'が借りている本を貸し出そうとしました') if book.rental.user.name.present?
           end
         else
-          user.rentals.create book: book
-          return_data.append({title: '貸出：' + book.name, author: book.author})
+          user.rentals.create! book: book
+          return_data.append({ title: '貸出：' + book.name, author: book.author })
         end
       end
     end
@@ -72,4 +70,3 @@ class ApiController < ApplicationController
     render json: return_data
   end
 end
-
