@@ -9,3 +9,7 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 2.4
   TargetRailsVersion: 5.1
+
+# override method of onkcop
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
