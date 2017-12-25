@@ -51,6 +51,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano3-unicorn'
   gem 'capistrano-locally', require: false
+  gem 'onkcop', require: false
 end
 
 group :staging do
