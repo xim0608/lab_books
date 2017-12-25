@@ -13,3 +13,7 @@ AllCops:
 # override method of onkcop
 Style/StringLiterals:
   EnforcedStyle: single_quotes
+Lint/AssignmentInCondition:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: false
