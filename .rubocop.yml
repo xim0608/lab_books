@@ -1,10 +1,8 @@
 inherit_gem:
   onkcop:
     - "config/rubocop.yml"
-    # uncomment if use rails cops
     - "config/rails.yml"
-    # uncomment if use rspec cops
-    # - "config/rspec.yml"
+    - "config/rspec.yml"
 
 AllCops:
   TargetRubyVersion: 2.4
@@ -13,3 +11,7 @@ AllCops:
 # override method of onkcop
 Style/StringLiterals:
   EnforcedStyle: single_quotes
+Lint/AssignmentInCondition:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: false
