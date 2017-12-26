@@ -33,7 +33,7 @@ gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'will_paginate', '~> 3.1.5'
-gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
+# gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
 gem 'xmlrpc'
 
 group :development, :test do
