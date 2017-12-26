@@ -7,11 +7,13 @@ require 'capistrano/locally'
 require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
-
+require 'capistrano/rbenv'
 require 'capistrano3/unicorn'
 
 set :rbenv_type, :system
-set :rbenv_ruby, '2.4.2'
+set :rbenv_path, '/usr/local/rbenv'
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_map_bins, %w[rake gem bundle ruby rails]
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
