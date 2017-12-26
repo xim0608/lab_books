@@ -6,7 +6,7 @@ set :repo_url, "https://github.com/xim0608/labooks.git"
 set :branch, 'master'
 set :deploy_to, '/var/www/labooks'
 set :scm, :git
-set :bundle_without, %w{development test staging}.join(' ')
+set :bundle_without, %w{staging}.join(' ')
 set :log_level, :debug
 set :pty, true
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets bundle public/system public/assets}
