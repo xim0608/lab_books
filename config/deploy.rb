@@ -54,6 +54,6 @@ namespace :deploy do
   # Unicorn 再起動タスク
   desc 'Restart application'
   task :restart do
-    invoke 'unicorn:restart' # lib/capistrano/tasks/production.rb 内処理を実行
+    invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
   end
 end
