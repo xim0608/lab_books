@@ -53,7 +53,7 @@ production:
   <<: *default
   database: labooks_production
   host: localhost
-  username: <%= ENV['PRODUCTION_DATABASE_USER'] %>
+  username: myjlab
   socket: /var/lib/mysql/mysql.sock
   password: '@Miyaji3'
 
