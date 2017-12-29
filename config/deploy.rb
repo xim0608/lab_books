@@ -14,6 +14,7 @@ set :default_env, {path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"}
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 set :bundle_flags, "--deployment --without development test"
 set :keep_releases, 5
+set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
@@ -52,8 +53,8 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 
   # Unicorn 再起動タスク
-  desc 'Restart application'
-  task :restart do
-    invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
-  end
+  # # desc 'Restart application'
+  # task :restart do
+  #   invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
+  # end
 end
