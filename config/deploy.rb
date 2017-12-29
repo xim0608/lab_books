@@ -52,8 +52,12 @@ namespace :deploy do
   # before :started, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
 
+  after 'deploy:publishing', 'deploy:restart'
+  task :restart do
+    invoke 'unicorn:restart'
+  end
   # Unicorn 再起動タスク
-  # # desc 'Restart application'
+  # desc 'Restart application'
   # task :restart do
   #   invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
   # end
