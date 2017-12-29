@@ -1,5 +1,5 @@
 module Users
-  class RegistrationsController < Devise::RegistrationsController
+  class RegistrationsController < DeviseInvitable::RegistrationsController
     def new
       # sign_upはできないようにする(routesで設定するのが大変)
       redirect_to root_path
