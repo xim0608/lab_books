@@ -3,3 +3,4 @@
 require_relative 'config/environment'
 
 run Rails.application
+use Unicorn::WorkerKiller::MaxRequests, 100, 120, true
