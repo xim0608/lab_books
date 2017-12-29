@@ -3,7 +3,7 @@ worker_processes 4
 
 app_path = '/var/www/labooks'
 app_shared_path = "#{app_path}/shared"
-working_directory "#{app_path}/current/"
+working_directory rails_root
 
 listen "#{app_shared_path}/tmp/sockets/unicorn.sock"
 
@@ -33,6 +33,10 @@ before_fork do |server, worker|
     rescue Errno::ENOENT, Errno::ESRCH
     end
   end
+end
+
+after_fork do |server, worker|
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
 end
 
 # after_fork do |server, worker|
