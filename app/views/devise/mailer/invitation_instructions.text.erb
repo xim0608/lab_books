@@ -1,11 +1,11 @@
-<%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %>
+<%= t("devise.mailer.invitation_instructions.hello", email: @resource.email)%>
 
 <%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %>
 
-<%= accept_invitation_url(@resource, :invitation_token => @token) %>
+<%= Rails.application.routes.url_helpers.accept_user_invitation_url(invitation_token: @resource.raw_invitation_token, host: root_url) %>
 
 <% if @resource.invitation_due_at %>
   <%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %>
 <% end %>
 
-<%= strip_tags t("devise.mailer.invitation_instructions.ignore") %>
+<%= ActionController::Base.helpers.strip_tags t("devise.mailer.invitation_instructions.ignore") %>
