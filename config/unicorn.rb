@@ -3,7 +3,7 @@ worker_processes 4
 
 app_path = '/var/www/labooks'
 app_shared_path = "#{app_path}/shared"
-working_directory rails_root
+working_directory = '/var/www/labooks/current'
 
 listen "#{app_shared_path}/tmp/sockets/unicorn.sock"
 
