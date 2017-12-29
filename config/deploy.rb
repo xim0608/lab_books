@@ -14,6 +14,7 @@ set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 set :bundle_flags, "--deployment --without development test"
 set :keep_releases, 5
 set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
+set :bundle_binstubs, -> { shared_path.join('bin') }
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
