@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   # disable sign_up from top_page
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [:registrations], controllers: { invitations: 'users/invitations' }
   as :user do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
