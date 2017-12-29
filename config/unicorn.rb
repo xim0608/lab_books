@@ -6,15 +6,12 @@ app_shared_path = "#{app_path}"
 working_directory = '/var/www/labooks'
 
 listen "#{app_shared_path}/tmp/sockets/unicorn.sock"
-
-stdout_path "#{app_shared_path}/log/unicorn.stdout.log"
-stderr_path "#{app_shared_path}/log/unicorn.stderr.log"
-
 pid "#{app_shared_path}/tmp/pids/unicorn.pid"
+
+timeout 30
 
 stderr_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
 stdout_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
-timeout 30
 preload_app true
 
 before_exec do |server|
