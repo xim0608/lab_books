@@ -18,14 +18,14 @@ set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-  # アプリの再起動を行うタスク
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :mkdir, '-p', release_path.join('tmp')
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
+  # # アプリの再起動を行うタスク
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     execute :mkdir, '-p', release_path.join('tmp')
+  #     execute :touch, release_path.join('tmp/restart.txt')
+  #   end
+  # end
 
   # linked_files で使用するファイルをアップロードするタスク
   # deployが行われる前に実行する必要がある。
