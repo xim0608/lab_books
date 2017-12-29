@@ -14,6 +14,8 @@ pid "#{app_shared_path}/tmp/pids/unicorn.pid"
 
 stderr_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
 stdout_path File.expand_path('log/unicorn.log', ENV['RAILS_ROOT'])
+timeout 30
+preload_app true
 
 before_exec do |server|
   ENV['BUNDLE_GEMFILE'] = "#{working_directory}/Gemfile"
