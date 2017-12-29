@@ -2,7 +2,6 @@
 worker_processes 1
 
 app_path = '/var/www/labooks'
-Unicorn::HttpServer::START_CTX[0] = File.join(app_path, 'shared/bin/unicorn')
 app_shared_path = "#{app_path}/shared"
 working_directory = '/var/www/labooks/current'
 
