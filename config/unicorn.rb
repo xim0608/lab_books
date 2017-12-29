@@ -19,14 +19,16 @@ before_exec do |server|
 end
 
 before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
+  # http://techracho.bpsinc.jp/baba/2012_08_29/6001
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.connection.disconnect!
 
+  # 古いPIDファイル取得
   old_pid = "#{server.config[:pid]}.oldbin"
-  if old_pid != server.pid
+  if File.exists?(old_pid) && server.pid != old_pid
+    # 古いPIDがある場合
     begin
-      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-      Process.kill(sig, File.read(old_pid).to_i)
+      # 古いmasterプロセスを終了させる
+      Process.kill('QUIT', File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
     end
   end
