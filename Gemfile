@@ -26,6 +26,8 @@ gem 'okura', '~> 0.0.1'
 gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'rails', '5.1.1'
+gem 'rails-i18n'
+gem 'rake', '10.4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'search_cop', '~> 1.0.8'
 gem 'therubyracer'
@@ -51,10 +53,6 @@ group :development, :test do
   gem 'letter_opener_web'
   gem 'onkcop', require: false
   gem 'rspec-rails', '~> 3.5.2'
-end
-
-group :staging do
-  gem 'pg'
 end
 
 group :development do

@@ -53,14 +53,6 @@ production:
   <<: *default
   database: labooks_production
   host: localhost
-  username: <%= ENV['PRODUCTION_DATABASE_USER'] %>
+  username: myjlab
   socket: /var/lib/mysql/mysql.sock
   password: '@Miyaji3'
-
-staging:
-  <<: *default
-  adapter: postgresql
-  encoding: unicode
-  database: labooks_staging
-  username: labooks
-  password: <%= ENV['HEROKU_PASSWORD'] %>

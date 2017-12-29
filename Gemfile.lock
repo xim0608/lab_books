@@ -222,7 +222,6 @@ GEM
     parallel (1.12.1)
     parser (2.4.0.2)
       ast (~> 2.3)
-    pg (0.21.0)
     polyglot (0.3.5)
     powerpack (0.1.1)
     public_suffix (2.0.5)
@@ -248,6 +247,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (5.0.4)
+      i18n (~> 0.7)
+      railties (~> 5.0)
     railties (5.1.1)
       actionpack (= 5.1.1)
       activesupport (= 5.1.1)
@@ -407,10 +409,11 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.5)
   okura (~> 0.0.1)
   onkcop
-  pg
   puma (~> 3.7)
   rack-cors
   rails (= 5.1.1)
+  rails-i18n
+  rake (= 10.4.2)
   rspec-rails (~> 3.5.2)
   sass-rails (~> 5.0)
   search_cop (~> 1.0.8)
