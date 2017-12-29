@@ -5,7 +5,7 @@ ROOT_DIR="/var/www/labooks"
 
 PID="${ROOT_DIR}/tmp/pids/unicorn.pid"
 CONF="${ROOT_DIR}/config/unicorn.rb"
-CMD="bundle exec unicorn -c ${CONF} -E ${ENV}"
+CMD="bundle exec unicorn -c ${CONF} -E ${ENV} -D"
 
 start()
 {
