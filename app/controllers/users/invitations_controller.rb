@@ -9,20 +9,20 @@ module Users
       self.resource = invite_resource
       Rails.logger.info("resource: " + self.resource.to_s)
       if self.resource == false
-        redirect_to new_user_invitation_path, alert: "エラーが発生しました"
-      end
-
-      resource_invited = resource.errors.empty?
-      yield resource if block_given?
-      @resource = resource
-      text = ERB.new(File.read("#{Rails.root}/app/views/devise/mailer/invitation_instructions.text.erb")).result(binding)
-      res = Slack.chat_postMessage(text: text, username: 'labooks', channel: "@#{resource.slack_name}")
-      Rails.logger.info(res)
-      if res['ok'] == false
-        redirect_to new_user_invitation_path, alert: "エラーが発生しました"
+        respond_with_navigational(resource) {render :new}
       else
+        resource_invited = resource.errors.empty?
+        yield resource if block_given?
+
         if resource_invited
           if is_flashing_format? && self.resource.invitation_sent_at
+            @resource = resource
+            text = ERB.new(File.read("#{Rails.root}/app/views/devise/mailer/invitation_instructions.text.erb")).result(binding)
+            res = Slack.chat_postMessage(text: text, username: 'labooks', channel: "@#{resource.slack_name}")
+            Rails.logger.info(res)
+            if res['ok'] == false
+              redirect_to new_user_invitation_path, alert: "エラーが発生しました"
+            end
             set_flash_message :notice, :send_instructions, :email => self.resource.email
           end
           if self.method(:after_invite_path_for).arity == 1
