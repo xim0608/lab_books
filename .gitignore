@@ -40,3 +40,6 @@ tags
 
 # booklog initial data
 db/seeds/booklog*
+/public/packs
+/public/packs-test
+/node_modules
