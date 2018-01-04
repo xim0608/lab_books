@@ -9,6 +9,7 @@
     <div class="col s12 m12 l7">
       <h2><%= @book.name %> <h5>著者：<%= @book.author %></h5></h2>
       <%= render 'shared/books_tag' %>
+      <p><%= @book.description %></p>
     </div>
   </div>
 </div>
@@ -69,14 +70,12 @@
     })
 </script>
 <script type="text/javascript" charset="utf-8">
-
-
     window.onload = function () {
         var app = new Vue({
             el: '#recommend',
             data: {recommends: []},
             created: function () {
-                this.$http.get('http://localhost:3001/recommends/<%= @book.id %>').then(function (response) {
+                this.$http.get('/books/<%= @book.id %>/recommends').then(function (response) {
                     for (var i = 0; i < response.body.length; i++) {
                         this.recommends.push(response.body[i]);
                     }

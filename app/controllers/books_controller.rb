@@ -77,11 +77,8 @@ class BooksController < ApplicationController
     session[:show_num] = params[:show_num].to_i
   end
 
-  # API
-  def rent
-  end
-
-  def return
+  def recommends
+    render json: Book.find(params[:id]).recommends
   end
 
   private

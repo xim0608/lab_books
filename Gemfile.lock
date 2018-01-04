@@ -269,6 +269,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    redis (4.0.1)
     ref (2.0.0)
     representable (3.0.4)
       declarative (< 0.1.0)
@@ -433,6 +434,7 @@ DEPENDENCIES
   rails (= 5.1.1)
   rails-i18n
   rake (= 10.4.2)
+  redis
   rspec-rails (~> 3.5.2)
   sass-rails (~> 5.0)
   search_cop (~> 1.0.8)
