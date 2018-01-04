@@ -1,30 +1,94 @@
 <div id="review-error"></div>
 <div style="overflow: hidden;">
-<h3><%= @book.name %> <h5>著者：<%= @book.author %></h5></h3>
-<%= render 'shared/books_tag' %>
-<div class="row">
-  <div class="col s12 m12 l6 image" height="300" width="300">
-    <%= smaller_book_image @book.image_url %>
+  <h3><%= @book.name %> <h5>著者：<%= @book.author %></h5></h3>
+  <%= render 'shared/books_tag' %>
+  <div class="row">
+    <div class="col s12 m12 l6 image" height="300" width="300">
+      <%= smaller_book_image @book.image_url %>
+    </div>
+    <div class="col s12 m12 l6">
+      <p><%= @book.description %></p>
+    </div>
   </div>
-  <div class="col s12 m12 l6">
-    <p><%= @book.description %></p>
-  </div>
+
 </div>
 
-<div id="review"></div>
+<div id="recommend">
+  <div class="row">
+    <div class="col l4 m6 s12" v-for="recommend in recommends">
+      <div class="card horizontal z-depth-2"
+           onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+        <div class="card-image w-photo card-link" :data-url="recommend.id" v-on:click="book_link(recommend.id)" style="cursor:hand; cursor: pointer;">
+          <div class="photo">
+            <img :src="recommend.image_url" alt="">
+          </div>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content w-photo card-link" :data-url="recommend.id" v-on:click="book_link(recommend.id)" style="cursor:hand; cursor: pointer;
+          ">
+            <small>
+              <p>{{ recommend.name }}</p>
+              著者：{{ recommend.author }}
+              <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+            </small>
+          </div>
+          <% if false %>
+            <div class="card-action w-photo">
+              <div class="favorite favorite-btn" :book_id="recommend.id">
+                <a href="#add_modal">
+                  <i class="material-icons md-dark md-inactive"
+                     onmouseover="this.className='material-icons'"
+                     onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+                </a>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<div id="review"></div>
+
 
 <script>
-$.ajax({
-  url: '<%= show_review_books_path %>?book_id=<%= @book.id %>',
-  dataType: 'json',
-  success: function(json){
-    if (Object.keys(json).indexOf("url") >= 0) {
-      $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
-    } else {
-      $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
-    }
-  }
-})
+    $('.card-link').click(function () {
+        location.href = '/books/' + jQuery(this).attr('data-url');
+    });
 
+    $.ajax({
+        url: '<%= show_review_books_path %>?book_id=<%= @book.id %>',
+        dataType: 'json',
+        success: function (json) {
+            if (Object.keys(json).indexOf("url") >= 0) {
+                $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
+            } else {
+                $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
+            }
+        }
+    })
+</script>
+<script type="text/javascript" charset="utf-8">
+
+
+    window.onload = function () {
+        var app = new Vue({
+            el: '#recommend',
+            data: {recommends: []},
+            created: function () {
+                this.$http.get('http://localhost:3001/recommends/<%= @book.id %>').then(function (response) {
+                    for (var i = 0; i < response.body.length; i++) {
+                        this.recommends.push(response.body[i]);
+                    }
+                }, function () {
+                    // error
+                });
+            },
+            methods: {
+                book_link: function (id) {
+                    window.location.href = '/books/' + id;
+                }
+            }
+        })
+    }
 </script>

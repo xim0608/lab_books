@@ -51,7 +51,6 @@ $primary-color: color("blue", "lighten-2") !default;
 
 .card-image.w-photo {
   width: auto;
-
 }
 
 .card-content.w-photo {
@@ -61,6 +60,21 @@ $primary-color: color("blue", "lighten-2") !default;
   text-overflow: ellipsis;
   //white-space: nowrap;
 }
+.card-image.recommend-photo {
+  height: 300px;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+}
+.recommend-photo {
+  width: auto;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
+}
+
 
 .card-action.w-photo {
   height: 52px;
