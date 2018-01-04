@@ -65,7 +65,7 @@ class Book < ApplicationRecord
   end
 
   def recommends
-    books_id = Redis.current.get("books/sparse_recommends/#{self.id}")
+    books_id = Redis.current.get("books/recommends/#{self.id}")
     raise ActiveRecord::RecordNotFound if books_id.nil?
     Book.where(id: JSON.parse(books_id))
   end
