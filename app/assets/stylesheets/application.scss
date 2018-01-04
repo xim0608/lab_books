@@ -51,7 +51,6 @@ $primary-color: color("blue", "lighten-2") !default;
 
 .card-image.w-photo {
   width: auto;
-
 }
 
 .card-content.w-photo {
@@ -60,6 +59,22 @@ $primary-color: color("blue", "lighten-2") !default;
   overflow: hidden;
   text-overflow: ellipsis;
   //white-space: nowrap;
+}
+
+.card-image.recommend-photo {
+  height: 300px;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+}
+
+.recommend-photo {
+  width: auto;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
 }
 
 .card-action.w-photo {
@@ -95,4 +110,21 @@ $primary-color: color("blue", "lighten-2") !default;
   height: 250px;
   line-height: 1.5;
   padding: 10px 0;
+}
+
+//h1,h2,h3,h4,h5{
+//  font-size: 80%;
+//}
+#book-detail h2 {
+  font-size: 1.5rem;
+  line-height: 110%;
+  margin: 1.46rem 0 1.168rem 0;
+}
+
+#book-detail h5 {
+  font-size: 1.0rem;
+}
+
+#book-detail {
+  margin-top: 15px;
 }

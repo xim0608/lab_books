@@ -30,14 +30,13 @@ Rails.application.routes.draw do
       get :show_all
       get :import_from_csv
       post :import
-      post :rent
-      post :return
       get :show_review
       post :change_show_type
       post :change_show_num
       get :list_favorite, to: 'favorites#list'
     end
     member do
+      get :recommends
       post :add, to: 'favorites#create'
       get :show_clips, to: 'favorites#show_clips'
     end

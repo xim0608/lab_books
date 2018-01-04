@@ -19,6 +19,7 @@ default: &default
 
 development:
   <<: *default
+  pool: 10
   database: labooks_development
 
 # Warning: The database defined as "test" will be erased and
