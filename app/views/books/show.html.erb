@@ -1,16 +1,16 @@
 <div id="review-error"></div>
-<div style="overflow: hidden;">
-  <h3><%= @book.name %> <h5>著者：<%= @book.author %></h5></h3>
-  <%= render 'shared/books_tag' %>
+<div style="overflow: hidden;" id="book-detail">
   <div class="row">
-    <div class="col s12 m12 l6 image" height="300" width="300">
-      <%= smaller_book_image @book.image_url %>
+    <div class="col s12 m12 l5 image" height="300" width="300">
+      <div class="responsive-img">
+        <%= smaller_book_image @book.image_url %>
+      </div>
     </div>
-    <div class="col s12 m12 l6">
-      <p><%= @book.description %></p>
+    <div class="col s12 m12 l7">
+      <h2><%= @book.name %> <h5>著者：<%= @book.author %></h5></h2>
+      <%= render 'shared/books_tag' %>
     </div>
   </div>
-
 </div>
 
 <div id="recommend">
