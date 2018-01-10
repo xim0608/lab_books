@@ -13,7 +13,12 @@ module OpenBd
     def get_json
       uri = URI.parse(@base_uri)
       json = Net::HTTP.get(uri)
-      result = JSON.parse(json, {:symbolize_names => true})
+      begin
+        result = JSON.parse(json, {:symbolize_names => true})
+      rescue
+        sleep(3)
+        retry
+      end
     end
 
     def get_description
