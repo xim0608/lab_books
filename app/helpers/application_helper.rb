@@ -31,8 +31,8 @@ module ApplicationHelper
         size = 'medium'
       end
 
-      image_url = "/images/no_image_#{size}.jpg"
-      image_tag image_url, size: '300x300'
+      image_path = "/public/images/no_image_#{size}.jpg"
+      image_tag image_path, size: '300x300'
     end
   end
 end
