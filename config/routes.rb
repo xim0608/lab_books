@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   # disable sign_up from top_page
-  devise_for :users, skip: [:registrations], controllers: { invitations: 'users/invitations' }
+  devise_for :users, skip: [:registrations], controllers: { invitations: 'users/invitations', passwords: 'users/passwords' }
   as :user do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
@@ -30,14 +30,13 @@ Rails.application.routes.draw do
       get :show_all
       get :import_from_csv
       post :import
-      post :rent
-      post :return
       get :show_review
       post :change_show_type
       post :change_show_num
       get :list_favorite, to: 'favorites#list'
     end
     member do
+      get :recommends
       post :add, to: 'favorites#create'
       get :show_clips, to: 'favorites#show_clips'
     end
