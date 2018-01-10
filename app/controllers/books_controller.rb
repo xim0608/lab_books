@@ -45,8 +45,8 @@ class BooksController < ApplicationController
       render json: {url: url}
     rescue Timeout::Error
       render json: {error: 'timeout'}
-    rescue
-      puts '503 error'
+    rescue => e
+      logger.error(e.message)
       counter += 1
       if counter <= 3
         retry
