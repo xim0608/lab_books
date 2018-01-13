@@ -1,6 +1,8 @@
 if (controller_rails === "books") {
     $(document).on("turbolinks:load", function (e) {
         e.preventDefault();
+        var liked = "<a href='#delete_modal'><i class='material-icons'>star</i></a>"
+        var unliked = "<a href='#add_modal'><i class='material-icons md-dark md-inactive'>star_border</i></a>"
 
         $(".card-link").click(function () {
             location.href = jQuery(this).attr("data-url");
@@ -50,7 +52,7 @@ if (controller_rails === "books") {
             });
             if ($books_id.includes(parseInt($(this).attr("book_id")))) {
                 // 白抜きにする
-                $(this).html("<a href='#add_modal'><i class='material-icons md-dark md-inactive'>star_border</i></a>");
+                $(this).html(unliked);
                 var i;
                 for (i = 0; i < $books_id.length; i++) {
                     if ($books_id[i] === parseInt($(this).attr("book_id"))) {
@@ -59,7 +61,7 @@ if (controller_rails === "books") {
                 }
             } else {
                 // 色付きにする
-                $(this).html("<a href='#delete_modal'><i class='material-icons'>star</i></a>");
+                $(this).html(liked);
                 $books_id.push(parseInt($(this).attr("book_id")));
             }
         });
@@ -103,7 +105,7 @@ if (controller_rails === "books") {
                     $books_id = json;
                     $(".favorite").each(function () {
                         if ($books_id.includes(parseInt($(this).attr("book_id")))) {
-                            $(this).html("<a href='#delete_modal'><i class='material-icons'>star</i></a>");
+                            $(this).html(liked);
                         }
                     });
                 }
