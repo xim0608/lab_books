@@ -87,7 +87,7 @@ if (controller_rails === "books") {
 
             $.ajax({
                 url: "/books/show_review?book_id=" + book_id,
-                dataType: 'json',
+                dataType: "json",
                 success: function (json) {
                     if (Object.keys(json).indexOf("url") >= 0) {
                         $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
