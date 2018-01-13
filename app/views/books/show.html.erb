@@ -53,39 +53,5 @@
 
 
 <%= javascript_tag do %>
-
-
-    $(document).on('turbolinks:load', function (e) {
-        e.preventDefault()
-        var app = new Vue({
-            el: '#recommend',
-            data: {recommends: []},
-            created: function () {
-                this.$http.get('/books/<%= @book.id %>/recommends').then(function (response) {
-                    for (var i = 0; i < response.body.length; i++) {
-                        this.recommends.push(response.body[i]);
-                    }
-                }, function () {
-                    // error
-                });
-            },
-            methods: {
-                book_link: function (id) {
-                    window.location.href = '/books/' + id;
-                }
-            }
-        })
-
-  $.ajax({
-  url: '<%= show_review_books_path %>?book_id=<%= @book.id %>',
-  dataType: 'json',
-  success: function (json) {
-  if (Object.keys(json).indexOf("url") >= 0) {
-  $("#review").html(`<div class="iframe-content"><iframe src="" frameborder="0" height="500" width="800"></iframe></div>`)
-  } else {
-  $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
-  }
-  }
-  })
-    });
+    let book_id = "<%= @book.id %>"
 <% end %>

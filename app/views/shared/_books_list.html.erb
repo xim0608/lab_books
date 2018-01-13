@@ -1,106 +1,102 @@
 <div class="row">
   <div class="col s8 l6">
     <% if params[:q].present? %>
-        <p>該当件数：<%= @books_size %>件</p>
+      <p>該当件数：<%= @books_size %>件</p>
     <% end %>
   </div>
 
   <div class="col s6 l3 push-l3">
     <label>表示形式</label>
     <select name="preview_type" id="preview_type" class="browser-default">
+      <!--<option value="with_image" disabled selected>表示方法</option>-->
       <option value="with_image" <%= 'selected' if session[:show_type] == 'with_image' %>>サムネイルあり</option>
       <option value="without_image" <%= 'selected' if session[:show_type] == 'without_image' %>>サムネイルなし</option>
     </select>
   </div>
 
   <% if params[:page].to_i == 1 || params[:page].blank? %>
-      <div class="col s6 l3 pull-l3">
-        <label>表示件数</label>
-        <select name="preview_num" id="preview_num" class="browser-default">
-          <option value="20" <%= 'selected' if session[:show_num] == 20 %>>20件</option>
-          <option value="50" <%= 'selected' if session[:show_num] == 50 %>>50件</option>
-          <option value="100" <%= 'selected' if session[:show_num] == 100 %>>100件</option>
-        </select>
-      </div>
+    <div class="col s6 l3 pull-l3">
+      <label>表示件数</label>
+      <select name="preview_num" id="preview_num" class="browser-default">
+        <!--<option value="20" disabled selected>表示件数</option>-->
+        <option value="20" <%= 'selected' if session[:show_num] == 20 %>>20件</option>
+        <option value="50" <%= 'selected' if session[:show_num] == 50 %>>50件</option>
+        <option value="100" <%= 'selected' if session[:show_num] == 100 %>>100件</option>
+      </select>
+    </div>
   <% end %>
 </div>
-
 
 <div class="row">
   <% @books.each do |book| %>
-      <% if session[:show_type] == 'with_image' %>
-          <!--写真つき一覧-->
-          <%# aタグでリンクさせようとするとバグる %>
-          <div class="col l4 m6 s12">
-              <div class="card horizontal z-depth-2"
-                   onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
-                <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
-                  <div class="photo">
-                    <%= smaller_book_image book.image_url %>
-                  </div>
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
-                  ">
-                    <small>
-                      <p><%= book.name %></p>
-                      著者：<%= book.author %>
-                      <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-                    </small>
-                  </div>
-                  <% if user_signed_in? %>
-                      <div class="card-action w-photo">
-                        <div class="favorite favorite-btn" book_id="<%= book.id %>">
-                          <a href="#add_modal">
-                            <i class="material-icons md-dark md-inactive"
-                               onmouseover="this.className='material-icons'"
-                               onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
-                          </a>
-                        </div>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
-          </div>
-
-
-      <% else %>
-          <!--写真なし一覧-->
-          <div class="col l4 m6 s12">
-            <div class="card horizontal z-depth-2 wo-photo"
-                 onmouseover="this.className='card horizontal z-depth-5 wo-photo'"
-                 onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
-              <div class="card-stacked row">
-                <div class="card-content col wo-photo">
-                  <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
-                    <small>
-                      <p><%= book.name %></p>
-                      著者：<%= book.author %>
-                      <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-                    </small>
-                  </div>
-                  <% if user_signed_in? %>
-                      <div class="favorite col s2 favorite-btn" book_id="<%= book.id %>">
-                        <a href="#add_modal">
-                          <i class="material-icons md-dark md-inactive"
-                             onmouseover="this.className='material-icons'"
-                             onmouseout="this.className='material-icons md-dark md-inactive'"
-                             style="cursor:hand; cursor: pointer;">
-                            star_border</i>
-                        </a>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
+    <% if session[:show_type] == 'with_image' %>
+      <!--写真つき一覧-->
+      <%# aタグでリンクさせようとするとバグる %>
+      <div class="col l4 m6 s12">
+        <div class="card horizontal z-depth-2"
+             onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+          <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
+            <div class="photo">
+              <%= smaller_book_image book.image_url %>
             </div>
           </div>
-      <% end %>
+          <div class="card-stacked">
+            <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
+            ">
+              <small>
+                <p><%= book.name %></p>
+                著者：<%= book.author %>
+                <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+              </small>
+            </div>
+            <% if user_signed_in? %>
+              <div class="card-action w-photo">
+                <div class="favorite favorite-btn" book_id="<%= book.id %>">
+                  <a href="#add_modal">
+                    <i class="material-icons md-dark md-inactive"
+                       onmouseover="this.className='material-icons'"
+                       onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    <% else %>
+      <!--写真なし一覧-->
+      <div class="col l4 m6 s12">
+        <div class="card horizontal z-depth-2 wo-photo"
+             onmouseover="this.className='card horizontal z-depth-5 wo-photo'"
+             onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
+          <div class="card-stacked row">
+            <div class="card-content col wo-photo">
+              <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
+                <small>
+                  <p><%= book.name %></p>
+                  著者：<%= book.author %>
+                  <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+                </small>
+              </div>
+              <% if user_signed_in? %>
+                <div class="favorite col s2 favorite-btn" book_id="<%= book.id %>">
+                  <a href="#add_modal">
+                    <i class="material-icons md-dark md-inactive"
+                       onmouseover="this.className='material-icons'"
+                       onmouseout="this.className='material-icons md-dark md-inactive'"
+                       style="cursor:hand; cursor: pointer;">
+                      star_border</i>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
-
-
-
-
 
 <%# お気に入り追加時のモーダル %>
 <div id="add_modal" class="modal">
@@ -116,24 +112,7 @@
 </div>
 
 <% if controller.action_name == "show_all" %>
-    <div class="center-align">
-      <%= will_paginate @books, renderer: MaterializePagination::Rails %>
-    </div>
-<% end %>
-
-
-<%= javascript_tag do %>
-    $books_id = [];
-    $.ajax({
-        url: "<%= list_favorite_books_path %>",
-        dataType: 'json',
-        success: function (json) {
-            $books_id = json;
-            $('.favorite').each(function () {
-                if ($books_id.includes(parseInt($(this).attr('book_id')))) {
-                    $(this).html("<a href='#delete_modal'><i class='material-icons'>star</i></a>");
-                }
-            });
-        }
-    });
+  <div class="center-align">
+    <%= will_paginate @books, renderer: MaterializePagination::Rails %>
+  </div>
 <% end %>

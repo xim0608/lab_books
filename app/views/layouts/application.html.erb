@@ -6,6 +6,10 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag 'rblineprof', media: 'all', 'data-turbolinks-track': 'reload' if Rails.env.development? %>
+  <%= javascript_tag do %>
+    let controller_rails = "<%= controller_name %>";
+    let action_rails = "<%= action_name %>";
+  <% end %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'books' %>
 
@@ -18,14 +22,14 @@
 
 
   <% if notice.present? %>
-      <div class='card-panel green lighten-5'>
-        <p class="green-text"><%= notice %></p>
-      </div>
+    <div class='card-panel green lighten-5'>
+      <p class="green-text"><%= notice %></p>
+    </div>
   <% end %>
   <% if alert.present? %>
-      <div class='card-panel red lighten-4'>
-        <span class='red-text'><%= alert %></span>
-      </div>
+    <div class='card-panel red lighten-4'>
+      <span class='red-text'><%= alert %></span>
+    </div>
   <% end %>
 
   <%= yield %>
