@@ -67,6 +67,8 @@ group :development do
   gem 'spring', '~> 2.0.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'peek'
+  gem 'peek-rblineprof'
 end
 
 group :test do
