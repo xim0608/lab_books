@@ -7,8 +7,8 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag 'rblineprof', media: 'all', 'data-turbolinks-track': 'reload' if Rails.env.development? %>
   <%= javascript_tag do %>
-    let controller_rails = "<%= controller_name %>";
-    let action_rails = "<%= action_name %>";
+    var controller_rails = "<%= controller_name %>";
+    var action_rails = "<%= action_name %>";
   <% end %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'books' %>
