@@ -5,11 +5,11 @@
   <%= csrf_meta_tags %>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_link_tag "base/rblineprof", media: 'all' %>
+  <%= stylesheet_link_tag 'rblineprof', media: 'all', 'data-turbolinks-track': 'reload' if Rails.env.development? %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <style>
+  <%= javascript_include_tag 'books' %>
 
-  </style>
+
 </head>
 
 <body>

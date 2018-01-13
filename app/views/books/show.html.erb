@@ -52,25 +52,11 @@
 <div id="review"></div>
 
 
-<script>
-    $('.card-link').click(function () {
-        location.href = '/books/' + jQuery(this).attr('data-url');
-    });
+<%= javascript_tag do %>
 
-    $.ajax({
-        url: '<%= show_review_books_path %>?book_id=<%= @book.id %>',
-        dataType: 'json',
-        success: function (json) {
-            if (Object.keys(json).indexOf("url") >= 0) {
-                $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
-            } else {
-                $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
-            }
-        }
-    })
-</script>
-<script type="text/javascript" charset="utf-8">
-    window.onload = function () {
+
+    $(document).on('turbolinks:load', function (e) {
+        e.preventDefault()
         var app = new Vue({
             el: '#recommend',
             data: {recommends: []},
@@ -89,5 +75,17 @@
                 }
             }
         })
-    }
-</script>
+
+  $.ajax({
+  url: '<%= show_review_books_path %>?book_id=<%= @book.id %>',
+  dataType: 'json',
+  success: function (json) {
+  if (Object.keys(json).indexOf("url") >= 0) {
+  $("#review").html(`<div class="iframe-content"><iframe src="" frameborder="0" height="500" width="800"></iframe></div>`)
+  } else {
+  $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
+  }
+  }
+  })
+    });
+<% end %>
