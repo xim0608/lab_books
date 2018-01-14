@@ -16,7 +16,7 @@ class FavoritesController < ApplicationController
     current_user.unfavorite!(@book)
   end
 
-  def show_clips
+  def show_cliped_users
     @book = Book.find(params[:id])
     @users = User.includes(:favorites).where(favorites: {book_id: @book.id})
   end

@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
     member do
       get :recommends
-      get :favorites, to: 'favorites#show_clips'
+      get :favorites, to: 'favorites#show_cliped_users'
     end
   end
 
