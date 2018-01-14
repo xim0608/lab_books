@@ -22,17 +22,6 @@
               <i class="material-icons">book</i>
             </a>
           </li>
-          <li>
-            <a href="<%= edit_user_registration_path %>"
-               class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
-              <i class="material-icons">person</i>
-            </a>
-          </li>
-          <li>
-            <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltipped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
-              <i class="material-icons">book</i>
-            <% end %>
-          </li>
           <% if current_user.admin? %>
             <li>
               <a href="<%= admins_path %>"
@@ -41,6 +30,17 @@
               </a>
             </li>
           <% end %>
+          <li>
+            <a href="<%= edit_user_registration_path %>"
+               class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
+              <i class="material-icons">person</i>
+            </a>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltipped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
+              <i class="material-icons">exit_to_app</i>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>
