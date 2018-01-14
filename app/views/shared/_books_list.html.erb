@@ -109,7 +109,7 @@
   </div>
 </div>
 
-<% if controller.action_name == "show_all" %>
+<% if controller.action_name == "search" %>
   <div class="center-align">
     <%= will_paginate @books, renderer: MaterializePagination::Rails %>
   </div>

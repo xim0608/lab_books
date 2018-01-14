@@ -13,7 +13,7 @@ class BooksController < ApplicationController
     # @favorites = Favorites.all
   end
 
-  def show_all
+  def search
     books = Book.ja_search(params[:q])
     if params[:q].present?
       if ActsAsTaggableOn::Tag.pluck(:name).include?(params[:q])

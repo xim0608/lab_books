@@ -34,7 +34,7 @@
       <ul class="right">
         <li><a id="search-toggle"><i class="material-icons">search</i></a></li>
         <li>
-          <a href="<%= show_all_books_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show All Books"><i class="material-icons">view_module</i></a>
+          <a href="<%= search_books_path %>" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show All Books"><i class="material-icons">view_module</i></a>
         </li>
         <li><a href="" onclick="location.reload()"><i class="material-icons">refresh</i></a></li>
         <% if current_user %>
@@ -48,7 +48,7 @@
 <% if user_signed_in? %>
     <div class="container">
       <div id="search" class="card-panel grey lighten-3" style="<%= "display:none;" if params[:q].blank? %>">
-        <%= form_tag show_all_books_path, method: :get, class: 'input-field' do %>
+        <%= form_tag search_books_path, method: :get, class: 'input-field' do %>
             <p class="row">
               <i class="material-icons prefix">search</i>
               <%= text_field_tag "q", params[:q], class: 'validate' %>

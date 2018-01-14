@@ -96,7 +96,7 @@ if (controller_rails === "books") {
                     }
                 }
             })
-        } else if (action_rails === "index" || action_rails === "show_all") {
+        } else if (action_rails === "index" || action_rails === "search") {
             var $books_id = [];
             $.ajax({
                 url: "/books/list_favorite",

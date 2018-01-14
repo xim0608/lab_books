@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :books, except: [:edit, :update, :delete] do
     collection do
-      get :show_all
+      get :search
       get :import_from_csv
       post :import
       get :show_review
