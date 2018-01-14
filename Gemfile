@@ -69,6 +69,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'peek'
   gem 'peek-rblineprof'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :test do
