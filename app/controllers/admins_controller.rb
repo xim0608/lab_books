@@ -9,7 +9,7 @@ class AdminsController < ApplicationController
     @b4s = User.where(year: 'B4')
     @m1s = User.where(year: 'M1')
     @m2s = User.where(year: 'M2')
-    @books_sum = Rental.now.group(:user_id).sum(:user_id)
+    @books_sum = Rental.left_joins(:user).now.group(:user_id).size
   end
 
   def show

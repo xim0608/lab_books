@@ -5,16 +5,8 @@
     <% end %>
   </div>
 
-  <div class="col s6 l3 push-l3">
-    <label>表示形式</label>
-    <select name="preview_type" id="preview_type" class="browser-default">
-      <option value="with_image" <%= 'selected' if session[:show_type] == 'with_image' %>>サムネイルあり</option>
-      <option value="without_image" <%= 'selected' if session[:show_type] == 'without_image' %>>サムネイルなし</option>
-    </select>
-  </div>
-
   <% if params[:page].to_i == 1 || params[:page].blank? %>
-    <div class="col s6 l3 pull-l3">
+    <div class="col s6 l3 push-l3">
       <label>表示件数</label>
       <select name="preview_num" id="preview_num" class="browser-default">
         <option value="20" <%= 'selected' if session[:show_num] == 20 %>>20件</option>
@@ -27,60 +19,35 @@
 
 <div class="row">
   <% @books.each do |book| %>
-    <% if session[:show_type] == 'with_image' %>
-      <!--写真つき一覧-->
-      <%# aタグでリンクさせようとするとバグる %>
-      <div class="col l4 m6 s12">
-        <div class="card horizontal z-depth-2"
-             onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
-          <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
-            <div class="photo">
+    <!--写真つき一覧-->
+    <div class="col l4 m6 s12">
+      <div class="card horizontal z-depth-2"
+           onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
+        <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
+          <div class="photo">
+            <a href="<%= book_path(book.id) %>">
               <%= smaller_book_image book.image_url %>
-            </div>
-          </div>
-          <div class="card-stacked">
-            <div class="card-content w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;
-            ">
-              <small>
-                <p><%= book.name %></p>
-                著者：<%= book.author %>
-                <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-              </small>
-            </div>
-            <% if user_signed_in? %>
-              <div class="card-action w-photo" id="book_<%= book.id %>">
-                <%= render 'favorites/favorite_button', book: book %>
-              </div>
-            <% end %>
+            </a>
           </div>
         </div>
-      </div>
+        <div class="card-stacked">
+          <a href="<%= book_path(book.id) %>"
+             class="card-content w-photo card-link book-info">
+            <small>
+              <p><%= book.name %></p>
+              <p>著者：<%= book.author %></p>
+              <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
+            </small>
+          </a>
 
-    <% else %>
-      <!--写真なし一覧-->
-      <div class="col l4 m6 s12">
-        <div class="card horizontal z-depth-2 wo-photo"
-             onmouseover="this.className='card horizontal z-depth-5 wo-photo'"
-             onmouseout="this.className='card horizontal z-depth-1 wo-photo'">
-          <div class="card-stacked row">
-            <div class="card-content col wo-photo">
-              <div class="col s10 card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
-                <small>
-                  <p><%= book.name %></p>
-                  著者：<%= book.author %>
-                  <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
-                </small>
-              </div>
-              <% if user_signed_in? %>
-                <div class="favorite col s2 favorite-btn" id="book_<%= book.id %>">
-                  <%= render 'favorites/favorite_button', book: book %>
-                </div>
-              <% end %>
+          <% if user_signed_in? %>
+            <div class="card-action w-photo" id="book_<%= book.id %>">
+              <%= render 'favorites/favorite_button', book: book %>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
 

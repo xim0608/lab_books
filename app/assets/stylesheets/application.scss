@@ -81,17 +81,6 @@ $primary-color: color("blue", "lighten-2") !default;
   height: 52px;
 }
 
-.card.wo-photo {
-  height: 100px;
-  width: auto;
-
-}
-
-.card-content.wo-photo {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .material-icons.md-dark {
   color: rgba(0, 0, 0, 0.54);
 }
@@ -127,4 +116,8 @@ $primary-color: color("blue", "lighten-2") !default;
 
 #book-detail {
   margin-top: 15px;
+}
+
+.book-info {
+  color: black;
 }

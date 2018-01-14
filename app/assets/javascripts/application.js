@@ -16,3 +16,5 @@
 //= require vue-resource
 //= require turbolinks
 //= require materialize-sprockets
+//= require header
+//= require books
