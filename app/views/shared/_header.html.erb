@@ -23,14 +23,14 @@
             </a>
           </li>
           <% if current_user.admin? %>
-            <li>
-              <a href="<%= admins_path %>"
-                 class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Admin">
-                <i class="material-icons">settings</i>
-              </a>
-            </li>
+              <li class="hide-on-small-only">
+                <a href="<%= admins_path %>"
+                   class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Admin">
+                  <i class="material-icons">settings</i>
+                </a>
+              </li>
           <% end %>
-          <li>
+          <li class="hide-on-small-only">
             <a href="<%= edit_user_registration_path %>"
                class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
               <i class="material-icons">person</i>
