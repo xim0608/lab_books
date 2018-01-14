@@ -5,7 +5,7 @@ if (controller_rails === "books") {
         var unliked = "<a href='#add_modal'><i class='material-icons md-dark md-inactive'>star_border</i></a>"
 
         $(".card-link").click(function () {
-            location.href = jQuery(this).attr("data-url");
+            location.href = $(this).attr("data-url");
         });
 
         $(".modal").modal();
