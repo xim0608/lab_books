@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   get 'api/check_book/:book_isbn', to: 'api#check_book'
   get 'rentals/:user_id', to: 'rentals#show', as: 'user_rental'
 
-  resources :favorites, only: [:destroy, :index]
+  resources :favorites, only: [:destroy, :create]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

@@ -48,14 +48,8 @@
               </small>
             </div>
             <% if user_signed_in? %>
-              <div class="card-action w-photo">
-                <div class="favorite favorite-btn" book_id="<%= book.id %>">
-                  <a href="#add_modal">
-                    <i class="material-icons md-dark md-inactive"
-                       onmouseover="this.className='material-icons'"
-                       onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
-                  </a>
-                </div>
+              <div class="card-action w-photo" id="book_<%= book.id %>">
+                <%= render 'favorites/favorite_button', book: book %>
               </div>
             <% end %>
           </div>
@@ -78,14 +72,8 @@
                 </small>
               </div>
               <% if user_signed_in? %>
-                <div class="favorite col s2 favorite-btn" book_id="<%= book.id %>">
-                  <a href="#add_modal">
-                    <i class="material-icons md-dark md-inactive"
-                       onmouseover="this.className='material-icons'"
-                       onmouseout="this.className='material-icons md-dark md-inactive'"
-                       style="cursor:hand; cursor: pointer;">
-                      star_border</i>
-                  </a>
+                <div class="favorite col s2 favorite-btn" id="book_<%= book.id %>" book_id="<%= book.id %>">
+                  <%= render 'favorites/favorite_button', book: book %>
                 </div>
               <% end %>
             </div>

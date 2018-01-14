@@ -46,25 +46,25 @@ if (controller_rails === "books") {
                 );
         });
 
-        $(".favorite-btn").click(function () {
-            $.post({
-                url: `/books/${$(this).attr("book_id")}/add`
-            });
-            if ($books_id.includes(parseInt($(this).attr("book_id")))) {
-                // 白抜きにする
-                $(this).html(unliked);
-                var i;
-                for (i = 0; i < $books_id.length; i++) {
-                    if ($books_id[i] === parseInt($(this).attr("book_id"))) {
-                        $books_id.splice(i--, 1);
-                    }
-                }
-            } else {
-                // 色付きにする
-                $(this).html(liked);
-                $books_id.push(parseInt($(this).attr("book_id")));
-            }
-        });
+        // $(".favorite-btn").click(function () {
+        //     $.post({
+        //         url: `/books/${$(this).attr("book_id")}/add`
+        //     });
+        //     if ($books_id.includes(parseInt($(this).attr("book_id")))) {
+        //         // 白抜きにする
+        //         $(this).html(unliked);
+        //         var i;
+        //         for (i = 0; i < $books_id.length; i++) {
+        //             if ($books_id[i] === parseInt($(this).attr("book_id"))) {
+        //                 $books_id.splice(i--, 1);
+        //             }
+        //         }
+        //     } else {
+        //         // 色付きにする
+        //         $(this).html(liked);
+        //         $books_id.push(parseInt($(this).attr("book_id")));
+        //     }
+        // });
         if (action_rails === "show") {
             var app = new Vue({
                 el: "#recommend",
@@ -97,19 +97,19 @@ if (controller_rails === "books") {
                 }
             })
         } else if (action_rails === "index" || action_rails === "search") {
-            var $books_id = [];
-            $.ajax({
-                url: "/books/list_favorite",
-                dataType: "json",
-                success: function (json) {
-                    $books_id = json;
-                    $(".favorite").each(function () {
-                        if ($books_id.includes(parseInt($(this).attr("book_id")))) {
-                            $(this).html(liked);
-                        }
-                    });
-                }
-            });
+            // var $books_id = [];
+            // $.ajax({
+            //     url: "/books/list_favorite",
+            //     dataType: "json",
+            //     success: function (json) {
+            //         $books_id = json;
+            //         $(".favorite").each(function () {
+            //             if ($books_id.includes(parseInt($(this).attr("book_id")))) {
+            //                 $(this).html(liked);
+            //             }
+            //         });
+            //     }
+            // });
         }
     });
 }

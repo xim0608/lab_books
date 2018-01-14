@@ -1,22 +1,32 @@
 class FavoritesController < ApplicationController
   protect_from_forgery except: [:create]
 
+  # def create
+  #   @user_id = current_user.id
+  #   books = current_user.favorites.pluck(:book_id)
+  #   @book_id = Book.find(params[:id]).id
+  #   if books.include?(@book_id)
+  #     @favorite = current_user.favorites.where(book_id: @book_id).first
+  #     @favorite.destroy
+  #   else
+  #     @favorite = Favorite.new(book_id: @book_id, user_id: @user_id)
+  #     @favorite.save
+  #   end
+  # end
+  #
+  # def destroy
+  #   @favorite = Favorite.find(params[:id])
+  #   @favorite.destroy
+  # end
+
   def create
-    @user_id = current_user.id
-    books = current_user.favorites.pluck(:book_id)
-    @book_id = Book.find(params[:id]).id
-    if books.include?(@book_id)
-      @favorite = current_user.favorites.where(book_id: @book_id).first
-      @favorite.destroy
-    else
-      @favorite = Favorite.new(book_id: @book_id, user_id: @user_id)
-      @favorite.save
-    end
+    @book = Book.find(params[:book_id])
+    current_user.favorite!(@book)
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
-    @favorite.destroy
+    @book = Favorite.find(params[:id]).book
+    current_user.unfavorite!(@book)
   end
 
   def index
