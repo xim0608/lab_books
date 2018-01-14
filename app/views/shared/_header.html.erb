@@ -46,11 +46,11 @@
           <li>
             <a href="<%= edit_user_registration_path %>"
                class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
-              <i class="material-icons">perm_identity</i>
+              <i class="material-icons">person</i>
             </a>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltiped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
+            <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltipped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
               <i class="material-icons">book</i>
             <% end %>
           </li>
@@ -58,7 +58,7 @@
             <li>
               <a href="<%= admins_path %>"
                  class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Admin">
-                <i class="material-icons">build</i>
+                <i class="material-icons">settings</i>
               </a>
             </li>
           <% end %>
