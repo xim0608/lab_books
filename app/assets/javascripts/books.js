@@ -2,29 +2,7 @@ if (controller_rails === "books") {
     $(document).on("turbolinks:load", function (e) {
         e.preventDefault();
 
-        $(".card-link").click(function () {
-            location.href = $(this).attr("data-url");
-        });
-
         $(".modal").modal();
-
-        $("#preview_type").change(function () {
-            let val = $(this).val();
-            $.ajax({
-                type: "post",
-                url: "/books/change_show_type",
-                data: {show_type: val},
-                dataType: "json",
-            })
-                .then(
-                    function () {
-                        location.reload();
-                    },
-                    function () {
-                        alert("access failed");
-                    }
-                );
-        });
 
         $("#preview_num").change(function () {
             let val = $(this).val();
@@ -57,11 +35,6 @@ if (controller_rails === "books") {
                         // error
                     });
                 },
-                methods: {
-                    book_link: function (id) {
-                        window.location.href = "/books/" + id;
-                    }
-                }
             });
 
             $.ajax({

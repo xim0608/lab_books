@@ -2,8 +2,8 @@ require 'will_paginate/array'
 
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_show_type, :set_show_num
-  protect_from_forgery except: [:change_show_type, :change_show_num]
+  before_action :set_show_num
+  protect_from_forgery except: [:change_show_num]
 
   def index
     # 人気タグ
@@ -64,14 +64,6 @@ class BooksController < ApplicationController
     redirect_to books_path, notice: notice_msg
   end
 
-  def change_show_type
-    if params[:show_type] == 'with_image'
-      session[:show_type] = 'with_image'
-    else
-      session[:show_type] = 'without_image'
-    end
-  end
-
   def change_show_num
     session[:show_num] = params[:show_num].to_i
   end
@@ -81,9 +73,6 @@ class BooksController < ApplicationController
   end
 
   private
-  def set_show_type
-    session[:show_type] ||= 'with_image'
-  end
 
   def set_show_num
     session[:show_num] ||= 20
