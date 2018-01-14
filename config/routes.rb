@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   as :user do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
-    get 'users/:id/favorites' => 'favorites#index'
+    get 'users/:id/favorites' => 'favorites#index', :as => 'user_favorite_books'
   end
 
   namespace :api do
