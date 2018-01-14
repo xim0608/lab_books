@@ -19,39 +19,43 @@
     <div class="col l4 m6 s12" v-for="recommend in recommends">
       <div class="card horizontal z-depth-2"
            onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
-        <div class="card-image w-photo card-link" :data-url="recommend.id" v-on:click="book_link(recommend.id)" style="cursor:hand; cursor: pointer;">
+        <div class="card-image w-photo card-link" style="cursor:hand; cursor: pointer;">
           <div class="photo">
-            <img :src="recommend.image_url" alt="">
+            <a :href="'/books/' + recommend.id">
+              <img :src="recommend.image_url" alt="">
+            </a>
           </div>
         </div>
         <div class="card-stacked">
-          <div class="card-content w-photo card-link" :data-url="recommend.id" v-on:click="book_link(recommend.id)" style="cursor:hand; cursor: pointer;
-          ">
+          <a :href="'/books/' + recommend.id" class="card-content w-photo card-link book-info">
             <small>
               <p>{{ recommend.name }}</p>
-              著者：{{ recommend.author }}
+              <p>著者：{{ recommend.author }}</p>
               <span class="grey-text"><%#cut_description(book.description) if book.description.present? %></span>
             </small>
-          </div>
-          <% if false %>
-            <div class="card-action w-photo">
-              <div class="favorite favorite-btn" :book_id="recommend.id">
-                <a href="#add_modal">
-                  <i class="material-icons md-dark md-inactive"
-                     onmouseover="this.className='material-icons'"
-                     onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
-                </a>
-              </div>
-            </div>
-          <% end %>
+          </a>
         </div>
+        <% if false %>
+          <div class="card-action w-photo">
+            <div class="favorite favorite-btn">
+              <a href="#add_modal">
+                <i class="material-icons md-dark md-inactive"
+                   onmouseover="this.className='material-icons'"
+                   onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+              </a>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 </div>
 <div id="review"></div>
 
 
 <%= javascript_tag do %>
-    let book_id = "<%= @book.id %>"
+  var book_id = "<%= @book.id %>"
+  var controller_rails = "<%= controller_name %>"
+  var action_rails = "<%= action_name %>"
 <% end %>
