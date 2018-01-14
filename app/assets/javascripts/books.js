@@ -1,9 +1,3 @@
-// $(document).on("turbolinks:load", function (e) {
-//     e.preventDefault();
-    // Waves.displayEffect();
-    // $('.button-collapse').sideNav('hide');
-// });
-
 if (controller_rails === "books") {
     $(document).on("turbolinks:load", function (e) {
         e.preventDefault();
