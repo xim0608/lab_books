@@ -10,7 +10,6 @@ class BooksController < ApplicationController
     @tags = ActsAsTaggableOn::Tag.most_used(20)
     # 新着本
     @books = Book.order('id DESC').take(session[:show_num])
-    # @favorites = Favorites.all
   end
 
   def search

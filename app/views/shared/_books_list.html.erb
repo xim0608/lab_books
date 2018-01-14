@@ -72,7 +72,7 @@
                 </small>
               </div>
               <% if user_signed_in? %>
-                <div class="favorite col s2 favorite-btn" id="book_<%= book.id %>" book_id="<%= book.id %>">
+                <div class="favorite col s2 favorite-btn" id="book_<%= book.id %>">
                   <%= render 'favorites/favorite_button', book: book %>
                 </div>
               <% end %>
