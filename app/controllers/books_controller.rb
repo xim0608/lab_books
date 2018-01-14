@@ -2,7 +2,7 @@ require 'will_paginate/array'
 
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_show_type, :set_show_num, :check_notice_or_error
+  before_action :set_show_type, :set_show_num
   protect_from_forgery except: [:change_show_type, :change_show_num]
 
   def index
@@ -89,8 +89,5 @@ class BooksController < ApplicationController
     session[:show_num] ||= 20
   end
 
-  def check_notice_or_error
-    # flash[:notice] =
-  end
 end
 
