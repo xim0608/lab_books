@@ -1,0 +1,7 @@
+<div class="favorite favorite-btn">
+  <%= link_to favorites_path(book_id: book.id), remote: true, method: :post do %>
+    <i class="material-icons md-dark md-inactive"
+       onmouseover="this.className='material-icons'"
+       onmouseout="this.className='material-icons md-dark md-inactive'">star_border</i>
+  <% end %>
+</div>

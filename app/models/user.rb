@@ -25,4 +25,16 @@ class User < ApplicationRecord
   def admin?
     self.is_admin
   end
+
+  def favorite?(book)
+    self.favorites.find_by(book_id: book.id)
+  end
+
+  def favorite!(book)
+    self.favorites.create!(book_id: book.id)
+  end
+
+  def unfavorite!(book)
+    self.favorites.find_by(book_id: book.id).destroy
+  end
 end
