@@ -36,22 +36,8 @@ class BooksController < ApplicationController
 
   def show_review
     require 'timeout'
-    @book = Book.find(params[:book_id])
-    counter = 0
-    begin
-      res = Amazon::Ecs.item_lookup(@book.isbn_10, ResponseGroup: 'Reviews')
-      url = res.get_element('CustomerReviews').get('IFrameURL')
-      render json: {url: url}
-    rescue Timeout::Error
-      render json: {error: 'timeout'}
-    rescue => e
-      logger.error(e.message)
-      counter += 1
-      if counter <= 3
-        retry
-      end
-      render json: {error: '503 error'}
-    end
+    book = Book.find(params[:book_id])
+    render json: {url: book.review_iframe_url}
   end
 
   def import
