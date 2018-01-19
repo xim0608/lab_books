@@ -5,7 +5,7 @@ if (controller_rails === "books") {
         $(".modal").modal();
 
         $("#preview_num").change(function () {
-            let val = $(this).val();
+            var val = $(this).val();
             $.ajax({
                 type: "post",
                 url: "/books/change_show_num",
@@ -42,7 +42,7 @@ if (controller_rails === "books") {
                 dataType: "json",
                 success: function (json) {
                     if (Object.keys(json).indexOf("url") >= 0) {
-                        $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
+                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0' height='500' width='800'g></iframe></div>")
                     } else {
                         $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
                     }
