@@ -140,9 +140,13 @@ $primary-color: color("blue", "lighten-2") !default;
 }
 
 .available:before {
-  content: "○ | 貸出可能";
+  content: "○ | 貸出可";
 }
 
 .available {
   background-color: #58ACFA;
+}
+
+.rental-badge.index {
+  font-size: 70%;
 }
