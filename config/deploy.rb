@@ -13,8 +13,8 @@ set :default_env, {path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"}
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 set :bundle_flags, "--deployment --without development test"
 set :keep_releases, 5
-set :unicorn_config_path, -> { File.join(current_path, "config", "unicorn.rb") }
-set :bundle_binstubs, -> { shared_path.join('bin') }
+set :unicorn_config_path, -> {File.join(current_path, "config", "unicorn.rb")}
+set :bundle_binstubs, -> {shared_path.join('bin')}
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
@@ -33,8 +33,8 @@ namespace :deploy do
   task :upload do
     on roles(:app) do |host|
       execute :mkdir, '-p', "#{shared_path}/config"
-      upload!('config/database.yml',"#{shared_path}/config/database.yml")
-      upload!('config/secrets.yml',"#{shared_path}/config/secrets.yml")
+      upload!('config/database.yml', "#{shared_path}/config/database.yml")
+      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
     end
   end
 
@@ -53,15 +53,19 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 
   # Unicorn 再起動タスク
-  # desc 'Restart application'
-  # task :restart do
-  #   invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
-  # end
-end
-
-after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
+  desc 'Restart application'
   task :restart do
-    invoke 'unicorn:restart'
+    on roles(:web) do
+      with {'BUILD_ID' => 'dontkillme'} do
+        invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
+      end
+    end
   end
 end
+
+# after 'deploy:publishing', 'deploy:restart'
+# namespace :deploy do
+#   task :restart do
+#     invoke 'unicorn:restart'
+#   end
+# end

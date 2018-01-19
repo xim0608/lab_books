@@ -1,0 +1,5 @@
+<div class="favorite favorite-btn">
+  <%= link_to favorite_path(current_user.favorite?(book).try(:id)), remote: true, method: :delete do %>
+    <i class='material-icons'>star</i></a>
+  <% end %>
+</div>

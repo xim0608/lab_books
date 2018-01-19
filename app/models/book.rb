@@ -13,15 +13,15 @@ class Book < ApplicationRecord
 
   has_many :favorites
   has_many :users, through: :favorites
-  has_one :rental, -> { where(return_at: nil) }
+  has_one :rental, -> {where(return_at: nil)}
 
   def self.import(file)
     counter = 0
     CSV.foreach(file.path, encoding: Encoding::SHIFT_JIS) do |row|
       unless self.exists?(isbn_13: row[2].to_i)
         create(isbn_13: row[2].to_i, isbn_10: row[1], name: row[11],
-             publisher: row[13], author: row[12], publish_year: row[14].to_i,
-             pages: row[16].to_i)
+               publisher: row[13], author: row[12], publish_year: row[14].to_i,
+               pages: row[16].to_i)
         counter += 1
       end
     end
@@ -34,7 +34,7 @@ class Book < ApplicationRecord
       image_url = book[:image].sub('._SL75_', '')
       if self.exists?(book[:asin])
         create(author: book[:author], isbn_10: book[:asin], name: book[:title],
-                               image_url: image_url)
+               image_url: image_url)
         puts 'success'
       end
     end
@@ -70,4 +70,46 @@ class Book < ApplicationRecord
     Book.where(id: JSON.parse(books_id))
   end
 
+  def review_url
+    require 'cgi'
+    time_now = Time.current.to_i
+    review_json = Redis.current.get("books/reviews/#{self.id}")
+    if review_json.present?
+      review = JSON.parse(review_json)
+      if !review.key?('expiration_date') && time_now > review['expiration_date'].to_i
+        save_review_iframe_url
+      else
+        review['url']
+      end
+    else
+      save_review_iframe_url
+    end
+  end
+
+  private
+  def fetch_review_iframe_url
+    max_attempts = 3
+    attempts = 0
+    begin
+      res = Amazon::Ecs.item_lookup(self.isbn_10, ResponseGroup: 'Reviews')
+    rescue Amazon::RequestError => e
+      if attempts <= max_attempts
+        retry
+      else
+        logger.error("tried 3 times, but error")
+        logger.error(e.message)
+        return ''
+      end
+    end
+    res.get_element('CustomerReviews').get('IFrameURL')
+  end
+
+  def save_review_iframe_url
+    url = fetch_review_iframe_url
+    # URLに付与されているparameterから有効期限を取得
+    exp = Time.parse(CGI::parse(url).symbolize_keys[:exp].first).to_i
+    save_json = {url: url, expiration_date: exp}
+    Redis.current.set("books/reviews/#{self.id}", save_json.to_json)
+    url
+  end
 end
