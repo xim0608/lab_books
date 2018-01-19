@@ -55,11 +55,7 @@ namespace :deploy do
   # Unicorn 再起動タスク
   desc 'Restart application'
   task :restart do
-    on roles(:web) do
-      with {'BUILD_ID' => 'dontkillme'} do
-        invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
-      end
-    end
+    invoke 'unicorn:restart' # lib/capistrano/tasks/production.rake 内処理を実行
   end
 end
 
