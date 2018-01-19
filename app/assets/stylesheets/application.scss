@@ -121,3 +121,28 @@ $primary-color: color("blue", "lighten-2") !default;
 .book-info {
   color: black;
 }
+
+.rental-badge {
+  padding: 3px 8px;
+  font-size: 100%;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 0 3px #FFF;
+  white-space: nowrap;
+}
+
+.rented:before {
+  content: "× | 貸出中";
+}
+
+.rented {
+  background-color: #B00100;
+}
+
+.available:before {
+  content: "○ | 貸出可能";
+}
+
+.available {
+  background-color: #58ACFA;
+}
