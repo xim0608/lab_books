@@ -1,5 +1,5 @@
 
-Ω# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 worker_processes 4
 
 app_path = '/var/www/labooks'
