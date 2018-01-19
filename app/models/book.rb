@@ -70,29 +70,46 @@ class Book < ApplicationRecord
     Book.where(id: JSON.parse(books_id))
   end
 
-  def review_iframe_url
+  def review_url
+    require 'cgi'
     time_now = Time.current.to_i
     review_json = Redis.current.get("books/reviews/#{self.id}")
-    review = JSON.parse(review_json) if review_json.present?
-    if review_json.nil? || time_now - review['timestamp'] > 86400
-      max_attempts = 3
-      attempts = 0
-      begin
-        res = Amazon::Ecs.item_lookup(self.isbn_10, ResponseGroup: 'Reviews')
-      rescue Amazon::RequestError
-        if attempts <= max_attempts
-          retry
-        else
-          logger.error "tried 3 times, but error"
-          return ''
-        end
+    if review_json.present?
+      review = JSON.parse(review_json)
+      if !review.key?('expiration_date') && time_now > review['expiration_date'].to_i
+        save_review_iframe_url
+      else
+        review['url']
       end
-      url = res.get_element('CustomerReviews').get('IFrameURL')
-      save_json = {url: url, timestamp: time_now}
-      Redis.current.set("books/reviews/#{self.id}", save_json.to_json)
-      url
     else
-      review['url']
+      save_review_iframe_url
     end
+  end
+
+  private
+  def fetch_review_iframe_url
+    max_attempts = 3
+    attempts = 0
+    begin
+      res = Amazon::Ecs.item_lookup(self.isbn_10, ResponseGroup: 'Reviews')
+    rescue Amazon::RequestError => e
+      if attempts <= max_attempts
+        retry
+      else
+        logger.error("tried 3 times, but error")
+        logger.error(e.message)
+        return ''
+      end
+    end
+    res.get_element('CustomerReviews').get('IFrameURL')
+  end
+
+  def save_review_iframe_url
+    url = fetch_review_iframe_url
+    # URLに付与されているparameterから有効期限を取得
+    exp = Time.parse(CGI::parse(url).symbolize_keys[:exp].first).to_i
+    save_json = {url: url, expiration_date: exp}
+    Redis.current.set("books/reviews/#{self.id}", save_json.to_json)
+    url
   end
 end

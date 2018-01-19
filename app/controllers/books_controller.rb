@@ -37,7 +37,7 @@ class BooksController < ApplicationController
   def show_review
     require 'timeout'
     book = Book.find(params[:book_id])
-    render json: {url: book.review_iframe_url}
+    render json: {url: book.review_url}
   end
 
   def import
