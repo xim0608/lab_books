@@ -11,7 +11,7 @@ set :pty, true
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets bundle public/system public/assets}
 set :default_env, {path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"}
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
-set :bundle_flags, "--deployment --without development test"
+set :bundle_flags, "--deployment --without test"
 set :keep_releases, 5
 set :unicorn_config_path, -> {File.join(current_path, "config", "unicorn.rb")}
 set :bundle_binstubs, -> {shared_path.join('bin')}
