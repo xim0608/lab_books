@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-worker_processes 1
+worker_processes 4
 
 app_path = '/var/www/labooks'
 app_shared_path = "#{app_path}"

@@ -42,6 +42,8 @@ gem 'vuejs-rails'
 gem 'will_paginate', '~> 3.1.5'
 gem 'will_paginate-materialize', github: 'harrybournis/will_paginate-materialize'
 gem 'xmlrpc'
+gem 'peek'
+gem 'peek-rblineprof'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -67,8 +69,6 @@ group :development do
   gem 'spring', '~> 2.0.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-  gem 'peek'
-  gem 'peek-rblineprof'
   gem 'rack-mini-profiler', require: false
 end
 

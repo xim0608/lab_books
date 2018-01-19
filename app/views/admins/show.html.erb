@@ -41,10 +41,10 @@
                 $('#result').find('li').remove();
                 $(data).each(function (i, book) {
                     if (book.is_borrowing === true) {
-                        let href = "<%= @user.id %>/" + book.id;
+                        var href = "<%= @user.id %>/" + book.id;
                         $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a class="change_flag" data-book_id="' + book.id + '">返却する</a></div></li>')
                     } else {
-                        let href = "<%= @user.id %>/" + book.id;
+                        var href = "<%= @user.id %>/" + book.id;
                         $('#result').append('<li class="collection-item">' + book.name + '<div align="right"><a class="change_flag" data-book_id="' + book.id + '">貸出中にする</a></div></li>')
                     }
                 });
