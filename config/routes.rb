@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       get :search
       get :import_from_csv
       post :import
-      get :show_review
+      post :show_review
       post :change_show_type
       post :change_show_num
     end

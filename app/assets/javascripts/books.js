@@ -38,8 +38,10 @@ if (controller_rails === "books") {
             });
 
             $.ajax({
-                url: "/books/show_review?book_id=" + book_id,
-                dataType: "json",
+                type: "POST",
+                url: "/books/show_review",
+                beforeSend: function(xhr) {xhr.setRequestHeader("X-CSRF-Token", $("meta[name='csrf-token']").attr("content"))},
+                data: "book_id=" + book_id,
                 success: function (json) {
                     if (Object.keys(json).indexOf("url") >= 0) {
                         $("#review").html(`<div class="iframe-content"><iframe src="${json["url"]}" frameborder="0" height="500" width="800"></iframe></div>`)
