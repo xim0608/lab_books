@@ -50,12 +50,6 @@ group :development, :test do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'byebug', '~> 9.0.6'
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-locally', require: false
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
-  gem 'capistrano3-unicorn'
   gem 'factory_girl_rails', '~> 4.8.0'
   gem 'letter_opener'
   gem 'letter_opener_web'
