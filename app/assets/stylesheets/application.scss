@@ -4,16 +4,6 @@ $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
 @import 'material_icons';
 
-//body {
-//  display: flex;
-//  min-height: 100vh;
-//  flex-direction: column;
-//}
-//
-//main {
-//  flex: 1 0 auto;
-//}
-
 .pagination a li.active {
   color: #fff;
 }
@@ -120,4 +110,33 @@ $primary-color: color("blue", "lighten-2") !default;
 
 .book-info {
   color: black;
+}
+
+.rental-badge {
+  padding: 3px 8px;
+  font-size: 100%;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 0 3px #FFF;
+  white-space: nowrap;
+}
+
+.rented:before {
+  content: "× | 貸出中";
+}
+
+.rented {
+  background-color: #B00100;
+}
+
+.available:before {
+  content: "○ | 貸出可";
+}
+
+.available {
+  background-color: #58ACFA;
+}
+
+.rental-badge.index {
+  font-size: 70%;
 }

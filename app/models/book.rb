@@ -86,6 +86,10 @@ class Book < ApplicationRecord
     end
   end
 
+  def rented?
+    self.rental.present?
+  end
+
   private
   def fetch_review_iframe_url
     max_attempts = 3
