@@ -40,3 +40,5 @@ tags
 
 # booklog initial data
 db/seeds/booklog*
+
+/public/assets/*
