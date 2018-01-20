@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     # 人気タグ
     @tags = ActsAsTaggableOn::Tag.most_used(20)
     # 新着本
-    @books = Book.order('id DESC').take(session[:show_num])
+    @books = Book.preload(:rental).order('id DESC').take(session[:show_num])
   end
 
   def search
@@ -22,7 +22,7 @@ class BooksController < ApplicationController
         @books_size = books.count
       end
     end
-    @books = books.order('publish_year').paginate(:page => params[:page], :per_page => session[:show_num])
+    @books = books.preload(:rental).order('publish_year').paginate(:page => params[:page], :per_page => session[:show_num])
     @tags = ActsAsTaggableOn::Tag.most_used(20)
   end
 

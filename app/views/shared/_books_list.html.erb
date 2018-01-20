@@ -47,7 +47,9 @@
                   <%= render 'favorites/favorite_button', book: book %>
                 </div>
                 <div class="col s8 m8 l8">
-                  <span class="rental-badge index <%= book.rented? ? 'rented' : 'available' %>"></span>
+                  <a href="<%= book_path(book.id) %>" >
+                    <span class="rental-badge index <%= book.rented? ? 'rented' : 'available' %>"></span>
+                  </a>
                 </div>
               </div>
             </div>
