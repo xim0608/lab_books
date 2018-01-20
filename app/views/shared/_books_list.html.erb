@@ -41,12 +41,12 @@
           </a>
 
           <% if user_signed_in? %>
-            <div class="card-action w-photo" id="book_<%= book.id %>">
+            <div class="card-action w-photo">
               <div class="row">
-                <div class="col s4 m4 l4">
+                <div class="left" id="book_<%= book.id %>">
                   <%= render 'favorites/favorite_button', book: book %>
                 </div>
-                <div class="col s8 m8 l8">
+                <div class="right">
                   <a href="<%= book_path(book.id) %>" >
                     <span class="rental-badge index <%= book.rented? ? 'rented' : 'available' %>"></span>
                   </a>
