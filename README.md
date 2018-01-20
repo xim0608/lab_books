@@ -19,14 +19,14 @@ Set variables in `.env` file.
 $ cp env.example .env
 ```
 To import your booklog data, export and download your csv from [booklog](http://booklog.jp/) and copy to `db/seeds` directory.  
-Before you execute below command, set up mysql users.
+Before you execute below command, set up mysql user authentication.
 ```shell
 $ bundle install
 $ bundle exec rake db:setup
 ```
 `rake db:setup` command is
 1. creating database and tables
-2. making admin initial user
+2. making admin initial user (you must set ENV initial_user_email and pass)
 3. import booklog csv data
 
 Then execute
