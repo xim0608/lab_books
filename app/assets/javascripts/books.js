@@ -1,5 +1,6 @@
-if (controller_rails === "books") {
-    $(document).on("turbolinks:load", function (e) {
+$(document).on("turbolinks:load", function (e) {
+
+    if (controller_rails === "books") {
         e.preventDefault();
 
         $(".modal").modal();
@@ -22,7 +23,7 @@ if (controller_rails === "books") {
                 );
         });
 
-        if (action_rails === "show" && controller_rails === "books") {
+        if (action_rails === "show" && controller_rails === "books" && document.getElementById("recommend")) {
             var app = new Vue({
                 el: "#recommend",
                 data: {recommends: []},
@@ -49,5 +50,5 @@ if (controller_rails === "books") {
                 }
             })
         }
-    });
-}
+    }
+});
