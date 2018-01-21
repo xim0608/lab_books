@@ -22,35 +22,33 @@ $(document).on("turbolinks:load", function (e) {
                     }
                 );
         });
-    }
-});
 
-$(document).on("turbolinks:render", function (e) {
-    if (action_rails === "show" && controller_rails === "books" && document.getElementById("recommend")) {
-        var app = new Vue({
-            el: "#recommend",
-            data: {recommends: []},
-            created: function () {
-                this.$http.get("/books/" + book_id + "/recommends").then(function (response) {
-                    for (var i = 0; i < response.body.length; i++) {
-                        this.recommends.push(response.body[i]);
+        if (action_rails === "show" && controller_rails === "books" && document.getElementById("recommend")) {
+            var app = new Vue({
+                el: "#recommend",
+                data: {recommends: []},
+                created: function () {
+                    this.$http.get("/books/" + book_id + "/recommends").then(function (response) {
+                        for (var i = 0; i < response.body.length; i++) {
+                            this.recommends.push(response.body[i]);
+                        }
+                    }, function () {
+                        // error
+                    });
+                },
+            });
+
+            $.ajax({
+                url: "/books/show_review?book_id=" + book_id,
+                dataType: "json",
+                success: function (json) {
+                    if (Object.keys(json).indexOf("url") >= 0) {
+                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0' height='500' width='800'g></iframe></div>")
+                    } else {
+                        $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
                     }
-                }, function () {
-                    // error
-                });
-            },
-        });
-
-        $.ajax({
-            url: "/books/show_review?book_id=" + book_id,
-            dataType: "json",
-            success: function (json) {
-                if (Object.keys(json).indexOf("url") >= 0) {
-                    $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0' height='500' width='800'g></iframe></div>")
-                } else {
-                    $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
                 }
-            }
-        })
+            })
+        }
     }
 });
