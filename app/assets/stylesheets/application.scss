@@ -140,3 +140,10 @@ $primary-color: color("blue", "lighten-2") !default;
 .rental-badge.index {
   font-size: 70%;
 }
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: #ffab40;
+  margin-right: 5px;
+  transition: color .3s ease;
+  text-transform: uppercase;
+}
