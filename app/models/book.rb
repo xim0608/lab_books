@@ -76,12 +76,15 @@ class Book < ApplicationRecord
     review_json = Redis.current.get("books/reviews/#{self.id}")
     if review_json.present?
       review = JSON.parse(review_json)
-      if !review.key?('expiration_date') && time_now > review['expiration_date'].to_i
+      if !review.key?('fetched_at') || time_now - review['fetched_at'].to_i > 1.hour
+        logger.info("isbn-#{self.isbn_10} review not fetched in 1 hour. start reload")
         save_review_iframe_url
       else
+        logger.info("isbn-#{self.isbn_10} load review from cache")
         review['url']
       end
     else
+      logger.info("isbn-#{self.isbn_10} no data in redis. start to fetch url")
       save_review_iframe_url
     end
   end
@@ -112,7 +115,8 @@ class Book < ApplicationRecord
     url = fetch_review_iframe_url
     # URLに付与されているparameterから有効期限を取得
     exp = Time.parse(CGI::parse(url).symbolize_keys[:exp].first).to_i
-    save_json = {url: url, expiration_date: exp}
+    # 1時間ごとにurlを更新するようにする
+    save_json = {url: url, expiration_date: exp, fetched_at: Time.current.to_i}
     Redis.current.set("books/reviews/#{self.id}", save_json.to_json)
     url
   end
