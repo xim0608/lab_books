@@ -11,7 +11,7 @@
       <h5>著者：<%= @book.author %></h5>
       <span class="rental-badge <%= @book.rented? ? 'rented' : 'available' %>"></span>
       <%= render 'shared/books_tag' %>
-      <p><%= @book.description %></p>
+      <p><%= simple_format(h(@book.description)) %></p>
     </div>
   </div>
 </div>
