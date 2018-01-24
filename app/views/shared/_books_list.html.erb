@@ -47,9 +47,21 @@
                   <%= render 'favorites/favorite_button', book: book %>
                 </div>
                 <div class="right">
-                  <a href="<%= book_path(book.id) %>" >
-                    <span class="rental-badge index <%= book.rented? ? 'rented' : 'available' %>"></span>
-                  </a>
+                  <% if current_user.is_admin? %>
+                    <% if book.rented? %>
+                      <a onclick="checkUser('<%= book.rental.user.nickname %>','<%= book.rental.created_at.strftime('%Y年%m月%d日%H時%M分') %>','<%= book_path(book.id) %>')">
+                        <span class="rental-badge index rented"></span>
+                      </a>
+                    <% else %>
+                      <a href="<%= book_path(book.id) %>">
+                        <span class="rental-badge index available"></span>
+                      </a>
+                    <% end %>
+                  <% else %>
+                    <a href="<%= book_path(book.id) %>">
+                      <span class="rental-badge index <%= book.rented? ? 'rented' : 'available' %>"></span>
+                    </a>
+                  <% end %>
                 </div>
               </div>
             </div>
