@@ -52,3 +52,9 @@ $(document).on("turbolinks:load", function (e) {
         }
     }
 });
+
+function checkUser(username, rental_at, book_path) {
+    if (confirm("この本は" + username + "に" + rental_at + "から貸し出し中です。")) {
+        Turbolinks.visit(book_path);
+    }
+}

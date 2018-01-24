@@ -49,8 +49,8 @@
                 <div class="right">
                   <% if current_user.is_admin? %>
                     <% if book.rented? %>
-                      <a href="<%= book_path(book.id) %>" onclick="alert('<%= book.rental.created_at.strftime('%Y年%m月%d日%H時%M分') %>\nから<%= book.rental.user.nickname %>に貸し出し中')">
-                          <span class="rental-badge index rented"></span>
+                      <a onclick="checkUser('<%= book.rental.user.nickname %>','<%= book.rental.created_at.strftime('%Y年%m月%d日%H時%M分') %>','<%= book_path(book.id) %>')">
+                        <span class="rental-badge index rented"></span>
                       </a>
                     <% else %>
                       <a href="<%= book_path(book.id) %>">
