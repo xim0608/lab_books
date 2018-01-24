@@ -13,7 +13,7 @@
         <%= render 'favorites/favorite_button', book: @book %>
       </div>
       <span class="rental-badge <%= @book.rented? ? 'rented' : 'available' %>"></span>
-      <%= render 'shared/books_tag' %>ｓ
+      <%= render 'shared/books_tag' %>
       <p><%= simple_format(h(@book.description)) %></p>
     </div>
   </div>
