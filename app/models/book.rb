@@ -93,10 +93,6 @@ class Book < ApplicationRecord
     self.rental.present?
   end
 
-  def rental_user
-    self.rental.user
-  end
-
   private
   def fetch_review_iframe_url
     max_attempts = 3
