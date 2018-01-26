@@ -188,6 +188,8 @@ GEM
     materialize-sass (0.98.2)
       sass (~> 3.3)
     memoist (0.15.0)
+    meta-tags (2.7.0)
+      actionpack (>= 3.2.0, < 5.3)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -410,6 +412,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   material_icons (~> 2.2.1)
   materialize-sass (~> 0.98.2)
+  meta-tags
   mysql2 (>= 0.3.18, < 0.5)
   natto
   okura (~> 0.0.1)
