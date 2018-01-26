@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LaBooks</title>
+  <%
+    set_meta_tags :site => 'Labooks',
+                  :description => '蔵書管理アプリ',
+                  :keywords => '蔵書,管理,貸出',
+                  :reverse => true
+  %>
+  <%= display_meta_tags %>
   <%= csrf_meta_tags %>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
