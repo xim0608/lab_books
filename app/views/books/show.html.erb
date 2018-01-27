@@ -1,3 +1,5 @@
+<% set_meta_tags title: @book.name %>
+
 <div id="review-error"></div>
 <div style="overflow: hidden;" id="book-detail">
   <div class="row">
@@ -9,6 +11,9 @@
     <div class="col s12 m12 l7">
       <h2><%= @book.name %> </h2>
       <h5>著者：<%= @book.author %></h5>
+      <div id="book_<%= @book.id %>">
+        <%= render 'favorites/favorite_button', book: @book %>
+      </div>
       <span class="rental-badge <%= @book.rented? ? 'rented' : 'available' %>"></span>
       <%= render 'shared/books_tag' %>
       <p><%= simple_format(h(@book.description)) %></p>
