@@ -3,14 +3,16 @@
     <span class='red-text'><%= '入力された値は不正です' %></span>
   </div>
 <% end %>
+
 <h2><%= t "devise.invitations.new.header" %></h2>
 
 <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+  <%= devise_error_messages! %>
+
   <% resource.class.invite_key_fields.each do |field| -%>
-    <p><%= f.label field, 'slack_account' %><br/>
-      <%= f.text_field field, value: 'myjlab@' %></p>
+    <p><%= f.label field %><br />
+      <%= f.text_field field %></p>
   <% end -%>
-  <p>@の後ろに招待するユーザのSlackアカウント名を入力してください</p>
-  <p><%= f.submit t("devise.invitations.new.submit_button"), class: "waves-effect waves-light btn" %></p>
+
+  <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
 <% end %>
-<br/>
