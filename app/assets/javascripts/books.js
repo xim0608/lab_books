@@ -43,7 +43,7 @@ $(document).on("turbolinks:load", function (e) {
                 dataType: "json",
                 success: function (json) {
                     if (Object.keys(json).indexOf("url") >= 0) {
-                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0' height='500' width='800'g></iframe></div>")
+                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0'></iframe></div>")
                     } else {
                         $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
                     }
