@@ -20,7 +20,7 @@
 <div class="row">
   <% @books.each do |book| %>
     <!--写真つき一覧-->
-    <div class="col l4 m6 s12">
+    <div class="col xl4 l6 m6 s12">
       <div class="card horizontal z-depth-2"
            onmouseover="this.className='card horizontal z-depth-5'" onmouseout="this.className='card horizontal z-depth-1'">
         <div class="card-image w-photo card-link" data-url="<%= book_path(book.id) %>" style="cursor:hand; cursor: pointer;">
