@@ -140,3 +140,11 @@ $primary-color: color("blue", "lighten-2") !default;
   border-top: 1px solid rgba(160, 160, 160, 0.2);
   padding: 16px 21px;
 }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  padding: 14px 5px 3px;
+}
+
+#nav-dropdown{
+  width: 150px;
+}
