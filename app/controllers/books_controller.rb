@@ -37,11 +37,7 @@ class BooksController < ApplicationController
   def review_html
     require 'timeout'
     book = Book.find(params[:book_id])
-    sa = StyleAppender.new(book.review_html)
-    sa.append('#review')
-    html = sa.replace_style
-    render body: html
-    # render body: book.review_html
+    render body: book.review_html(user_agent=request.env["HTTP_USER_AGENT"])
   end
 
   def import
