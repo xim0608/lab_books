@@ -75,9 +75,11 @@ class Book < ApplicationRecord
     review_html_json = Redis.current.get("books/reviews_html/#{self.id}")
     if review_html_json.present?
       review = JSON.parse(review_html_json)
-      if time_now - review['fetched_at'] > 1.day
+      if time_now - review['fetched_at'] > 1.minute
         logger.info("isbn-#{self.isbn_10} review html not fetched in 1 day. start reload")
-        save_review_iframe_html(user_agent)
+        # save_review_iframe_html(user_agent)
+        ReviewWorker.perform_async(self.id, user_agent)
+        review['html']
       else
         logger.info("isbn-#{self.isbn_10} review html load review from cache")
         review['html']
@@ -90,6 +92,17 @@ class Book < ApplicationRecord
 
   def rented?
     self.rental.present?
+  end
+
+  def save_review_iframe_html(user_agent = '')
+    html = fetch_review_iframe_html
+    # 1日ごとにhtmlを更新するようにする(urlは1時間おきに更新しておく)
+    sa = StyleAppender.new(html)
+    sa.append('#review')
+    html = sa.replace_style
+    save_json = {html: html, fetched_at: Time.current.to_i}
+    Redis.current.set("books/reviews_html/#{self.id}", save_json.to_json)
+    html
   end
 
   private
@@ -160,16 +173,5 @@ class Book < ApplicationRecord
         return ''
       end
     end
-  end
-
-  def save_review_iframe_html(user_agent = '')
-    html = fetch_review_iframe_html
-    # 1日ごとにhtmlを更新するようにする(urlは1時間おきに更新しておく)
-    sa = StyleAppender.new(html)
-    sa.append('#review')
-    html = sa.replace_style
-    save_json = {html: html, fetched_at: Time.current.to_i}
-    Redis.current.set("books/reviews_html/#{self.id}", save_json.to_json)
-    html
   end
 end
