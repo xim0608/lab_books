@@ -34,10 +34,10 @@ class BooksController < ApplicationController
     @tags = @book.tags
   end
 
-  def show_review
+  def review_html
     require 'timeout'
     book = Book.find(params[:book_id])
-    render json: {url: book.review_url}
+    render body: book.review_html(user_agent=request.env["HTTP_USER_AGENT"])
   end
 
   def import
