@@ -43,9 +43,21 @@ $(document).on("turbolinks:load", function (e) {
                 dataType: "json",
                 success: function (json) {
                     if (Object.keys(json).indexOf("url") >= 0) {
-                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0'></iframe></div>")
+                        $("#review").html("<div class='iframe-content'><iframe src='" + json["url"] + "' frameborder='0' scrolling='auto'></iframe></div>")
                     } else {
                         $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
+                    }
+                }
+            })
+
+            $.ajax({
+                url: "/books/review?book_id=" + book_id,
+                cache: false,
+                success: function (html) {
+                    if (html === "") {
+                        $("#review-error").html("<div class='card-panel red lighten-4'><span class='red-text'>レビューの読み込みに失敗しました</span></div>")
+                    } else {
+                        $("#review-test").append(html)
                     }
                 }
             })

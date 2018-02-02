@@ -73,7 +73,7 @@ class Book < ApplicationRecord
   def review_url
     require 'cgi'
     time_now = Time.current.to_i
-    review_json = Redis.current.get("books/reviews/#{self.id}")
+    review_json = Redis.current.get("books/reviews_url/#{self.id}")
     if review_json.present?
       review = JSON.parse(review_json)
       if !review.key?('fetched_at') || time_now - review['fetched_at'].to_i > 1.hour
@@ -86,6 +86,25 @@ class Book < ApplicationRecord
     else
       logger.info("isbn-#{self.isbn_10} no data in redis. start to fetch url")
       save_review_iframe_url
+    end
+  end
+
+  def review
+    max_attempts = 3
+    attempts = 0
+    agent = Mechanize.new
+    begin
+      page = agent.get(review_url)
+      doc = Nokogiri::HTML(page.content.toutf8)
+      return doc.to_html
+    rescue Exception => e
+      if attempts <= max_attempts
+        retry
+      else
+        logger.error("tried 3 times, but error")
+        logger.error(e.message)
+        return ''
+      end
     end
   end
 
@@ -117,7 +136,7 @@ class Book < ApplicationRecord
     exp = Time.parse(CGI::parse(url).symbolize_keys[:exp].first).to_i
     # 1時間ごとにurlを更新するようにする
     save_json = {url: url, expiration_date: exp, fetched_at: Time.current.to_i}
-    Redis.current.set("books/reviews/#{self.id}", save_json.to_json)
+    Redis.current.set("books/reviews_url/#{self.id}", save_json.to_json)
     url
   end
 end

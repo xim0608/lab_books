@@ -40,6 +40,12 @@ class BooksController < ApplicationController
     render json: {url: book.review_url}
   end
 
+  def review
+    require 'timeout'
+    book = Book.find(params[:book_id])
+    render body: book.review
+  end
+
   def import
     counter = Book.import(params[:file])
     if counter >= 1
