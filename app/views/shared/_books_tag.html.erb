@@ -1,8 +1,10 @@
 <div class="pad-top">
-<% @tags.each do |tag| %>
-    <div class="chip">
-      <%= link_to tag.name, controller: 'books', action: 'search', q: tag.name %>
-      <span><%= tag.taggings_count unless action_name == 'show' %></span>
-    </div>
-<% end %>
+  <div class="hide-on-med-and-down">
+    <% @tags.each do |tag, idx| %>
+      <div class="chip">
+        <%= link_to tag.name, controller: 'books', action: 'search', q: tag.name %>
+        <span><%= tag.taggings_count unless action_name == 'show' %></span>
+      </div>
+    <% end %>
+  </div>
 </div>
