@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
 
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_scope :user do
     get '/sign_in' => 'devise/sessions#new'
   end
@@ -32,6 +37,7 @@ Rails.application.routes.draw do
       get :import_from_csv
       post :import
       get :show_review
+      get :review_html
       post :change_show_type
       post :change_show_num
     end
