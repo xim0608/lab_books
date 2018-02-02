@@ -37,8 +37,11 @@ class BooksController < ApplicationController
   def review_html
     require 'timeout'
     book = Book.find(params[:book_id])
-    # render body: StyleInliner::Document.new(book.review_html, replace_properties_to_attributes: true).inline
-    render body: book.review_html
+    sa = StyleAppender.new(book.review_html)
+    sa.append('#review')
+    html = sa.replace_style
+    render body: html
+    # render body: book.review_html
   end
 
   def import

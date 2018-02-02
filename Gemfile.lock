@@ -90,6 +90,7 @@ GEM
     concurrent-ruby (1.0.5)
     concurrent-ruby-ext (1.0.5)
       concurrent-ruby (= 1.0.5)
+    crass (1.0.3)
     css_parser (1.6.0)
       addressable
     database_cleaner (1.5.3)
@@ -428,6 +429,8 @@ DEPENDENCIES
   byebug (~> 9.0.6)
   capybara (~> 2.14.0)
   coffee-rails (~> 4.2)
+  crass
+  css_parser
   database_cleaner (~> 1.5.3)
   devise (~> 4.3.0)
   devise_invitable
