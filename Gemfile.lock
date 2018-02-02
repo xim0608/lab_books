@@ -430,7 +430,6 @@ DEPENDENCIES
   capybara (~> 2.14.0)
   coffee-rails (~> 4.2)
   crass
-  css_parser
   database_cleaner (~> 1.5.3)
   devise (~> 4.3.0)
   devise_invitable
