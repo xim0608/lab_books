@@ -75,7 +75,7 @@ class Book < ApplicationRecord
     review_html_json = Redis.current.get("books/reviews_html/#{self.id}")
     if review_html_json.present?
       review = JSON.parse(review_html_json)
-      if time_now - review['fetched_at'] > 1.minute
+      if time_now - review['fetched_at'] > 1.day
         logger.info("isbn-#{self.isbn_10} review html not fetched in 1 day. start reload")
         # save_review_iframe_html(user_agent)
         ReviewWorker.perform_async(self.id, user_agent)
