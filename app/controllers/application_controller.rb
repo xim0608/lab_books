@@ -72,9 +72,7 @@ class ApplicationController < ActionController::Base
     authenticate_admin!
   end
 
-
   private
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :nickname, :student_id, :year])
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [:email])
