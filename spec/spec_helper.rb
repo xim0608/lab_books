@@ -16,7 +16,14 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'devise'
+require File.expand_path("spec/support/controller_macros.rb")
+require File.expand_path("spec/support/controller_helpers.rb")
+
 RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

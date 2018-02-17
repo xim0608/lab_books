@@ -58,10 +58,12 @@ group :development, :test do
   gem 'binding_of_caller', '~> 0.7.2'
   gem 'byebug', '~> 9.0.6'
   gem 'factory_girl_rails', '~> 4.8.0'
+  gem 'guard'
+  gem 'guard-rspec'
   gem 'letter_opener'
   gem 'letter_opener_web'
   gem 'onkcop', require: false
-  gem 'rspec-rails', '~> 3.5.2'
+  gem 'rspec-rails'
 end
 
 group :development do
