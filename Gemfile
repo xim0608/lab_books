@@ -64,6 +64,7 @@ group :development, :test do
   gem 'letter_opener_web'
   gem 'onkcop', require: false
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do

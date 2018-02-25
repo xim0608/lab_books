@@ -16,6 +16,9 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+require 'rails_helper'
 require 'devise'
 require File.expand_path("spec/support/controller_macros.rb")
 require File.expand_path("spec/support/controller_helpers.rb")

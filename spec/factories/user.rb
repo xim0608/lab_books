@@ -5,5 +5,6 @@ FactoryGirl.define do
     nickname 'たろう'
     student_id '10000000'
     year 'B3'
+    is_admin true
   end
 end
