@@ -1,64 +1,68 @@
-<ul id="nav-dropdown" class="dropdown-content">
-  <li class="hide-on-med-and-up">
-    <a href="<%= user_favorite_books_path(current_user.id) %>"
-       class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Your Favorites">
-      <i class="material-icons left">grade</i>
-      <span>Favorites</span>
-    </a>
-  </li>
-  <li>
-    <a href="<%= user_rental_path(current_user) %>"
-       class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Rentals">
-      <i class="material-icons left md-18">book</i>Rentals
-    </a>
-  </li>
-  <li>
-    <a href="<%= edit_user_registration_path %>"
-       class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
-      <i class="material-icons left md-18">person</i>Account
-    </a>
-  </li>
-  <% if current_user.admin? %>
-    <li>
-      <a href="<%= admins_path %>"
-         class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Admin">
-        <i class="material-icons left md-18">settings</i>Admin
+<% if user_signed_in? %>
+  <ul id="nav-dropdown" class="dropdown-content">
+    <li class="hide-on-med-and-up">
+      <a href="<%= user_favorite_books_path(current_user.id) %>"
+         class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Your Favorites">
+        <i class="material-icons left">grade</i>
+        <span>Favorites</span>
       </a>
     </li>
-  <% end %>
-  <li>
-    <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltipped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
-      <i class="material-icons left md-18">exit_to_app</i>Logout
+    <li>
+      <a href="<%= user_rental_path(current_user) %>"
+         class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Rentals">
+        <i class="material-icons left md-18">book</i>Rentals
+      </a>
+    </li>
+    <li>
+      <a href="<%= edit_user_registration_path %>"
+         class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Account">
+        <i class="material-icons left md-18">person</i>Account
+      </a>
+    </li>
+    <% if current_user.admin? %>
+      <li>
+        <a href="<%= admins_path %>"
+           class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Admin">
+          <i class="material-icons left md-18">settings</i>Admin
+        </a>
+      </li>
     <% end %>
-  </li>
-</ul>
+    <li>
+      <%= link_to destroy_user_session_path, :method => :delete, :class => 'tooltipped', 'data-positon' => 'bottom', 'data-delay' => '50', 'data-tooltip' => 'Logout' do %>
+        <i class="material-icons left md-18">exit_to_app</i>Logout
+      <% end %>
+    </li>
+  </ul>
+<% end %>
 
 <!--navigation bar-->
 <nav>
   <div class="container">
     <div class="nav-wrapper">
       <a href="<%= books_path %>" class="brand-logo left"><i class="material-icons hide-on-small-only"> book</i> LaBooks</a>
-      <ul class="right">
-        <li>
-          <a id="search-toggle" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search Books">
-            <i class="material-icons left">search</i>
-            <span class="hide-on-med-and-down">Search</span>
-          </a>
-        </li>
-        <li class="hide-on-small-only">
-          <a href="<%= user_favorite_books_path(current_user.id) %>"
-             class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Your Favorites">
-            <i class="material-icons left">grade</i>
-            <span class="hide-on-med-and-down">Favorites</span>
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-button" href="#!" data-activates="nav-dropdown" data-constrainwidth="false">
-            <i class="material-icons left">arrow_drop_down</i>
-            <span class="hide-on-med-and-down">Menu</span>
-          </a>
-        </li>
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="right">
+          <li>
+            <a id="search-toggle" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Search Books">
+              <i class="material-icons left">search</i>
+              <span class="hide-on-med-and-down">Search</span>
+            </a>
+          </li>
+          <li class="hide-on-small-only">
+            <a href="<%= user_favorite_books_path(current_user.id) %>"
+               class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show Your Favorites">
+              <i class="material-icons left">grade</i>
+              <span class="hide-on-med-and-down">Favorites</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-button" href="#!" data-activates="nav-dropdown" data-constrainwidth="false">
+              <i class="material-icons left">arrow_drop_down</i>
+              <span class="hide-on-med-and-down">Menu</span>
+            </a>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </nav>
