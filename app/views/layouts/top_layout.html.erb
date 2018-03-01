@@ -12,14 +12,6 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag 'rblineprof', media: 'all', 'data-turbolinks-track': 'reload' if Rails.env.development? %>
-  <style>
-    #top-lp-title {
-      color: #42a5f5;
-    }
-    #top-lp {
-      background-color: #dee1e3;
-    }
-  </style>
   <%= javascript_tag do %>
     var controller_rails = "<%= controller_name %>";
     var action_rails = "<%= action_name %>";
