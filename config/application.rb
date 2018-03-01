@@ -18,6 +18,9 @@ module Labooks
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.paths.add 'lib', eager_load: true
+    config.to_prepare do
+      Devise::SessionsController.layout "top_layout"
+    end
 
     # config.middleware.insert_before 0, "Rack::Cors" do
     #   allow do
