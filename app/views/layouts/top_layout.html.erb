@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%
+    set_meta_tags :site => 'Labooks',
+                  :description => '蔵書管理アプリ',
+                  :keywords => '蔵書,管理,貸出',
+                  :reverse => true
+  %>
+  <%= display_meta_tags %>
+  <%= csrf_meta_tags %>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'rblineprof', media: 'all', 'data-turbolinks-track': 'reload' if Rails.env.development? %>
+  <%= javascript_tag do %>
+    var controller_rails = "<%= controller_name %>";
+    var action_rails = "<%= action_name %>";
+  <% end %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'welcome', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body id="top-lp">
+
+<div class="container">
+  <h2 class="center"><i class="material-icons medium" id="top-lp-title">book</i> LaBooks</h2>
+
+  <div class="row">
+    <div class="col l2 m2"></div>
+    <div class="col l8 m8 s12">
+      <% if notice.present? %>
+        <div id="notice-panel">
+          <div class='card-panel green lighten-5'>
+            <p class="green-text"><%= notice %></p>
+          </div>
+        </div>
+      <% end %>
+      <% if alert.present? %>
+        <div id="alert-panel">
+          <div class='card-panel red lighten-4'>
+            <span class='red-text'><%= alert %></span>
+          </div>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+    <div class="col l2 m2"></div>
+
+  </div>
+</div>
+
+</body>
+</html>
